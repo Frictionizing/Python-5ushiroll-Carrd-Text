@@ -48,24 +48,6 @@ class Client:
     
 ClientQueue_Error = []
 
-"""
-Subject to change (LEGACY): 
-[0] = Date & Time
-[1] = Username
-[2] = SubscriberStar
-[5] = Commission Type
-[6] = Complex Background
-[7] = # Of Characters Featured
-[13] = Paypal or Square payment type
-
-[3] = Username
-[4] = Commission Type
-[6] = Commission Type part 2
-[7] = # of Characters Featured
-[8] = Complex Background
-[11] = Email
-[12] = Paypal of Square payment
-"""
 userName = 1; subscriber = 2; commType = 5; complexBG = 6; charNum = 7; payment = 13
 
 ##################FUNCTIONS##################
@@ -175,17 +157,14 @@ def commishType(x,y):
         return "Daily Dragon Feature"
 
     if (x == "Cell-Shaded" or x == "Reference Sheet") and y == "":
-        #print("error: left question 6 blank even though required")
         return "Error: See Remarks"
     if  x == "Cell-Shaded":
         if y == "Simple (ref sheets only)" or y == "Complex (ref sheets only)":
-            #print("error: Incompatible answer with previous input")
             return "Error: See Remarks"
         else:
             return x + " " + y
     
     if x == "Reference Sheet" and not (y == "Simple (ref sheets only)" or  y == "Complex (ref sheets only)"):
-        #print("error: Incompatible answer with previous input")
         return "Error: See Remarks"
     if x == "Reference Sheet" and y == "Simple (ref sheets only)":
         return "Simple Reference Sheet"
@@ -229,7 +208,6 @@ def CreateClientObjects():
         comm = apostrophe_removal(preComm.split("\",\""))
 
         #Parsing out Name     
-
         name = comm[2]
 
         if "@" in name and "#" in name:
@@ -241,12 +219,10 @@ def CreateClientObjects():
 
         #Discord Case
         else:
-            name = comm[2].split("#")[0]
-
+            name = name.split("#")[0]
         #Twitter Case
         if len(name.split("@")) == 2:
             name = name.split("@")[1]
-
         #Discord Case 2
         if len(name.split(":")) == 2:
             name = name.split(": ")[1]
@@ -377,6 +353,7 @@ def printPrices(x):
 def Generate(x):
     writeToFile(stringConcat(x))
 
+#Resets the entire program
 def Reset():
     Applications = CreateClientObjects()
     Generate(Applications)
