@@ -100,12 +100,12 @@ def clear():
         colorDict[i].configure(image = progressDict[script2.buttonList[i].currentColor()])
     script2.appendProgress(script2.buttonList)
 
-#Runs GUI
-window = Tk()
-
 def restart():
     window.destroy()
     os.startfile("C:/Users/Brian/Documents/Python/CarrdTextGenerator/Scripts/ProgramExecutable.py")
+
+#Runs GUI
+window = Tk()
 
 #Proportions of window, not allowed to resize
 window.geometry("1800x1100")
@@ -114,25 +114,25 @@ window.resizable(width=False, height=False)
 #Title of program
 window.title("SussyExecutable")
 
-#Image Uploads
+#Create photos types
 #Background image
 photo = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Kai_and_Zero.png"))
 photo = photo.subsample(2,2)
 #Blank Button
 photo_blank = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Blank.png"))
 #In Progress Button
-photo_inprogress = PhotoImage(file = names.findPath("\Scripts","\\Sprites/InProgress.png"))
+photo_inprogress  = PhotoImage(file = names.findPath("\Scripts","\\Sprites/InProgress.png"))
 #Completed button
-photo_completed = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Completed.png"))
+photo_completed   = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Completed.png"))
 #Color Boxes
-photo_bluebox = PhotoImage(file = names.findPath("\Scripts","\\Sprites/BlueBox.png"))
-photo_yellowbox = PhotoImage(file = names.findPath("\Scripts","\\Sprites/YellowBox.png"))
-photo_redbox = PhotoImage(file = names.findPath("\Scripts","\\Sprites/RedBox.png"))
+photo_bluebox     = PhotoImage(file = names.findPath("\Scripts","\\Sprites/BlueBox.png"))
+photo_yellowbox   = PhotoImage(file = names.findPath("\Scripts","\\Sprites/YellowBox.png"))
+photo_redbox      = PhotoImage(file = names.findPath("\Scripts","\\Sprites/RedBox.png"))
 photo_paymentplan = PhotoImage(file = names.findPath("\Scripts","\\Sprites/PaymentPlan.png"))
-photo_blackbox = PhotoImage(file = names.findPath("\Scripts","\\Sprites/BlackBox.png"))
+photo_blackbox    = PhotoImage(file = names.findPath("\Scripts","\\Sprites/BlackBox.png"))
 #Image of clipboard
-photo_clip = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Clipboard.png"))
-photo_clip = photo_clip.subsample(resize,resize)
+photo_clip  = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Clipboard.png"))
+photo_clip  = photo_clip.subsample(resize,resize)
 #Image of Sheets
 photo_sheet = PhotoImage(file = names.findPath("\Scripts","\\Sprites/GoogleSheets.png"))
 photo_sheet = photo_sheet.subsample(22,22)

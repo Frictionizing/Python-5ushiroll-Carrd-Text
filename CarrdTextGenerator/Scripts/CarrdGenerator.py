@@ -143,7 +143,7 @@ def stringConcat(x):
         st += i.getName() + ": " + textChange(i.getType(), i.getComplex(), i.getCharNum()) + "\n"
 
     for i in range(0,len(x)):
-        Applications[i].typeChange(textChange(Applications[i].getType(), Applications[i].getComplex(), Applications[i].getCharNum()))
+        x[i].typeChange(textChange(x[i].getType(), x[i].getComplex(), x[i].getCharNum()))
 
     return st[:-1]
 
