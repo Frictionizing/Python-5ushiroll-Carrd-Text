@@ -5,7 +5,7 @@ from tkinter import *
 import os
 import pyperclip
 
-with open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/TextOutput.txt') as f:
+with open(names.findPath("\Scripts","\\Texts\TextOutput.txt")) as f:
     lines = f.readlines()
 f.close()
 
@@ -116,42 +116,42 @@ window.title("SussyExecutable")
 
 #Image Uploads
 #Background image
-photo = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/Kai_and_Zero.png")
+photo = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Kai_and_Zero.png"))
 photo = photo.subsample(2,2)
 #Blank Button
-photo_blank = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/Blank.png")
+photo_blank = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Blank.png"))
 #In Progress Button
-photo_inprogress = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/InProgress.png")
+photo_inprogress = PhotoImage(file = names.findPath("\Scripts","\\Sprites/InProgress.png"))
 #Completed button
-photo_completed = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/Completed.png")
+photo_completed = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Completed.png"))
 #Color Boxes
-photo_bluebox = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/BlueBox.png")
-photo_yellowbox = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/YellowBox.png")
-photo_redbox = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/RedBox.png")
-photo_paymentplan = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/PaymentPlan.png")
-photo_blackbox = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/BlackBox.png")
+photo_bluebox = PhotoImage(file = names.findPath("\Scripts","\\Sprites/BlueBox.png"))
+photo_yellowbox = PhotoImage(file = names.findPath("\Scripts","\\Sprites/YellowBox.png"))
+photo_redbox = PhotoImage(file = names.findPath("\Scripts","\\Sprites/RedBox.png"))
+photo_paymentplan = PhotoImage(file = names.findPath("\Scripts","\\Sprites/PaymentPlan.png"))
+photo_blackbox = PhotoImage(file = names.findPath("\Scripts","\\Sprites/BlackBox.png"))
 #Image of clipboard
-photo_clip = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/Clipboard.png")
+photo_clip = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Clipboard.png"))
 photo_clip = photo_clip.subsample(resize,resize)
 #Image of Sheets
-photo_sheet = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/GoogleSheets.png")
+photo_sheet = PhotoImage(file = names.findPath("\Scripts","\\Sprites/GoogleSheets.png"))
 photo_sheet = photo_sheet.subsample(22,22)
 #Image of Carrd
-photo_carrd = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/CarrdLogo.png")
+photo_carrd = PhotoImage(file = names.findPath("\Scripts","\\Sprites/CarrdLogo.png"))
 photo_carrd = photo_carrd.subsample(10,10)
 #Image of Reset
-photo_sweep = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/sweep.png")
+photo_sweep = PhotoImage(file = names.findPath("\Scripts","\\Sprites/sweep.png"))
 photo_sweep = photo_sweep.subsample(7,7)
 #Image of Power
-photo_power = PhotoImage(file = r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/Sprites/restart.png")
+photo_power = PhotoImage(file = names.findPath("\Scripts","\\Sprites/restart.png"))
 photo_power = photo_power.subsample(5,5)
 
 progressDict = { 
+        True : "blue",
+        False : "black",
         "BLANK": photo_blank,
         "IN PROGRESS": photo_inprogress,
         "COMPLETED": photo_completed,
-        True : "blue",
-        False : "black",
         "BLACK" : photo_blackbox,
         "YELLOW" : photo_yellowbox,
         "RED" : photo_redbox,

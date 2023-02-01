@@ -2,10 +2,11 @@
 # pip install pyperclip
 # ^Do that if not done^
 
-#Import CSV file format and pyperclip (Copy to clipboard extension)
-import csv
+#Import pyperclip (Copy to clipboard extension)
+
 import math
 import pyperclip
+import pathlib
 import CommissionPrices as prices
 
 ##################CLASSES & VARIABLES##################
@@ -69,16 +70,23 @@ userName = 1; subscriber = 2; commType = 5; complexBG = 6; charNum = 7; payment 
 
 ##################FUNCTIONS##################
 
+#Find the path to file, x is path to split, y is replacement text
+def findPath(x,y):
+    p = str(pathlib.Path(__file__))
+    return p.split(x)[0] + y
+
 #Reads csv file and returns file
 def readFile():
-    with open(r"C:/Users/Brian/Documents/Python/CarrdTextGenerator/5ushiroll's Commission Form.csv", errors = "ignore") as f:
+
+    with open(findPath("\Scripts","\\5ushiroll's Commission Form.csv"), errors = "ignore") as f:
         lines = f.readlines()
     f.close()
     return lines
 
 #Write results to txt file
 def writeToFile(x):
-    f = open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/TextOutput.txt', "w")
+    f = open(findPath("\Scripts","\\Texts\TextOutput.txt"), "w")
+    #f = open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/TextOutput.txt', "w")
     f.write(x)
     f.close()
 
@@ -192,10 +200,7 @@ def errorText(x,y,z):
     return z + ': Error - Commissioned "' + x + '" while answering "' + y + '" in the follow up question.'
 
 def shortenPayment(x):
-    if x == "I can pay with Square":
-        return "SQUARE"
-    else:
-        return "PAYPAL"
+    return "SQUARE" if x == "I can pay with Square" else "PAYPAL"
 
 #Create Client objects and put them in Queue (MAIN FUCNTION)
 def CreateClientObjects():

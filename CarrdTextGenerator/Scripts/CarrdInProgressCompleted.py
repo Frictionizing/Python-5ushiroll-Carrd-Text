@@ -1,15 +1,18 @@
 import CarrdGenerator as script1
 from tkinter import *
 
-with open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/TextOutput.txt') as f:
+#with open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/TextOutput.txt') as f:
+with open(script1.findPath("\Scripts","\\Texts\TextOutput.txt")) as f:
     lines = f.readlines()
 f.close()
 
-with open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/SaveFile.txt') as f:
+#with open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/SaveFile.txt') as f:
+with open(script1.findPath("\Scripts","\\Texts\SaveFile.txt")) as f:
     save = f.readlines()
 f.close()
 
-with open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/SaveColors.txt') as f:
+#with open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/SaveColors.txt') as f:
+with open(script1.findPath("\Scripts","\\Texts\SaveColors.txt")) as f:
     colorSave = f.readlines()
 f.close()
 
@@ -47,11 +50,11 @@ class ButtonMode:
         x.color = change[x.color]
 
 def writeToFile(x, i):
-    f = open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/SaveFile.txt', "w")
+    f = open(script1.findPath("\Scripts","\\Texts\SaveFile.txt"), "w")
     f.write(x)
     f.close()
 
-    f = open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/SaveColors.txt', "w")
+    f = open(script1.findPath("\Scripts","\\Texts\SaveColors.txt"), "w")
     f.write(i)
     f.close()
 
