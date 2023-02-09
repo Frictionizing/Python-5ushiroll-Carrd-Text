@@ -15,14 +15,18 @@ comm = ["Daily Dragon Feature",             #0
         "Rendered Headshot",                #12
         "Sketch Page",                      #13
         "Complex Reference Sheet",          #14
-        "Full Render"                       #15
+        "Full Render",                      #15
+        "Gacha Splash Art 3 Star",              #16
+        "Gacha Splash Art 4 Star",              #17
+        "Gacha Splash Art 5 Star",              #18
+        "Gacha Splash Art 6 Star"               #19
         ]                      
 
 
 #Prices of base commission
 priceDict = {
     comm[0]  : 85,
-    comm[1]  : 0,
+    comm[1]  : 215,
     comm[2]  : 85,
     comm[3]  : 95,
     comm[4]  : 135,
@@ -36,7 +40,11 @@ priceDict = {
     comm[12] : 230,
     comm[13] : 275,
     comm[14] : 270,
-    comm[15] : 400
+    comm[15] : 400,
+    comm[16] : 230,
+    comm[17] : 275,
+    comm[18] : 350,
+    comm[19] : 400
 }
 
 #Complex Background upgrade prices
@@ -56,7 +64,11 @@ bgDict = {
     comm[12] : 30,
     comm[13] : 0,
     comm[14] : 0,
-    comm[15] : 0
+    comm[15] : 0,
+    comm[16] : 0,
+    comm[17] : 0,
+    comm[18] : 0,
+    comm[19] : 0
 }
 
 #Extra Character count prices
@@ -76,7 +88,11 @@ charDict = {
     comm[12] : 30,
     comm[13] : 0,
     comm[14] : 0,
-    comm[15] : 55
+    comm[15] : 55,
+    comm[16] : 0,
+    comm[17] : 0,
+    comm[18] : 0,
+    comm[19] : 0
 }
 
 #Conversion rate to CAD if payment type is Square (set to 1.3 means 1.00 USD = 1.30 CAD)
@@ -111,7 +127,11 @@ shortDict = {
     comm[12] : "RH",
     comm[13] : "SP",
     comm[14] : "CRS",
-    comm[15] : "Full-Ren"
+    comm[15] : "Full-Ren",
+    comm[16] : "GACH-3",
+    comm[17] : "GACH-4",
+    comm[18] : "GACH-5",
+    comm[19] : "GACH-6"
 }
 
 #Gramatically correct plural form for commissions with 2 or more characters
@@ -131,5 +151,9 @@ pluralDict = {
     comm[12] : "Rendered Headshots",
     comm[13] : "Sketch Page",
     comm[14] : "Complex Reference Sheet",
-    comm[15] : "Full Render w/ Extra Character"
+    comm[15] : "Full Render w/ Extra Character",
+    comm[16] : "Gacha Splash Art 3 Star",
+    comm[17] : "Gacha Splash Art 4 Star",
+    comm[18] : "Gacha Splash Art 5 Star",
+    comm[19] : "Gacha Splash Art 6 Star"
 }

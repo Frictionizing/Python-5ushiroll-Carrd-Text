@@ -102,7 +102,7 @@ def clear():
 
 def restart():
     window.destroy()
-    os.startfile("C:/Users/Brian/Documents/Python/CarrdTextGenerator/Scripts/ProgramExecutable.py")
+    os.startfile(names.findPath("\Scripts","\\Scripts\ProgramExecutable.py"))
 
 #Runs GUI
 window = Tk()

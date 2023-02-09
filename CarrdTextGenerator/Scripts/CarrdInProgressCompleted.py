@@ -1,17 +1,14 @@
 import CarrdGenerator as script1
 from tkinter import *
 
-#with open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/TextOutput.txt') as f:
 with open(script1.findPath("\Scripts","\\Texts\TextOutput.txt")) as f:
     lines = f.readlines()
 f.close()
 
-#with open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/SaveFile.txt') as f:
 with open(script1.findPath("\Scripts","\\Texts\SaveFile.txt")) as f:
     save = f.readlines()
 f.close()
 
-#with open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/SaveColors.txt') as f:
 with open(script1.findPath("\Scripts","\\Texts\SaveColors.txt")) as f:
     colorSave = f.readlines()
 f.close()

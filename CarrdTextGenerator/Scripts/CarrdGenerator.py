@@ -45,6 +45,8 @@ class Client:
         return app.fullType
     def getPaymentType(app):
         return app.paymentType
+    def overrideComplex(app, new):
+        app.isComplex = new
     
 ClientQueue_Error = []
 
@@ -68,7 +70,6 @@ def readFile():
 #Write results to txt file
 def writeToFile(x):
     f = open(findPath("\Scripts","\\Texts\TextOutput.txt"), "w")
-    #f = open(r'C:/Users/Brian/Documents/Python/CarrdTextGenerator/Texts/TextOutput.txt', "w")
     f.write(x)
     f.close()
 
@@ -152,7 +153,7 @@ def copyToClipboard(s):
     pyperclip.copy(s)
     return
 
-def commishType(x,y):
+def commishType(x,y,z):
     if x == "Daily Dragon Feature (Only available for SubStar Wyvern tier)":
         return "Daily Dragon Feature"
 
@@ -170,6 +171,12 @@ def commishType(x,y):
         return "Simple Reference Sheet"
     if x == "Reference Sheet" and y == "Complex (ref sheets only)":
         return "Complex Reference Sheet"
+
+    if x == "Gacha Splash Art":
+        if z == "":
+            return "Error: See Remarks"
+        s = x + " " + z
+        x = s
 
     return x
 
@@ -206,6 +213,7 @@ def CreateClientObjects():
             preComm += lines[y]
 
         comm = apostrophe_removal(preComm.split("\",\""))
+        print(comm)
 
         #Parsing out Name     
         name = comm[2]
@@ -232,7 +240,7 @@ def CreateClientObjects():
         name = name.replace("(Discord)", "")
         name = name.replace("(twitter)", "")
         name = name.replace("(discord)", "")
-
+        
         #Space in Name Front
         if name[0] == " ":
             name = name[1:len(name)]
@@ -242,10 +250,11 @@ def CreateClientObjects():
             name = name[0:len(name)-1]
 
         name = capital(name)
-
         #Simplify array to relevant data
-        simplified_comm = [name, convertBool(comm[3]), commishType(comm[4], comm[6]), 
-                           convertBool(comm[8]), parseInt(comm[7]), shortenPayment(comm[12])]
+        #Comm[] = Name 2, Sub 3, Comm 4, 6 CellShaded Ref Sheet Q, 7 Gacha Q, 9 Char Num, 10 Background, 14 Payment 
+        #0 Name, 1 Subscriber, 2 Comm, 3 Background, 4 #Chars, 5 Payment Type
+        simplified_comm = [name, convertBool(comm[3]), commishType(comm[4], comm[6], comm[7]), 
+                           convertBool(comm[10]), parseInt(comm[9]), shortenPayment(comm[14])]
 
         if simplified_comm[2] == "Error: See Remarks":
             simplified_comm[2] = errorText(comm[4], comm[6], simplified_comm[0])
