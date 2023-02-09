@@ -122,7 +122,8 @@ def textChange(x,y,z):
     pluralDict = prices.pluralDict
     #Exempt from complex backgrounds
     exemptList = ["Simple Reference Sheet", "Complex Reference Sheet", "YCH", "Demonify Me", "Headshot Page", 
-                    "Sketch Page", "Daily Dragon Feature", "Full Render", "Mawshot", "Cell-Shaded Headshot"]
+                    "Sketch Page", "Daily Dragon Feature", "Full Render", "Mawshot", "Cell-Shaded Headshot",
+                    "Gacha Splash Art 3 Star","Gacha Splash Art 4 Star","Gacha Splash Art 5 Star","Gacha Splash Art 6 Star"]
    
     test = x
     if z >= 2:
@@ -138,9 +139,6 @@ def textChange(x,y,z):
 def stringConcat(x):
     st = ""
     for i in x:
-        #if i.getSub():
-        #    st += "[" + i.getName() + "]{cyan}: " + textChange(i.getType(), i.getComplex(), i.getCharNum()) + "\n"
-        #else:
         st += i.getName() + ": " + textChange(i.getType(), i.getComplex(), i.getCharNum()) + "\n"
 
     for i in range(0,len(x)):
@@ -181,6 +179,8 @@ def commishType(x,y,z):
     return x
 
 def errorText(x,y,z):
+    if x == "Gacha Splash Art":
+        return z + ': Error - Commissioned "' + x + '" without answering the follow up question.'
     if (x == "Cell-Shaded" or x == "Reference Sheet") and y == "":
         return z + ': Error - Commissioned "' + x + '" without answering the follow up question.'
     return z + ': Error - Commissioned "' + x + '" while answering "' + y + '" in the follow up question.'
@@ -213,7 +213,6 @@ def CreateClientObjects():
             preComm += lines[y]
 
         comm = apostrophe_removal(preComm.split("\",\""))
-        print(comm)
 
         #Parsing out Name     
         name = comm[2]
@@ -240,7 +239,7 @@ def CreateClientObjects():
         name = name.replace("(Discord)", "")
         name = name.replace("(twitter)", "")
         name = name.replace("(discord)", "")
-        
+
         #Space in Name Front
         if name[0] == " ":
             name = name[1:len(name)]

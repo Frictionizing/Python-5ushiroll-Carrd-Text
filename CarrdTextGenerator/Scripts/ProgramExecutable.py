@@ -26,7 +26,8 @@ def concatenate(x):
 
 #Copy final product to clipboard
 def click():
-    pyperclip.copy(concatenate(script2.appendProgress(script2.buttonList)))
+    str = concatenate(script2.appendProgress(script2.buttonList)).replace(" Star", "★")
+    pyperclip.copy(str)
 
 def click2():
     goog.sheet()

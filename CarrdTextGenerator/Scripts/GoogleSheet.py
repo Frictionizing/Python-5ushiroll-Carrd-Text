@@ -16,13 +16,16 @@ def maffs(i):
 
 #Shortened form with plural cases
 def shortenedComm(i):
+
+    exemptList = ["GACH-3","GACH-4","GACH-5","GACH-6", "Full-Ren"]
+
     name = prices.shortDict[i.getType()]
     if (name == "BAN" or name == "MAW" or name == "COS") and i.getCharNum() >= 2:
         name += "-w/charas"
     elif (name == "CS-H" or name == "CS-HB" or name == "CS-FB" or name == "RH") and i.getCharNum() >= 2:
         name += "s"
 
-    if i.getComplex() and not name == "Full-Ren":
+    if i.getComplex() and name not in exemptList:
         name += "-CB"
 
     return name
