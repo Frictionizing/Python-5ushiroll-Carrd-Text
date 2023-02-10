@@ -16,10 +16,10 @@ comm = ["Daily Dragon Feature",             #0
         "Sketch Page",                      #13
         "Complex Reference Sheet",          #14
         "Full Render",                      #15
-        "Gacha Splash Art 3 Star",              #16
-        "Gacha Splash Art 4 Star",              #17
-        "Gacha Splash Art 5 Star",              #18
-        "Gacha Splash Art 6 Star"               #19
+        "Gacha Splash Art 3 Star",          #16
+        "Gacha Splash Art 4 Star",          #17
+        "Gacha Splash Art 5 Star",          #18
+        "Gacha Splash Art 6 Star"           #19
         ]                      
 
 

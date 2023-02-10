@@ -29,6 +29,8 @@ class Client:
         app.numOfChar = application[4]
         app.paymentType = application[5]
         app.fullType  = ""
+        app.button    = ""
+        app.price     = -1
     def getName(app):
         return app.name
     def getSub(app):
@@ -45,6 +47,14 @@ class Client:
         return app.fullType
     def getPaymentType(app):
         return app.paymentType
+    def getPrice(app):
+        return app.price
+    def assignButton(app, button):
+        app.button = button
+    def getButton(app):
+        return app.button
+    def setPrice(app, i):
+        app.price = i
     def overrideComplex(app, new):
         app.isComplex = new
     
@@ -264,6 +274,8 @@ def CreateClientObjects():
         #Turn application into Client object
         cli = Client(simplified_comm)
 
+        cli.setPrice(singlePrice(cli))
+
         #Append to seperate queue depending on SubsriberStar status
         if cli.getSub():
             ClientQueue.append(cli)
@@ -278,10 +290,8 @@ def CreateClientObjects():
 
     return ClientQueue
 
-#Prints prices to terminal
-def printPrices(x):
-    totalPrice = 0
-    totalPriceCAD = 0
+#Returns Single Price of Client Comm in USD
+def singlePrice(i):
     #Current Prices
     priceDict = prices.priceDict
 
@@ -291,11 +301,32 @@ def printPrices(x):
     #Extra Character count prices
     charDict = prices.charDict
 
+    price = priceDict[i.getType()] 
+    if i.getComplex():
+        price += bgDict[i.getType()]
+    if i.getCharNum() > 1:
+        price += charDict[i.getType()]*(i.getCharNum()-1)
+    return price
+
+#Prints prices to terminal
+def printPrices(x):
+    totalPrice = 0
+    totalPriceCAD = 0
+
     #Conversion rate to CAD if payment type is Square (set to 1.3)
     cashConvert = prices.cashConvert
 
     #Money type
     cashConvert2 = prices.cashConvert2
+
+    ##Current Prices
+    priceDict = prices.priceDict
+
+    #Background upgrade prices
+    bgDict = prices.bgDict
+
+    #Extra Character count prices
+    charDict = prices.charDict
 
     print("TOTAL COMMISSIONS:" + str(len(x)))
     print("ERROR SUBMISSIONS:" + str(len(ClientQueue_Error)) + "\n")
@@ -305,11 +336,7 @@ def printPrices(x):
             print(i.getName() + ": See Remarks")
             continue
 
-        price = priceDict[i.getType()] 
-        if i.getComplex():
-            price += bgDict[i.getType()]
-        if i.getCharNum() > 1:
-            price += charDict[i.getType()]*(i.getCharNum()-1)
+        price = i.getPrice()
 
         if i.getPaymentType() == "SQUARE":
             price = math.floor(price * cashConvert[i.getPaymentType()])

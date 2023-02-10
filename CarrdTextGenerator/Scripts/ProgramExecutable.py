@@ -16,6 +16,18 @@ buttonDict = {}
 colorDict = {}
 resize = 7
 
+#Combine Application and ButtonList
+def consolidateObjects():
+    x = 0
+    for i in names.Applications:
+        i.assignButton(script2.buttonList[x])
+        x+=1
+
+consolidateObjects()
+
+Client = names.Applications
+
+
 #Concatenate string
 def concatenate(x):
     string = ""
@@ -29,6 +41,7 @@ def click():
     str = concatenate(script2.appendProgress(script2.buttonList)).replace(" Star", "★")
     pyperclip.copy(str)
 
+#Copy Google Sheet Info to Clipboard
 def click2():
     goog.sheet()
 
@@ -101,12 +114,107 @@ def clear():
         colorDict[i].configure(image = progressDict[script2.buttonList[i].currentColor()])
     script2.appendProgress(script2.buttonList)
 
+
 def restart():
     window.destroy()
     os.startfile(names.findPath("\Scripts","\\Scripts\ProgramExecutable.py"))
 
 #Runs GUI
 window = Tk()
+
+#Object holding Overwritten statements
+entry_Object = [0] * len(Client) 
+class Overwrite:
+    def __init__(app, content, i, xaxis, yaxis):
+        app.name  = content[0]
+        app.comm  = content[1]
+        app.price = content[2]
+        app.x     = xaxis
+        app.y     = yaxis
+
+        app.name.place(x=0 + xaxis, y = yaxis)
+        app.name.insert(INSERT, i.getName())
+
+        app.comm.place(x=455 + xaxis, y = yaxis)
+        app.comm.insert(INSERT, goog.shortenedComm(i))
+
+        app.price.place(x=770 + xaxis, y = yaxis)
+        app.price.insert(INSERT, i.getPrice())
+
+    def getName(app):
+        return app.name.get("1.0", "end-1c")
+    def getComm(app):
+        return app.comm.get("1.0", "end-1c")
+    def getPrice(app):
+        return app.price.get("1.0", "end-1c")
+
+#Overrides the Script with handmade edits
+def edit():
+    #Clears edit, goes back to main page
+    def destroyEditFrame():
+        bg_edit.destroy()
+        button_exit.destroy()
+        title.destroy()
+        for i in range(0,len(entry_Comm)):
+            entry_Name[i].destroy()
+            entry_Comm[i].destroy()
+            entry_Price[i].destroy()
+
+    #X,Y Axis for editable items
+    nextRowReady = True
+    count = 0
+    yaxis = 150
+    xaxis = 10
+
+    entry_Name = []
+    entry_Comm = []
+    entry_Price = []
+
+    bg_edit = Label(window,
+                    image = photo_edit)
+
+    title = Label(window, 
+                  text = "Editing Mode", 
+                  font = ("Helvetica", 50))
+
+    button_exit =  Button(window, 
+                          image = photo_check,
+                          height = 76,
+                          width = 76,
+                          command = destroyEditFrame)
+    
+    for i in Client:
+        if nextRowReady and count >= 10:
+            nextRowReady = not nextRowReady
+            xaxis = 900
+            yaxis = 150
+
+        entry_Name.append(Text(window, 
+                    width = 15, 
+                    height = 1, 
+                    font = ("Helvetica", 40),))
+
+        entry_Comm.append(Text(window, 
+                    width = 10, 
+                    height = 1,
+                    font = ("Helvetica", 40),))
+
+        entry_Price.append(Text(window, 
+                    width = 3, 
+                    height = 1,
+                    font = ("Helvetica", 40),))
+
+        entry_Object[count] = (Overwrite([entry_Name[count],entry_Comm[count],entry_Price[count]], i, xaxis, yaxis))
+
+        print(entry_Object[count].getName())
+
+        count += 1
+        yaxis += 80
+
+    bg_edit.place(x=0, y=0, relwidth=1, relheight=1)
+    title.place(x=0, y=0)
+    button_exit.place(x=840, y=0)
+    return
 
 #Proportions of window, not allowed to resize
 window.geometry("1800x1100")
@@ -116,9 +224,12 @@ window.resizable(width=False, height=False)
 window.title("SussyExecutable")
 
 #Create photos types
-#Background image
+#Background images
 photo = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Kai_and_Zero.png"))
 photo = photo.subsample(2,2)
+
+photo_edit = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Kai_Lightning.png"))
+photo_edit = photo_edit.subsample(3,3)
 #Blank Button
 photo_blank = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Blank.png"))
 #In Progress Button
@@ -146,6 +257,12 @@ photo_sweep = photo_sweep.subsample(7,7)
 #Image of Power
 photo_power = PhotoImage(file = names.findPath("\Scripts","\\Sprites/restart.png"))
 photo_power = photo_power.subsample(5,5)
+#Image of Pencil
+photo_pencil = PhotoImage(file = names.findPath("\Scripts","\\Sprites/pencil.png"))
+photo_pencil = photo_pencil.subsample(7,7)
+#Image of Green Checkmark
+photo_check = PhotoImage(file = names.findPath("\Scripts","\\Sprites/green_check.png"))
+photo_check = photo_check.subsample(25,25)
 
 progressDict = { 
         True : "blue",
@@ -175,18 +292,25 @@ title.place(x=0, y=0)
 createButtons()
 
 #Clipboard Button
-button =        Button(window, 
+button =       Button(window, 
                        command=click,
                        image = photo_carrd,
                        height = 130,
                        width = 130)
 
 #Sheet Button
-button_s =        Button(window, 
+button_s =     Button(window, 
                        command=click2,
                        image = photo_sheet,
                        height = 130,
                        width = 130)
+
+#Edit Button
+button_edit =  Button(window, 
+                       image = photo_pencil,
+                       height = 76,
+                       width = 76,
+                       command = edit)
 
 #Restart Button
 button_restart= Button(window, 
@@ -194,6 +318,7 @@ button_restart= Button(window,
                        height = 76,
                        width = 76,
                        command = restart)
+
 #Clear the board Button
 button_sweep =  Button(window, 
                        image = photo_sweep,
@@ -201,8 +326,10 @@ button_sweep =  Button(window,
                        width = 76,
                        command = clear)
 
+
 button.place(x=1500, y=965)
 button_s.place(x=1350, y=965)
 button_restart.place(x=1718, y=0)
 button_sweep.place(x=740, y=0)
+button_edit.place(x=840, y=0)
 window.mainloop()

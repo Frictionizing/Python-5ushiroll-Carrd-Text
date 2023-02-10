@@ -67,7 +67,7 @@ def sheet():
     for i in test: 
         final += i.getName() + nextCell
         final += shortenedComm(i) + nextCell
-        final += "$     " + maffs(i) + nextCell
+        final += "$" + maffs(i) + nextCell
         final += payment(h) + nextCell
         final += reorder(i) + nextCell
         final += reorder2(i) + newLine
