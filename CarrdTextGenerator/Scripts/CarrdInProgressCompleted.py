@@ -13,6 +13,12 @@ with open(script1.findPath("\Scripts","\\Texts\SaveColors.txt")) as f:
     colorSave = f.readlines()
 f.close()
 
+with open(script1.findPath("\Scripts","\\Texts\Test.txt")) as f:
+    record = f.readlines()
+f.close()
+
+Client = script1.Applications
+
 class ButtonMode:
     def __init__(x, i, save, colorsave):
         x.mode = save
@@ -46,13 +52,33 @@ class ButtonMode:
         }
         x.color = change[x.color]
 
-def writeToFile(x, i):
+#Test read new save file format, return Object of Client
+#Current length:9
+def readSaveTest():
+    final = []
+    every_client = []
+    le = 9
+    for i in range (0,len(record),le+1):
+        for j in range(0,le):
+            every_client.append(record[i+j][:-1])
+
+        final.append(every_client[:])
+        every_client.clear()
+    return final
+
+readSaveTest()
+
+def writeToFile(x, i, test):
     f = open(script1.findPath("\Scripts","\\Texts\SaveFile.txt"), "w")
     f.write(x)
     f.close()
 
     f = open(script1.findPath("\Scripts","\\Texts\SaveColors.txt"), "w")
     f.write(i)
+    f.close()
+
+    f = open(script1.findPath("\Scripts","\\Texts\Test.txt"), "w")
+    f.write(test)
     f.close()
 
 def concatenate(x):
@@ -74,6 +100,8 @@ def appendProgress(mode):
     complete   = " [==COMPLETED==]{lime}"
     list = []
     list2= []
+    #Save Test
+    test = ""
     write = ""
     colorWrite = ""
 
@@ -98,11 +126,25 @@ def appendProgress(mode):
         write += mode[i].currentMode() + "\n"
         colorWrite += mode[i].currentColor() + "\n"
 
+        test += Client[i].getName() + "\n"
+        test += str(Client[i].getSub()) + "\n"
+        test += Client[i].getType() + "\n"
+        test += str(Client[i].getComplex()) + "\n"
+        test += str(Client[i].getCharNum()) + "\n"
+        test += Client[i].getPaymentType() + "\n"
+
+        test += Client[i].getShortName() + "\n"
+        test += mode[i].currentMode() + "\n"
+        test += mode[i].currentColor() + "\n"
+        test += "\n"
+
+        print(Client[i].getFullType())
+
     for i in range(len(lines), 20):
         write += "BLANK" + "\n"
         colorWrite += "BLACK" + "\n"
 
-    writeToFile(write, colorWrite)
+    writeToFile(write, colorWrite, test)
     return list2
 
 buttonList = createButtonObjects()

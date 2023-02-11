@@ -1,0 +1,40 @@
+Fric
+False
+Mawshot
+True
+2
+SQUARE
+MAW-w/charas
+COMPLETED
+YELLOW
+
+Bob
+False
+Gacha Splash Art 5 Star
+True
+1
+SQUARE
+GACH-5
+BLANK
+BLACK
+
+Soosh
+False
+Gacha Splash Art 4 Star
+True
+1
+SQUARE
+GACH-4
+COMPLETED
+YELLOW
+
+Cheese
+False
+Gacha Splash Art 3 Star
+True
+1
+SQUARE
+GACH-3
+COMPLETED
+BLACK
+

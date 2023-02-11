@@ -20,18 +20,24 @@ class Client:
     isComplex: Complex Background boolean
     numOfChar: # of Characters Featured int
     paymentType: Paypal or Square
+    fullType: Detailed Description of Type (ie: Cell Shaded Fullbody -> Cell Shaded Fullbodies w/ Complex BG )
+    shortName: Shortened name abbrevation (ie: Cell Shaded Fullbodies w/ Complex BG -> CS-FBs-CB)
+    price: Calculated cost in USD
+    button: button objects associated with client
     """
     def __init__(app, application):
-        app.name      = application[0]
-        app.isSub     = application[1]
-        app.type      = application[2]
-        app.isComplex = application[3]
-        app.numOfChar = application[4]
+        app.name        = application[0]
+        app.isSub       = application[1]
+        app.type        = application[2]
+        app.isComplex   = application[3]
+        app.numOfChar   = application[4]
         app.paymentType = application[5]
-        app.fullType  = ""
-        app.button    = ""
-        app.shortName = ""
-        app.price     = -1
+        app.fullType    = textChange(app.type, app.isComplex, app.numOfChar)
+        app.shortName   = shortenedComm(app.type, app.numOfChar, app.isComplex)
+        app.price       = singlePrice(app.type, app.numOfChar, app.isComplex)
+
+        app.button      = ""
+
     #Get Functions
     def getName(app):
         return app.name
@@ -53,10 +59,8 @@ class Client:
         return app.shortName
     def getButton(app):
         return app.button
-
-    #Idk what this is lol
-    def typeChange(app, i):
-        app.fullType = i
+    def getFullType(app):
+        return app.fullType
 
     #Set Functions
     def assignButton(app, button):
@@ -67,7 +71,6 @@ class Client:
         app.shortName = i
 
     #Override Functions
-
     def OverrideComm(app, i,j,k):
         app.name = i
         app.shortName = j
@@ -75,6 +78,9 @@ class Client:
 
     def overrideComplex(app, new):
         app.isComplex = new
+
+    def overrideType(app, i):
+        app.fullType = i
     
 ClientQueue_Error = []
 
@@ -169,9 +175,6 @@ def stringConcat(x):
     for i in x:
         st += i.getName() + ": " + textChange(i.getType(), i.getComplex(), i.getCharNum()) + "\n"
 
-    for i in range(0,len(x)):
-        x[i].typeChange(textChange(x[i].getType(), x[i].getComplex(), x[i].getCharNum()))
-
     return st[:-1]
 
 #Copy result to clipboard
@@ -214,17 +217,17 @@ def errorText(x,y,z):
     return z + ': Error - Commissioned "' + x + '" while answering "' + y + '" in the follow up question.'
 
 #Shortened form with plural cases
-def shortenedComm(i):
+def shortenedComm(i,j,k):
 
-    exemptList = ["GACH-3","GACH-4","GACH-5","GACH-6", "Full-Ren"]
-
-    name = prices.shortDict[i.getType()]
-    if (name == "BAN" or name == "MAW" or name == "COS") and i.getCharNum() >= 2:
+    exemptList = ["GACH-3","GACH-4","GACH-5","GACH-6", "Full-Ren", "MAW", "DD", "YCH", "SRS", "CRS", "HSP", "DM", "SP", "RH"]
+    temp = prices.shortDict[i]
+    name = prices.shortDict[i]
+    if (name == "BAN" or name == "MAW" or name == "COS") and j >= 2:
         name += "-w/charas"
-    elif (name == "CS-H" or name == "CS-HB" or name == "CS-FB" or name == "RH") and i.getCharNum() >= 2:
+    elif (name == "CS-H" or name == "CS-HB" or name == "CS-FB" or name == "RH") and j >= 2:
         name += "s"
 
-    if i.getComplex() and name not in exemptList:
+    if k and temp not in exemptList:
         name += "-CB"
 
     return name
@@ -297,9 +300,6 @@ def CreateClientObjects():
         #Turn application into Client object
         cli = Client(simplified_comm)
 
-        cli.setPrice(singlePrice(cli))
-        cli.setShortName(shortenedComm(cli))
-
         #Append to seperate queue depending on SubsriberStar status
         if cli.getSub():
             ClientQueue.append(cli)
@@ -315,7 +315,7 @@ def CreateClientObjects():
     return ClientQueue
 
 #Returns Single Price of Client Comm in USD
-def singlePrice(i):
+def singlePrice(i,j,k):
     #Current Prices
     priceDict = prices.priceDict
 
@@ -325,11 +325,11 @@ def singlePrice(i):
     #Extra Character count prices
     charDict = prices.charDict
 
-    price = priceDict[i.getType()] 
-    if i.getComplex():
-        price += bgDict[i.getType()]
-    if i.getCharNum() > 1:
-        price += charDict[i.getType()]*(i.getCharNum()-1)
+    price = priceDict[i] 
+    if k:
+        price += bgDict[i]
+    if j > 1:
+        price += charDict[i]*(j-1)
     return price
 
 #Prints prices to terminal

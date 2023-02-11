@@ -155,7 +155,7 @@ def edit():
     def save():
         for i in range(0,len(Client)):
             Client[i].OverrideComm(entry_Object[i].getName(),entry_Object[i].getComm(),entry_Object[i].getPrice())
-            name_label[i].config(text = Client[i].getName())
+            name_label[i].config(text = str(i+1) + ". " + Client[i].getName())
         return
 
     #Clears edit, goes back to main page
