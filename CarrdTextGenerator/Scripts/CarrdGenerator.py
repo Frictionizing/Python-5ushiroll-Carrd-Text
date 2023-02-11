@@ -30,7 +30,9 @@ class Client:
         app.paymentType = application[5]
         app.fullType  = ""
         app.button    = ""
+        app.shortName = ""
         app.price     = -1
+    #Get Functions
     def getName(app):
         return app.name
     def getSub(app):
@@ -41,20 +43,36 @@ class Client:
         return app.isComplex
     def getCharNum(app):
         return app.numOfChar
-    def typeChange(app, i):
-        app.fullType = i
     def getNewType(app):
         return app.fullType
     def getPaymentType(app):
         return app.paymentType
     def getPrice(app):
         return app.price
-    def assignButton(app, button):
-        app.button = button
+    def getShortName(app):
+        return app.shortName
     def getButton(app):
         return app.button
+
+    #Idk what this is lol
+    def typeChange(app, i):
+        app.fullType = i
+
+    #Set Functions
+    def assignButton(app, button):
+        app.button = button
     def setPrice(app, i):
         app.price = i
+    def setShortName(app, i):
+        app.shortName = i
+
+    #Override Functions
+
+    def OverrideComm(app, i,j,k):
+        app.name = i
+        app.shortName = j
+        app.price = k
+
     def overrideComplex(app, new):
         app.isComplex = new
     
@@ -195,6 +213,22 @@ def errorText(x,y,z):
         return z + ': Error - Commissioned "' + x + '" without answering the follow up question.'
     return z + ': Error - Commissioned "' + x + '" while answering "' + y + '" in the follow up question.'
 
+#Shortened form with plural cases
+def shortenedComm(i):
+
+    exemptList = ["GACH-3","GACH-4","GACH-5","GACH-6", "Full-Ren"]
+
+    name = prices.shortDict[i.getType()]
+    if (name == "BAN" or name == "MAW" or name == "COS") and i.getCharNum() >= 2:
+        name += "-w/charas"
+    elif (name == "CS-H" or name == "CS-HB" or name == "CS-FB" or name == "RH") and i.getCharNum() >= 2:
+        name += "s"
+
+    if i.getComplex() and name not in exemptList:
+        name += "-CB"
+
+    return name
+
 def shortenPayment(x):
     return "SQUARE" if x == "I can pay with Square" else "PAYPAL"
 
@@ -227,28 +261,12 @@ def CreateClientObjects():
         #Parsing out Name     
         name = comm[2]
 
-        if "@" in name and "#" in name:
-            name = name.split("#")[0]
-            name = name.split("@")[1]
-            if "Discord:" in name or "discord:" in name:
-                name = name.split("Discord:")[0]
-                name = name.split("discord:")[0]
-
         #Discord Case
-        else:
-            name = name.split("#")[0]
+        name = name.split("#")[0]
+
         #Twitter Case
         if len(name.split("@")) == 2:
             name = name.split("@")[1]
-        #Discord Case 2
-        if len(name.split(":")) == 2:
-            name = name.split(": ")[1]
-
-        #Other Case 2
-        name = name.replace("(Twitter)", "")
-        name = name.replace("(Discord)", "")
-        name = name.replace("(twitter)", "")
-        name = name.replace("(discord)", "")
 
         #Space in Name Front
         if name[0] == " ":
@@ -262,8 +280,13 @@ def CreateClientObjects():
         #Simplify array to relevant data
         #Comm[] = Name 2, Sub 3, Comm 4, 6 CellShaded Ref Sheet Q, 7 Gacha Q, 9 Char Num, 10 Background, 14 Payment 
         #0 Name, 1 Subscriber, 2 Comm, 3 Background, 4 #Chars, 5 Payment Type
-        simplified_comm = [name, convertBool(comm[3]), commishType(comm[4], comm[6], comm[7]), 
-                           convertBool(comm[10]), parseInt(comm[9]), shortenPayment(comm[14])]
+        simplified_comm = [name,                                                  
+                           convertBool(comm[3]), 
+                           commishType(comm[4], comm[6], comm[7]), 
+                           convertBool(comm[10]), 
+                           parseInt(comm[9]), 
+                           shortenPayment(comm[14])
+                           ]
 
         if simplified_comm[2] == "Error: See Remarks":
             simplified_comm[2] = errorText(comm[4], comm[6], simplified_comm[0])
@@ -275,6 +298,7 @@ def CreateClientObjects():
         cli = Client(simplified_comm)
 
         cli.setPrice(singlePrice(cli))
+        cli.setShortName(shortenedComm(cli))
 
         #Append to seperate queue depending on SubsriberStar status
         if cli.getSub():

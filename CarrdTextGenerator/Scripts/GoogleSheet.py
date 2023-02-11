@@ -6,29 +6,11 @@ import pyperclip
 
 #Price function
 def maffs(i):
-    ans = prices.priceDict[i.getType()] + (prices.charDict[i.getType()] * (i.getCharNum()-1))
-    if i.getComplex():
-        ans += prices.bgDict[i.getType()]
+    ans = i.getPrice()
 
     if i.getPaymentType() == "SQUARE":
-        ans = math.floor(1.3 * ans)
+        ans = math.floor(1.3 * float(ans))
     return str(ans) + ".00"
-
-#Shortened form with plural cases
-def shortenedComm(i):
-
-    exemptList = ["GACH-3","GACH-4","GACH-5","GACH-6", "Full-Ren"]
-
-    name = prices.shortDict[i.getType()]
-    if (name == "BAN" or name == "MAW" or name == "COS") and i.getCharNum() >= 2:
-        name += "-w/charas"
-    elif (name == "CS-H" or name == "CS-HB" or name == "CS-FB" or name == "RH") and i.getCharNum() >= 2:
-        name += "s"
-
-    if i.getComplex() and name not in exemptList:
-        name += "-CB"
-
-    return name
 
 def reorder(i):
     if i.getPaymentType() == "SQUARE":
@@ -46,7 +28,7 @@ def reorder2(i):
 
 #Returns whether commission is paid for or not, or on a payment plan
 def payment(i):
-    c = buttons.buttonList[i].currentColor()
+    c = i.getButton().currentColor()
     if c == "BLACK" or c == "BLUE":
         return "Y"
     elif  c == "YELLOW" or c == "RED":
@@ -66,9 +48,9 @@ def sheet():
 
     for i in test: 
         final += i.getName() + nextCell
-        final += shortenedComm(i) + nextCell
+        final += i.getShortName() + nextCell
         final += "$" + maffs(i) + nextCell
-        final += payment(h) + nextCell
+        final += payment(i) + nextCell
         final += reorder(i) + nextCell
         final += reorder2(i) + newLine
         h += 1

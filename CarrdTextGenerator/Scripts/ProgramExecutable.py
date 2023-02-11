@@ -13,6 +13,7 @@ maxComm = 20
 complete   = " [==COMPLETED==]{lime}"
 inProgress = " [==IN PROGRESS==]{orange}"
 buttonDict = {}
+name_label = {}
 colorDict = {}
 resize = 7
 
@@ -78,11 +79,11 @@ def createButtons():
             yaxis = 150
 
         #List of names
-        name_label = Label(window,
+        name_label[i] = Label(window,
                            text = str(i+1) + ". " +  names.Applications[i].getName(),
                            font = ("Helvetica", 40),
                            fg = progressDict[names.Applications[i].getSub()],)
-        name_label.place(x=xaxis + 10, y=yaxis)
+        name_label[i].place(x=xaxis + 10, y=yaxis)
 
         #List of progress buttons
         buttonDict[i] = Button(window, 
@@ -136,7 +137,7 @@ class Overwrite:
         app.name.insert(INSERT, i.getName())
 
         app.comm.place(x=455 + xaxis, y = yaxis)
-        app.comm.insert(INSERT, goog.shortenedComm(i))
+        app.comm.insert(INSERT, i.getShortName())
 
         app.price.place(x=770 + xaxis, y = yaxis)
         app.price.insert(INSERT, i.getPrice())
@@ -150,8 +151,18 @@ class Overwrite:
 
 #Overrides the Script with handmade edits
 def edit():
+    
+    def save():
+        for i in range(0,len(Client)):
+            Client[i].OverrideComm(entry_Object[i].getName(),entry_Object[i].getComm(),entry_Object[i].getPrice())
+            name_label[i].config(text = Client[i].getName())
+        return
+
     #Clears edit, goes back to main page
     def destroyEditFrame():
+        #Save Changes
+        save()
+
         bg_edit.destroy()
         button_exit.destroy()
         title.destroy()
@@ -205,8 +216,6 @@ def edit():
                     font = ("Helvetica", 40),))
 
         entry_Object[count] = (Overwrite([entry_Name[count],entry_Comm[count],entry_Price[count]], i, xaxis, yaxis))
-
-        print(entry_Object[count].getName())
 
         count += 1
         yaxis += 80
