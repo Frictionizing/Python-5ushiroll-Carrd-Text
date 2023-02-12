@@ -22,24 +22,69 @@ def subscriberLen(x):
             ct += 1
     return ct
 
-test = ""
+##Read In Saved File With Edits
+def readSave():
+    le = 9
+    final = []
+    every_client = []
+    ClientQueue = []
+    ClientQueue_NoSub = []
 
-f = open(script1.findPath("\Scripts","\\Texts\Test.txt"), "w")
-f.write(test)
-f.close()
+    def dumb(i):
+        if i == "True":
+            return True
+        return False
+    
+    with open(main.findPath("\Scripts","\\Texts\SaveFile.txt")) as f:
+        r = f.readlines()
+    f.close()
 
-test += Client[i].getName() + "\n"
-test += str(Client[i].getSub()) + "\n"
-test += Client[i].getType() + "\n"
-test += str(Client[i].getComplex()) + "\n"
-test += str(Client[i].getCharNum()) + "\n"
-test += Client[i].getPaymentType() + "\n"
+    for i in range (0,len(r),le+1):
+        for j in range(0,le):
+            every_client.append(r[i+j][:-1])
 
-test += Client[i].getShortName() + "\n"
-test += mode[i].currentMode() + "\n"
-test += mode[i].currentColor() + "\n"
-test += "\n"
+        final.append(every_client[:])
+        every_client.clear()
 
+    for i in final:
+        cli = main.Client([i[0],dumb(i[1]),i[2],dumb(i[3]),int(i[4]),i[5]])
+        cli.overrideState(i[7])
+        print(cli.getState())
+        cli.overrideColor(i[8])
+        if cli.getSub():
+            ClientQueue.append(cli)
+        else:
+            ClientQueue_NoSub.append(cli)
+
+    for i in ClientQueue_NoSub:
+        ClientQueue.append(i)
+
+    return ClientQueue
+
+def writeSave():
+    test = ""
+    for i in ClientObj:
+        test += i.getName() + "\n"
+        test += str(i.getSub()) + "\n"
+        test += i.getType() + "\n"
+        test += str(i.getComplex()) + "\n"
+        test += str(i.getCharNum()) + "\n"
+        test += i.getPaymentType() + "\n"
+        test += i.getShortName() + "\n"
+        test += i.getButton().currentMode() + "\n"
+        test += i.getButton().currentColor() + "\n"
+        test += "\n"
+    writeToFile(test)
+    print(test)
+
+def writeToFile(t):
+    f = open(main.findPath("\Scripts","\\Texts\SaveFile.txt"), "w")
+    f.write(t)
+    f.close()
 
 ClientObj = readCSV()
+ClientObj = readSave()
+print(ClientObj[0].getState())
+
+
 #ClientObj.append(readSingle(1))

@@ -37,6 +37,8 @@ class Client:
         app.price       = singlePrice(app.type, app.numOfChar, app.isComplex)
 
         app.button      = ""
+        app.state       = "BLANK"
+        app.color       = "BLACK" if not app.isSub else "BLUE"
 
     #Get Functions
     def getName(app):
@@ -61,6 +63,10 @@ class Client:
         return app.button
     def getFullType(app):
         return app.fullType
+    def getState(app):
+        return app.state
+    def getColor(app):
+        return app.color
 
     #Set Functions
     def assignButton(app, button):
@@ -81,6 +87,11 @@ class Client:
 
     def overrideType(app, i):
         app.fullType = i
+
+    def overrideState(app, i):
+        app.state = i
+    def overrideColor(app, i):
+        app.color = i
     
 ClientQueue_Error = []
 
@@ -151,6 +162,9 @@ def parseInt(x):
 #x is Type, y is Complex Background, z is # of Characters
 def textChange(x,y,z):
     #Temp is the base x commission title
+
+    z = int(z)
+
     temp = x
 
     pluralDict = prices.pluralDict
@@ -218,6 +232,8 @@ def errorText(x,y,z):
 
 #Shortened form with plural cases
 def shortenedComm(i,j,k):
+
+    j = int(j)
 
     exemptList = ["GACH-3","GACH-4","GACH-5","GACH-6", "Full-Ren", "MAW", "DD", "YCH", "SRS", "CRS", "HSP", "DM", "SP", "RH"]
     temp = prices.shortDict[i]
@@ -383,6 +399,8 @@ def CreateClientObjectIndex(w):
 
 #Returns Single Price of Client Comm in USD
 def singlePrice(i,j,k):
+    j = int(j)
+
     #Current Prices
     priceDict = prices.priceDict
 

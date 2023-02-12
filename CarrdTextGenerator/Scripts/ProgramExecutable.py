@@ -6,10 +6,6 @@ from tkinter import *
 import os
 import pyperclip
 
-with open(names.findPath("\Scripts","\\Texts\TextOutput.txt")) as f:
-    lines = f.readlines()
-f.close()
-
 maxComm = 20
 complete   = " [==COMPLETED==]{lime}"
 inProgress = " [==IN PROGRESS==]{orange}"
@@ -86,7 +82,7 @@ def createButtons():
         #List of progress buttons
         buttonDict[i] = Button(window, 
                                command = convertMode,
-                               image = progressDict[carrd.save[i][:-1]])
+                               image = progressDict[Client[i].getState()])
         buttonDict[i].place(x=680 + xaxis, y=yaxis)
 
         #Override SubscriberStar color to blue
@@ -95,7 +91,7 @@ def createButtons():
         #List of color overlay buttons
         colorDict[i] = Button(window, 
                               command = convertColor,
-                              image = progressDict[carrd.colorSave[i][:-1]])
+                              image = progressDict[Client[i].getColor()])
         colorDict[i].place(x=605 + xaxis, y=yaxis)
 
         #Move the Y axis every iteration (resets at the halfway point)
@@ -154,6 +150,7 @@ def edit():
         for i in range(0,len(Client)):
             Client[i].OverrideComm(entry_Object[i].getName(),entry_Object[i].getComm(),entry_Object[i].getPrice())
             name_label[i].config(text = str(i+1) + ". " + Client[i].getName())
+        app.writeSave()
         return
 
     #Clears edit, goes back to main page

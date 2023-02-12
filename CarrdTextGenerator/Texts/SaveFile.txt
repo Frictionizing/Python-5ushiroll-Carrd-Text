@@ -1,20 +1,40 @@
-IN PROGRESS
-IN PROGRESS
-IN PROGRESS
-IN PROGRESS
+Bobby
+True
+Gacha Splash Art 5 Star
+True
+1
+SQUARE
+GACH-5
+COMPLETED
+YELLOW
+
+Fric
+False
+Mawshot
+True
+2
+SQUARE
+MAW-w/charas
 BLANK
+BLACK
+
+Soosh
+False
+Gacha Splash Art 4 Star
+True
+1
+SQUARE
+GACH-4
 BLANK
+RED
+
+Cheesenipple
+False
+Gacha Splash Art 3 Star
+True
+1
+SQUARE
+GACH-3
 BLANK
-BLANK
-BLANK
-BLANK
-BLANK
-BLANK
-BLANK
-BLANK
-BLANK
-BLANK
-BLANK
-BLANK
-BLANK
-BLANK
+BLACK
+
