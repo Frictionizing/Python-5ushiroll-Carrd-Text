@@ -1,9 +1,6 @@
 import CarrdGenerator as script1
+import MasterClientList as app
 from tkinter import *
-
-with open(script1.findPath("\Scripts","\\Texts\TextOutput.txt")) as f:
-    lines = f.readlines()
-f.close()
 
 with open(script1.findPath("\Scripts","\\Texts\SaveFile.txt")) as f:
     save = f.readlines()
@@ -17,7 +14,7 @@ with open(script1.findPath("\Scripts","\\Texts\Test.txt")) as f:
     record = f.readlines()
 f.close()
 
-Client = script1.Applications
+Client = app.ClientObj
 
 class ButtonMode:
     def __init__(x, i, save, colorsave):
@@ -68,7 +65,7 @@ def readSaveTest():
 
 readSaveTest()
 
-def writeToFile(x, i, test):
+def writeToFile(x, i):
     f = open(script1.findPath("\Scripts","\\Texts\SaveFile.txt"), "w")
     f.write(x)
     f.close()
@@ -89,7 +86,7 @@ def concatenate(x):
 
 def createButtonObjects():
     buttons = []
-    for i in range (0,len(lines)):
+    for i in range (0,app.commLen(Client)):
         if i == 20:
             break
         buttons.append(ButtonMode(i, save[i][:-1], colorSave[i][:-1]))
@@ -98,17 +95,13 @@ def createButtonObjects():
 def appendProgress(mode):
     inProgress = " [==IN PROGRESS==]{orange}"
     complete   = " [==COMPLETED==]{lime}"
-    list = []
     list2= []
-    #Save Test
-    test = ""
     write = ""
     colorWrite = ""
 
-    for i in range(0,len(lines)):
-        list.append(lines[i])
+    for i in range(0,app.commLen(Client)):
 
-        name = script1.Applications[i].getName()
+        name = Client[i].getName()
 
         dic = {
             "BLANK" : "",
@@ -121,30 +114,16 @@ def appendProgress(mode):
             "PAYMENT PLAN" : "!" + name + ": "
         }
 
-        list2.append(dic[buttonList[i].currentColor()] + script1.Applications[i].getNewType() + dic[mode[i].currentMode()] + "\n")
+        list2.append(dic[buttonList[i].currentColor()] + Client[i].getNewType() + dic[mode[i].currentMode()] + "\n")
 
         write += mode[i].currentMode() + "\n"
         colorWrite += mode[i].currentColor() + "\n"
 
-        test += Client[i].getName() + "\n"
-        test += str(Client[i].getSub()) + "\n"
-        test += Client[i].getType() + "\n"
-        test += str(Client[i].getComplex()) + "\n"
-        test += str(Client[i].getCharNum()) + "\n"
-        test += Client[i].getPaymentType() + "\n"
-
-        test += Client[i].getShortName() + "\n"
-        test += mode[i].currentMode() + "\n"
-        test += mode[i].currentColor() + "\n"
-        test += "\n"
-
-        print(Client[i].getFullType())
-
-    for i in range(len(lines), 20):
+    for i in range(app.commLen(Client), 20):
         write += "BLANK" + "\n"
         colorWrite += "BLACK" + "\n"
 
-    writeToFile(write, colorWrite, test)
+    writeToFile(write, colorWrite)
     return list2
 
 buttonList = createButtonObjects()

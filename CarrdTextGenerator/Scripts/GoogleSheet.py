@@ -1,6 +1,4 @@
-import CarrdGenerator as data
-import CommissionPrices as prices
-import CarrdInProgressCompleted as buttons
+import MasterClientList as data
 import math
 import pyperclip
 
@@ -44,7 +42,7 @@ def sheet():
     final    = ""
 
     h = 0
-    test = data.Applications
+    test = data.ClientObj
 
     for i in test: 
         final += i.getName() + nextCell

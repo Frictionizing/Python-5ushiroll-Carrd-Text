@@ -314,6 +314,73 @@ def CreateClientObjects():
 
     return ClientQueue
 
+def CreateClientObjectIndex(w):
+    lines = readFile()
+    ClientQueue = []
+    ClientQueue_NoSub = []
+    #Find line csv file where data begins and puts data into array; split by the comma and quotes
+
+    for i in range(iterable(lines), len(lines)):
+
+        #Collect all lines of single commission
+        preComm = lines[i]
+        if preComm[0:3] != "\"20":
+            continue
+
+        for y in range(i+1, len(lines)):
+            if y >= len(lines) or lines[y][0:3] == "\"20":
+                break
+            if lines[y] == "\n":
+                continue
+            preComm += lines[y]
+
+        comm = apostrophe_removal(preComm.split("\",\""))
+
+        #Parsing out Name     
+        name = comm[2]
+
+        #Discord Case
+        name = name.split("#")[0]
+
+        #Twitter Case
+        if len(name.split("@")) == 2:
+            name = name.split("@")[1]
+
+        #Space in Name Front
+        if name[0] == " ":
+            name = name[1:len(name)]
+
+        #Space in Name Back
+        if name[len(name)-1] == " ":
+            name = name[0:len(name)-1]
+
+        name = capital(name)
+        #Simplify array to relevant data
+        #Comm[] = Name 2, Sub 3, Comm 4, 6 CellShaded Ref Sheet Q, 7 Gacha Q, 9 Char Num, 10 Background, 14 Payment 
+        #0 Name, 1 Subscriber, 2 Comm, 3 Background, 4 #Chars, 5 Payment Type
+        simplified_comm = [name,                                                  
+                           convertBool(comm[3]), 
+                           commishType(comm[4], comm[6], comm[7]), 
+                           convertBool(comm[10]), 
+                           parseInt(comm[9]), 
+                           shortenPayment(comm[14])
+                           ]
+
+        if simplified_comm[2] == "Error: See Remarks":
+            simplified_comm[2] = errorText(comm[4], comm[6], simplified_comm[0])
+
+        cli = Client(simplified_comm)
+            #Append to seperate queue depending on SubsriberStar status
+        if cli.getSub():
+            ClientQueue.append(cli)
+        else:
+            ClientQueue_NoSub.append(cli)
+
+        for i in ClientQueue_NoSub:
+            ClientQueue.append(i)   
+        
+    return ClientQueue[w]
+
 #Returns Single Price of Client Comm in USD
 def singlePrice(i,j,k):
     #Current Prices
@@ -412,12 +479,7 @@ def printPrices(x):
 def Generate(x):
     writeToFile(stringConcat(x))
 
-#Resets the entire program
-def Reset():
-    Applications = CreateClientObjects()
-    Generate(Applications)
-
 ##################MAIN##################
-Applications = CreateClientObjects()
-Generate(Applications)
+#Applications = CreateClientObjects()
+#Generate(Applications)
 #Create Objects and seperate to two seperate queues ClientQueue and ClientQueue_NoSub

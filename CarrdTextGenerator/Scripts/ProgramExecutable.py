@@ -1,4 +1,5 @@
-import CarrdInProgressCompleted as script2
+import MasterClientList as app
+import CarrdInProgressCompleted as carrd
 import CarrdGenerator as names
 import GoogleSheet as goog
 from tkinter import *
@@ -17,17 +18,15 @@ name_label = {}
 colorDict = {}
 resize = 7
 
+Client = app.ClientObj
 #Combine Application and ButtonList
 def consolidateObjects():
     x = 0
-    for i in names.Applications:
-        i.assignButton(script2.buttonList[x])
+    for i in Client:
+        i.assignButton(carrd.buttonList[x])
         x+=1
 
 consolidateObjects()
-
-Client = names.Applications
-
 
 #Concatenate string
 def concatenate(x):
@@ -39,7 +38,7 @@ def concatenate(x):
 
 #Copy final product to clipboard
 def click():
-    str = concatenate(script2.appendProgress(script2.buttonList)).replace(" Star", "★")
+    str = concatenate(carrd.appendProgress(carrd.buttonList)).replace(" Star", "★")
     pyperclip.copy(str)
 
 #Copy Google Sheet Info to Clipboard
@@ -52,25 +51,24 @@ def createButtons():
     xaxis = 0
     nextRowReady = True
 
-    for i in range(0,(len(script2.buttonList))):
+    for i in range(0,(len(carrd.buttonList))):
         #Capped the maximum amount of commissions
         if i > maxComm:
             break
 
         #Function for changing the mode of each indivudual progress button
         def convertMode(x=i):
-            script2.buttonList[x].changeMode()
-            buttonDict[x].configure(image = progressDict[script2.buttonList[x].currentMode()])
+            carrd.buttonList[x].changeMode()
+            buttonDict[x].configure(image = progressDict[carrd.buttonList[x].currentMode()])
             #Update save file
-            updateSave = script2.appendProgress(script2.buttonList)
-            #print(concatenate(updateSave))
+            carrd.appendProgress(carrd.buttonList)
 
         def convertColor(x=i):
-            script2.buttonList[x].changeColor()
-            if script2.buttonList[x].currentColor() == "BLACK" and names.Applications[x].getSub():
-                script2.buttonList[x].changeColorOverride("BLUE")
-            colorDict[x].configure(image = progressDict[script2.buttonList[x].currentColor()])
-            updateSave = script2.appendProgress(script2.buttonList)
+            carrd.buttonList[x].changeColor()
+            if carrd.buttonList[x].currentColor() == "BLACK" and Client[x].getSub():
+                carrd.buttonList[x].changeColorOverride("BLUE")
+            colorDict[x].configure(image = progressDict[carrd.buttonList[x].currentColor()])
+            carrd.appendProgress(carrd.buttonList)
 
         #If more than half commissions, continue on the right side
         if nextRowReady and i >= 10:
@@ -80,24 +78,24 @@ def createButtons():
 
         #List of names
         name_label[i] = Label(window,
-                           text = str(i+1) + ". " +  names.Applications[i].getName(),
+                           text = str(i+1) + ". " +  Client[i].getName(),
                            font = ("Helvetica", 40),
-                           fg = progressDict[names.Applications[i].getSub()],)
+                           fg = progressDict[Client[i].getSub()],)
         name_label[i].place(x=xaxis + 10, y=yaxis)
 
         #List of progress buttons
         buttonDict[i] = Button(window, 
                                command = convertMode,
-                               image = progressDict[script2.save[i][:-1]])
+                               image = progressDict[carrd.save[i][:-1]])
         buttonDict[i].place(x=680 + xaxis, y=yaxis)
 
         #Override SubscriberStar color to blue
-        if script2.buttonList[i].currentColor() == "BLACK" and names.Applications[i].getSub():
-            script2.buttonList[i].changeColorOverride("BLUE")
+        if carrd.buttonList[i].currentColor() == "BLACK" and Client[i].getSub():
+            carrd.buttonList[i].changeColorOverride("BLUE")
         #List of color overlay buttons
         colorDict[i] = Button(window, 
                               command = convertColor,
-                              image = progressDict[script2.colorSave[i][:-1]])
+                              image = progressDict[carrd.colorSave[i][:-1]])
         colorDict[i].place(x=605 + xaxis, y=yaxis)
 
         #Move the Y axis every iteration (resets at the halfway point)
@@ -105,17 +103,17 @@ def createButtons():
 
 #Reset all buttons and modes to BLANK
 def clear():
-    for i in range(0,len(script2.buttonList)):
-        script2.buttonList[i].reset()
+    for i in range(0,len(carrd.buttonList)):
+        carrd.buttonList[i].reset()
         buttonDict[i].configure(image = photo_blank)
-        if names.Applications[i].getSub():
-            script2.buttonList[i].changeColorOverride("BLUE")
+        if Client[i].getSub():
+            carrd.buttonList[i].changeColorOverride("BLUE")
         else:
-            script2.buttonList[i].changeColorOverride("BLACK")
-        colorDict[i].configure(image = progressDict[script2.buttonList[i].currentColor()])
-    script2.appendProgress(script2.buttonList)
+            carrd.buttonList[i].changeColorOverride("BLACK")
+        colorDict[i].configure(image = progressDict[carrd.buttonList[i].currentColor()])
+    carrd.appendProgress(carrd.buttonList)
 
-
+#Restart Entire program
 def restart():
     window.destroy()
     os.startfile(names.findPath("\Scripts","\\Scripts\ProgramExecutable.py"))
@@ -162,7 +160,6 @@ def edit():
     def destroyEditFrame():
         #Save Changes
         save()
-
         bg_edit.destroy()
         button_exit.destroy()
         title.destroy()

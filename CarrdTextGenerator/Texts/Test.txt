@@ -1,3 +1,13 @@
+Bob
+True
+Gacha Splash Art 5 Star
+True
+1
+SQUARE
+GACH-5
+IN PROGRESS
+YELLOW
+
 Fric
 False
 Mawshot
@@ -5,18 +15,8 @@ True
 2
 SQUARE
 MAW-w/charas
-COMPLETED
+IN PROGRESS
 YELLOW
-
-Bob
-False
-Gacha Splash Art 5 Star
-True
-1
-SQUARE
-GACH-5
-BLANK
-BLACK
 
 Soosh
 False
@@ -25,7 +25,7 @@ True
 1
 SQUARE
 GACH-4
-COMPLETED
+IN PROGRESS
 YELLOW
 
 Cheese
@@ -35,6 +35,6 @@ True
 1
 SQUARE
 GACH-3
-COMPLETED
-BLACK
+IN PROGRESS
+YELLOW
 
