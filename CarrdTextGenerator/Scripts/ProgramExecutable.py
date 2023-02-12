@@ -57,14 +57,14 @@ def createButtons():
             carrd.buttonList[x].changeMode()
             buttonDict[x].configure(image = progressDict[carrd.buttonList[x].currentMode()])
             #Update save file
-            carrd.appendProgress(carrd.buttonList)
+            app.writeSave()
 
         def convertColor(x=i):
             carrd.buttonList[x].changeColor()
             if carrd.buttonList[x].currentColor() == "BLACK" and Client[x].getSub():
                 carrd.buttonList[x].changeColorOverride("BLUE")
             colorDict[x].configure(image = progressDict[carrd.buttonList[x].currentColor()])
-            carrd.appendProgress(carrd.buttonList)
+            app.writeSave()
 
         #If more than half commissions, continue on the right side
         if nextRowReady and i >= 10:
@@ -76,7 +76,7 @@ def createButtons():
         name_label[i] = Label(window,
                            text = str(i+1) + ". " +  Client[i].getName(),
                            font = ("Helvetica", 40),
-                           fg = progressDict[Client[i].getSub()],)
+                           fg = progressDict[Client[i].getSub()])
         name_label[i].place(x=xaxis + 10, y=yaxis)
 
         #List of progress buttons

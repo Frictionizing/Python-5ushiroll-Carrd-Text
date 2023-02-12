@@ -51,37 +51,27 @@ def createButtonObjects():
         buttons.append(ButtonMode(i, Client[i].getState(), Client[i].getColor()))
     return buttons
 
+#Returns Carrd Copy Paste Text
 def appendProgress(mode):
-    inProgress = " [==IN PROGRESS==]{orange}"
-    complete   = " [==COMPLETED==]{lime}"
-    list2= []
-    write = ""
-    colorWrite = ""
+    Carrd = []
 
     for i in range(0,app.commLen(Client)):
 
         name = Client[i].getName()
-
-        dic = {
-            "BLANK" : "",
-            "IN PROGRESS" : inProgress,
-            "COMPLETED" : complete,
-            "RED" : "[" + name + "]{red}: ",
-            "YELLOW" : "[" + name + "]{yellow}: ",
-            "BLUE" : "[" + name + "]{cyan}: ",
-            "BLACK" : name + ": ",
+        
+        ColorCode = {
+            "BLANK"        : "",
+            "IN PROGRESS"  : " [==IN PROGRESS==]{orange}",
+            "COMPLETED"    : " [==COMPLETED==]{lime}",
+            "RED"          : "[" + name + "]{red}: ",
+            "YELLOW"       : "[" + name + "]{yellow}: ",
+            "BLUE"         : "[" + name + "]{cyan}: ",
+            "BLACK"        : name + ": ",
             "PAYMENT PLAN" : "!" + name + ": "
         }
 
-        list2.append(dic[buttonList[i].currentColor()] + Client[i].getNewType() + dic[mode[i].currentMode()] + "\n")
+        Carrd.append(ColorCode[Client[i].getColor()] + Client[i].getNewType() + ColorCode[Client[i].getState()] + "\n")
 
-        write += mode[i].currentMode() + "\n"
-        colorWrite += mode[i].currentColor() + "\n"
-
-    for i in range(app.commLen(Client), 20):
-        write += "BLANK" + "\n"
-        colorWrite += "BLACK" + "\n"
-
-    return list2
+    return Carrd
 
 buttonList = createButtonObjects()

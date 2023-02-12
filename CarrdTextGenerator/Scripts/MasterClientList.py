@@ -24,7 +24,7 @@ def subscriberLen(x):
 
 ##Read In Saved File With Edits
 def readSave():
-    le = 9
+    le = 10
     final = []
     every_client = []
     ClientQueue = []
@@ -48,9 +48,10 @@ def readSave():
 
     for i in final:
         cli = main.Client([i[0],dumb(i[1]),i[2],dumb(i[3]),int(i[4]),i[5]])
+        cli.overrideShortName(i[6])
         cli.overrideState(i[7])
-        print(cli.getState())
         cli.overrideColor(i[8])
+        cli.overridePrice(int(i[9]))
         if cli.getSub():
             ClientQueue.append(cli)
         else:
@@ -59,6 +60,8 @@ def readSave():
     for i in ClientQueue_NoSub:
         ClientQueue.append(i)
 
+    #Print out suggested prices
+    main.printPrices(ClientQueue)
     return ClientQueue
 
 def writeSave():
@@ -73,18 +76,15 @@ def writeSave():
         test += i.getShortName() + "\n"
         test += i.getButton().currentMode() + "\n"
         test += i.getButton().currentColor() + "\n"
+        test += str(i.getPrice()) + "\n"
         test += "\n"
-    writeToFile(test)
-    print(test)
 
-def writeToFile(t):
     f = open(main.findPath("\Scripts","\\Texts\SaveFile.txt"), "w")
-    f.write(t)
+    f.write(test)
     f.close()
 
 ClientObj = readCSV()
 ClientObj = readSave()
-print(ClientObj[0].getState())
 
 
 #ClientObj.append(readSingle(1))

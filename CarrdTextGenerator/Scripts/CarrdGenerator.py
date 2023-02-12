@@ -82,12 +82,14 @@ class Client:
         app.shortName = j
         app.price = k
 
-    def overrideComplex(app, new):
-        app.isComplex = new
-
+    def overrideComplex(app, i):
+        app.isComplex = i
     def overrideType(app, i):
         app.fullType = i
-
+    def overrideShortName(app, i):
+        app.shortName = i
+    def overridePrice(app, i):
+        app.price = i
     def overrideState(app, i):
         app.state = i
     def overrideColor(app, i):
@@ -326,7 +328,7 @@ def CreateClientObjects():
         ClientQueue.append(i)
         
     #Print out suggested prices
-    printPrices(ClientQueue)
+    #printPrices(ClientQueue)
 
     return ClientQueue
 
