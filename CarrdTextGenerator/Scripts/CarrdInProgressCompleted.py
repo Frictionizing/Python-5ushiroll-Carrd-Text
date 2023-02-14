@@ -2,8 +2,6 @@ import CarrdGenerator as script1
 import MasterClientList as app
 from tkinter import *
 
-Client = app.ClientObj
-
 class ButtonMode:
     def __init__(x, i, save, colorsave):
         x.mode = save
@@ -27,6 +25,8 @@ class ButtonMode:
         x.mode = change[x.mode]
     def changeColorOverride(x, i):
         x.color = i
+    def changeModeOverride(x, i):
+        x.mode = i
     def changeColor(x):
         change = {
             "BLACK" : "YELLOW",
@@ -45,20 +45,21 @@ def concatenate(x):
 
 def createButtonObjects():
     buttons = []
-    for i in range (0,app.commLen(Client)):
+    print(len(app.ClientObj))
+    for i in range (0,app.commLen(app.ClientObj)):
         if i == 20:
             break
-        buttons.append(ButtonMode(i, Client[i].getState(), Client[i].getColor()))
+        buttons.append(ButtonMode(i, app.ClientObj[i].getState(), app.ClientObj[i].getColor()))
     return buttons
 
 #Returns Carrd Copy Paste Text
 def appendProgress(mode):
     Carrd = []
 
-    for i in range(0,app.commLen(Client)):
+    for i in range(0,app.commLen(app.ClientObj)):
 
-        name = Client[i].getName()
-        
+        name = app.ClientObj[i].getName()
+
         ColorCode = {
             "BLANK"        : "",
             "IN PROGRESS"  : " [==IN PROGRESS==]{orange}",
@@ -70,7 +71,7 @@ def appendProgress(mode):
             "PAYMENT PLAN" : "!" + name + ": "
         }
 
-        Carrd.append(ColorCode[Client[i].getColor()] + Client[i].getNewType() + ColorCode[Client[i].getState()] + "\n")
+        Carrd.append(ColorCode[app.ClientObj[i].getColor()] + app.ClientObj[i].getNewType() + ColorCode[app.ClientObj[i].getState()] + "\n")
 
     return Carrd
 

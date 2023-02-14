@@ -60,8 +60,6 @@ def readSave():
     for i in ClientQueue_NoSub:
         ClientQueue.append(i)
 
-    #Print out suggested prices
-    main.printPrices(ClientQueue)
     return ClientQueue
 
 def writeSave():
@@ -74,8 +72,12 @@ def writeSave():
         test += str(i.getCharNum()) + "\n"
         test += i.getPaymentType() + "\n"
         test += i.getShortName() + "\n"
-        test += i.getButton().currentMode() + "\n"
-        test += i.getButton().currentColor() + "\n"
+        if i.getButton() == "":
+            test += i.getState() + "\n"
+            test += i.getColor() + "\n"
+        else:
+            test += i.getButton().currentMode() + "\n"
+            test += i.getButton().currentColor() + "\n"
         test += str(i.getPrice()) + "\n"
         test += "\n"
 
@@ -83,8 +85,32 @@ def writeSave():
     f.write(test)
     f.close()
 
-ClientObj = readCSV()
 ClientObj = readSave()
 
+def appendNewComms():
+    ClientOG = readCSV()
+    global ClientObj
+    if commLen(ClientOG) > commLen(ClientObj):
+        sub = subscriberLen(ClientOG) - subscriberLen(ClientObj)
+        not_sub = commLen(ClientOG) - commLen(ClientObj) - sub
+        counter = 0
+        print(sub)
+        print(not_sub)
+        for i in range(subscriberLen(ClientObj), subscriberLen(ClientOG)):
+            ClientObj.insert(subscriberLen(ClientObj), readSingle(i))
+        for i in range(0, not_sub):
+            ClientObj.append(readSingle(len(ClientOG)-not_sub+counter))
+            counter += 1
+    
+    if commLen(ClientOG) < commLen(ClientObj):
+        ClientObj = ClientOG
+    
+    writeSave()
+    return
 
-#ClientObj.append(readSingle(1))
+appendNewComms()
+
+
+
+#Print out suggested prices
+main.printPrices(ClientObj)

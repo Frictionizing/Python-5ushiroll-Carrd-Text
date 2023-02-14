@@ -326,16 +326,16 @@ def CreateClientObjects():
 
     for i in ClientQueue_NoSub:
         ClientQueue.append(i)
-        
-    #Print out suggested prices
-    #printPrices(ClientQueue)
 
     return ClientQueue
 
 def CreateClientObjectIndex(w):
     lines = readFile()
+
+    #ClientList Queue
     ClientQueue = []
     ClientQueue_NoSub = []
+
     #Find line csv file where data begins and puts data into array; split by the comma and quotes
 
     for i in range(iterable(lines), len(lines)):
@@ -386,17 +386,23 @@ def CreateClientObjectIndex(w):
 
         if simplified_comm[2] == "Error: See Remarks":
             simplified_comm[2] = errorText(comm[4], comm[6], simplified_comm[0])
+            cli = Client(simplified_comm)
+            ClientQueue_Error.append(cli)
+            continue
 
+        #Turn application into Client object
         cli = Client(simplified_comm)
-            #Append to seperate queue depending on SubsriberStar status
+
+        #Append to seperate queue depending on SubsriberStar status
         if cli.getSub():
             ClientQueue.append(cli)
         else:
             ClientQueue_NoSub.append(cli)
 
-        for i in ClientQueue_NoSub:
-            ClientQueue.append(i)   
-        
+    for i in ClientQueue_NoSub:
+        ClientQueue.append(i)
+    
+    #print(w)
     return ClientQueue[w]
 
 #Returns Single Price of Client Comm in USD

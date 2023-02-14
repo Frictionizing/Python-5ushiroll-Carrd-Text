@@ -14,15 +14,15 @@ name_label = {}
 colorDict = {}
 resize = 7
 
-Client = app.ClientObj
+
 #Combine Application and ButtonList
-def consolidateObjects():
+def consolidateObjects(a):
     x = 0
-    for i in Client:
+    for i in a:
         i.assignButton(carrd.buttonList[x])
         x+=1
 
-consolidateObjects()
+consolidateObjects(app.ClientObj)
 
 #Concatenate string
 def concatenate(x):
@@ -32,7 +32,7 @@ def concatenate(x):
 
     return string + "\n"
 
-#Copy final product to clipboard
+#Copy Carrd to clipboard
 def click():
     str = concatenate(carrd.appendProgress(carrd.buttonList)).replace(" Star", "★")
     pyperclip.copy(str)
@@ -61,7 +61,7 @@ def createButtons():
 
         def convertColor(x=i):
             carrd.buttonList[x].changeColor()
-            if carrd.buttonList[x].currentColor() == "BLACK" and Client[x].getSub():
+            if carrd.buttonList[x].currentColor() == "BLACK" and app.ClientObj[x].getSub():
                 carrd.buttonList[x].changeColorOverride("BLUE")
             colorDict[x].configure(image = progressDict[carrd.buttonList[x].currentColor()])
             app.writeSave()
@@ -74,40 +74,62 @@ def createButtons():
 
         #List of names
         name_label[i] = Label(window,
-                           text = str(i+1) + ". " +  Client[i].getName(),
+                           text = str(i+1) + ". " +  app.ClientObj[i].getName(),
                            font = ("Helvetica", 40),
-                           fg = progressDict[Client[i].getSub()])
+                           fg = progressDict[app.ClientObj[i].getSub()])
         name_label[i].place(x=xaxis + 10, y=yaxis)
 
         #List of progress buttons
         buttonDict[i] = Button(window, 
                                command = convertMode,
-                               image = progressDict[Client[i].getState()])
+                               image = progressDict[app.ClientObj[i].getState()])
         buttonDict[i].place(x=680 + xaxis, y=yaxis)
 
         #Override SubscriberStar color to blue
-        if carrd.buttonList[i].currentColor() == "BLACK" and Client[i].getSub():
+        if carrd.buttonList[i].currentColor() == "BLACK" and app.ClientObj[i].getSub():
             carrd.buttonList[i].changeColorOverride("BLUE")
         #List of color overlay buttons
         colorDict[i] = Button(window, 
                               command = convertColor,
-                              image = progressDict[Client[i].getColor()])
+                              image = progressDict[app.ClientObj[i].getColor()])
         colorDict[i].place(x=605 + xaxis, y=yaxis)
+        
 
         #Move the Y axis every iteration (resets at the halfway point)
         yaxis += 80
+
+
+def refresh():
+    for i in range(0, len(name_label)):
+        name_label[i].destroy()
+        buttonDict[i].destroy()
+        colorDict[i].destroy()
+
+    app.appendNewComms()
+    carrd.buttonList = carrd.createButtonObjects()
+    createButtons()
+
+
+    for i in range(0,len(name_label)):
+        name_label[i].config(text = str(i+1) + ". " + app.ClientObj[i].getName())
+        name_label[i].config(fg = progressDict[app.ClientObj[i].getSub()])
+        buttonDict[i].config(image = progressDict[app.ClientObj[i].getState()])
+        colorDict[i].config(image = progressDict[app.ClientObj[i].getColor()])
+    for i in app.ClientObj:
+        print(i.getState())
+
+
 
 #Reset all buttons and modes to BLANK
 def clear():
     for i in range(0,len(carrd.buttonList)):
         carrd.buttonList[i].reset()
         buttonDict[i].configure(image = photo_blank)
-        if Client[i].getSub():
+        if app.ClientObj[i].getSub():
             carrd.buttonList[i].changeColorOverride("BLUE")
         else:
             carrd.buttonList[i].changeColorOverride("BLACK")
         colorDict[i].configure(image = progressDict[carrd.buttonList[i].currentColor()])
-    carrd.appendProgress(carrd.buttonList)
 
 #Restart Entire program
 def restart():
@@ -118,7 +140,7 @@ def restart():
 window = Tk()
 
 #Object holding Overwritten statements
-entry_Object = [0] * len(Client) 
+entry_Object = [0] * len(app.ClientObj) 
 class Overwrite:
     def __init__(app, content, i, xaxis, yaxis):
         app.name  = content[0]
@@ -147,9 +169,9 @@ class Overwrite:
 def edit():
     
     def save():
-        for i in range(0,len(Client)):
-            Client[i].OverrideComm(entry_Object[i].getName(),entry_Object[i].getComm(),entry_Object[i].getPrice())
-            name_label[i].config(text = str(i+1) + ". " + Client[i].getName())
+        for i in range(0,len(app.ClientObj)):
+            app.ClientObj[i].OverrideComm(entry_Object[i].getName(),entry_Object[i].getComm(),entry_Object[i].getPrice())
+            name_label[i].config(text = str(i+1) + ". " + app.ClientObj[i].getName())
         app.writeSave()
         return
 
@@ -188,7 +210,7 @@ def edit():
                           width = 76,
                           command = destroyEditFrame)
     
-    for i in Client:
+    for i in app.ClientObj:
         if nextRowReady and count >= 10:
             nextRowReady = not nextRowReady
             xaxis = 900
@@ -293,7 +315,7 @@ title.place(x=0, y=0)
 
 #Generate the other Buttons
 createButtons()
-
+#refresh()
 #Clipboard Button
 button =       Button(window, 
                        command=click,
@@ -315,6 +337,13 @@ button_edit =  Button(window,
                        width = 76,
                        command = edit)
 
+#Edit Button
+button_refresh =  Button(window, 
+                       image = photo_pencil,
+                       height = 76,
+                       width = 76,
+                       command = refresh)
+
 #Restart Button
 button_restart= Button(window, 
                        image = photo_power,
@@ -335,4 +364,5 @@ button_s.place(x=1350, y=965)
 button_restart.place(x=1718, y=0)
 button_sweep.place(x=740, y=0)
 button_edit.place(x=840, y=0)
+button_refresh.place(x=940, y=0)
 window.mainloop()
