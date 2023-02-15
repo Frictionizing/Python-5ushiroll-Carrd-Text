@@ -45,7 +45,6 @@ def concatenate(x):
 
 def createButtonObjects():
     buttons = []
-    print(len(app.ClientObj))
     for i in range (0,app.commLen(app.ClientObj)):
         if i == 20:
             break

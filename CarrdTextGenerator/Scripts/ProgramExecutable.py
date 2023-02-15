@@ -2,6 +2,8 @@ import MasterClientList as app
 import CarrdInProgressCompleted as carrd
 import CarrdGenerator as names
 import GoogleSheet as goog
+import CommissionPrices as price
+import webbrowser
 from tkinter import *
 import os
 import pyperclip
@@ -57,6 +59,7 @@ def createButtons():
             carrd.buttonList[x].changeMode()
             buttonDict[x].configure(image = progressDict[carrd.buttonList[x].currentMode()])
             #Update save file
+            app.ClientObj[x].overrideState(carrd.buttonList[x].currentMode())
             app.writeSave()
 
         def convertColor(x=i):
@@ -64,6 +67,7 @@ def createButtons():
             if carrd.buttonList[x].currentColor() == "BLACK" and app.ClientObj[x].getSub():
                 carrd.buttonList[x].changeColorOverride("BLUE")
             colorDict[x].configure(image = progressDict[carrd.buttonList[x].currentColor()])
+            app.ClientObj[x].overrideColor(carrd.buttonList[x].currentColor())
             app.writeSave()
 
         #If more than half commissions, continue on the right side
@@ -98,7 +102,7 @@ def createButtons():
         #Move the Y axis every iteration (resets at the halfway point)
         yaxis += 80
 
-
+#Refreshes the whole page for new CSV information
 def refresh():
     for i in range(0, len(name_label)):
         name_label[i].destroy()
@@ -107,18 +111,8 @@ def refresh():
 
     app.appendNewComms()
     carrd.buttonList = carrd.createButtonObjects()
+    consolidateObjects(app.ClientObj)
     createButtons()
-
-
-    for i in range(0,len(name_label)):
-        name_label[i].config(text = str(i+1) + ". " + app.ClientObj[i].getName())
-        name_label[i].config(fg = progressDict[app.ClientObj[i].getSub()])
-        buttonDict[i].config(image = progressDict[app.ClientObj[i].getState()])
-        colorDict[i].config(image = progressDict[app.ClientObj[i].getColor()])
-    for i in app.ClientObj:
-        print(i.getState())
-
-
 
 #Reset all buttons and modes to BLANK
 def clear():
@@ -131,6 +125,11 @@ def clear():
             carrd.buttonList[i].changeColorOverride("BLACK")
         colorDict[i].configure(image = progressDict[carrd.buttonList[i].currentColor()])
 
+    for i in range (0,len(app.ClientObj)):
+        app.ClientObj[i].overrideState("BLANK")
+        app.ClientObj[i].overrideColor(carrd.buttonList[i].currentColor())
+    app.writeSave()
+
 #Restart Entire program
 def restart():
     window.destroy()
@@ -140,7 +139,7 @@ def restart():
 window = Tk()
 
 #Object holding Overwritten statements
-entry_Object = [0] * len(app.ClientObj) 
+entry_Prices = [0] * len(price.comm) 
 class Overwrite:
     def __init__(app, content, i, xaxis, yaxis):
         app.name  = content[0]
@@ -165,6 +164,42 @@ class Overwrite:
     def getPrice(app):
         return app.price.get("1.0", "end-1c")
 
+#Object Holding Prices
+class OverwritePrices:
+    def __init__(app, content, i, xaxis, yaxis):
+        app.name  = content[0]
+        app.base  = content[1]
+        app.char  = content[2]
+        app.BG    = content[3]
+        app.x     = xaxis
+        app.y     = yaxis
+
+        app.name.place(x=0 + xaxis, y = yaxis)
+
+        app.base.place(x=335 + xaxis, y = yaxis)
+        app.base.insert(INSERT, price.priceDict[i])
+
+        app.char.place(x=420 + xaxis, y = yaxis)
+        app.char.insert(INSERT, price.charDict[i] if price.charDict[i] > 0 else "N/A")
+
+        app.BG.place(x=490 + xaxis, y = yaxis)
+        app.BG.insert(INSERT, price.bgDict[i] if price.bgDict[i] > 0 else "N/A")
+
+    def getBase(app):
+        return app.base.get("1.0", "end-1c")
+    def getChar(app):
+        try:
+            i = int(app.char.get("1.0", "end-1c"))
+        except:
+            return str(0)
+        return app.char.get("1.0", "end-1c")
+    def getBG(app):
+        try:
+            i = int(app.BG.get("1.0", "end-1c"))
+        except:
+            return str(0)
+        return app.BG.get("1.0", "end-1c")
+
 #Overrides the Script with handmade edits
 def edit():
     
@@ -181,6 +216,9 @@ def edit():
         save()
         bg_edit.destroy()
         button_exit.destroy()
+        name_tag.destroy()
+        comm_tag.destroy()
+        price_tag.destroy()
         title.destroy()
         for i in range(0,len(entry_Comm)):
             entry_Name[i].destroy()
@@ -196,20 +234,36 @@ def edit():
     entry_Name = []
     entry_Comm = []
     entry_Price = []
+    entry_Object = [0] * len(app.ClientObj) 
 
     bg_edit = Label(window,
                     image = photo_edit)
 
     title = Label(window, 
-                  text = "Editing Mode", 
+                  text = "Edit Comm Information", 
                   font = ("Helvetica", 50))
+
+    name_tag = Label(window, 
+                  text = "NAME", 
+                  fg = "blue",
+                  font = ("Helvetica", 30))
+    
+    comm_tag = Label(window, 
+                  text = "COMM", 
+                  fg = "blue",
+                  font = ("Helvetica", 30))
+
+    price_tag = Label(window, 
+                  text = "USD", 
+                  fg = "blue",
+                  font = ("Helvetica", 30))
 
     button_exit =  Button(window, 
                           image = photo_check,
-                          height = 76,
-                          width = 76,
+                          height = 130,
+                          width = 130,
                           command = destroyEditFrame)
-    
+    print(len(app.ClientObj))
     for i in app.ClientObj:
         if nextRowReady and count >= 10:
             nextRowReady = not nextRowReady
@@ -238,8 +292,103 @@ def edit():
 
     bg_edit.place(x=0, y=0, relwidth=1, relheight=1)
     title.place(x=0, y=0)
-    button_exit.place(x=840, y=0)
+    name_tag.place(x=160, y=90)
+    comm_tag.place(x=550, y=90)
+    price_tag.place(x=780, y=90)
+    button_exit.place(x=900, y=0)
     return
+
+#Updates the Prices
+def editPrices():
+    #X,Y Axis for editable items
+    count = 0
+    yaxis = 190
+    xaxis = 650
+
+    entry_Name = []
+    entry_Base = []
+    entry_Char = []
+    entry_BG = []
+    
+    def save():
+        return
+
+    #Clears edit, goes back to main page
+    def destroyEditFrame():
+        #Save Changes
+        save()
+        bg_edit.destroy()
+        button_exit.destroy()
+        title.destroy()
+        for i in range(0,len(entry_Name)):
+            entry_Name[i].destroy()
+            entry_Base[i].destroy()
+            entry_Char[i].destroy()
+            entry_BG[i].destroy()
+
+ 
+    bg_edit = Label(window,
+                    image = photo_edit)
+
+    title = Label(window, 
+                  text = "Price Sheet", 
+                  font = ("Helvetica", 50))
+
+    button_exit =  Button(window, 
+                          image = photo_check,
+                          height = 130,
+                          width = 130,
+                          command = destroyEditFrame)
+                
+    for i in price.comm:
+        """
+        if nextRowReady and count >= 10:
+            nextRowReady = not nextRowReady
+            xaxis = 900
+            yaxis = 150
+        """
+        entry_Name.append(Label(window,
+                    text = i, 
+                    width = 20, 
+                    height = 1,
+                    bg = "gray", 
+                    font = ("Helvetica", 20),))
+
+        entry_Base.append(Text(window, 
+                    width = 5, 
+                    height = 1,
+                    font = ("Helvetica", 20),))
+
+        entry_Char.append(Text(window, 
+                    width = 4, 
+                    height = 1,
+                    font = ("Helvetica", 20),))
+
+        entry_BG.append(Text(window, 
+                    width = 4, 
+                    height = 1,
+                    font = ("Helvetica", 20),))
+
+        entry_Prices[count] = (OverwritePrices([entry_Name[count],entry_Base[count],entry_Char[count],entry_BG[count]], i, xaxis, yaxis))
+
+        count += 1
+        yaxis += 45
+
+    bg_edit.place(x=0, y=0, relwidth=1, relheight=1)
+    title.place(x=0, y=0)
+    button_exit.place(x=900, y=0)
+    return
+
+#Sends you to twitter
+def link():
+    webbrowser.open("https://www.twitter.com/5ushiroll", new=0, autoraise=True)
+    return
+
+#Sends you to Rickroll
+def link2():
+    webbrowser.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", new=0, autoraise=True)
+    return
+
 
 #Proportions of window, not allowed to resize
 window.geometry("1800x1100")
@@ -284,10 +433,22 @@ photo_power = PhotoImage(file = names.findPath("\Scripts","\\Sprites/restart.png
 photo_power = photo_power.subsample(5,5)
 #Image of Pencil
 photo_pencil = PhotoImage(file = names.findPath("\Scripts","\\Sprites/pencil.png"))
-photo_pencil = photo_pencil.subsample(7,7)
+photo_pencil = photo_pencil.subsample(5,5)
 #Image of Green Checkmark
 photo_check = PhotoImage(file = names.findPath("\Scripts","\\Sprites/green_check.png"))
-photo_check = photo_check.subsample(25,25)
+photo_check = photo_check.subsample(20,20)
+#Image of CSV File
+photo_csv = PhotoImage(file = names.findPath("\Scripts","\\Sprites/csv.png"))
+photo_csv = photo_csv.subsample(5,5)
+#Image of Dollar sign
+photo_dollar = PhotoImage(file = names.findPath("\Scripts","\\Sprites/dollar.png"))
+photo_dollar = photo_dollar.subsample(15,15)
+#Image of Twitter
+photo_twitter = PhotoImage(file = names.findPath("\Scripts","\\Sprites/twitter.png"))
+photo_twitter = photo_twitter.subsample(12,12)
+#Image of Sus
+photo_amogus = PhotoImage(file = names.findPath("\Scripts","\\Sprites/amogus.png"))
+photo_amogus = photo_amogus.subsample(8,8)
 
 progressDict = { 
         True : "blue",
@@ -313,18 +474,18 @@ title = Label(window,
               font = ("Helvetica", 50))
 title.place(x=0, y=0)
 
-#Generate the other Buttons
+#Generate the Names, Subscriber, and Progress buttons
 createButtons()
-#refresh()
+
 #Clipboard Button
-button =       Button(window, 
+button_carrd =    Button(window, 
                        command=click,
                        image = photo_carrd,
                        height = 130,
                        width = 130)
 
 #Sheet Button
-button_s =     Button(window, 
+button_sheets =   Button(window, 
                        command=click2,
                        image = photo_sheet,
                        height = 130,
@@ -337,11 +498,11 @@ button_edit =  Button(window,
                        width = 76,
                        command = edit)
 
-#Edit Button
+#Refresh Button
 button_refresh =  Button(window, 
-                       image = photo_pencil,
-                       height = 76,
-                       width = 76,
+                       image = photo_csv,
+                       height = 120,
+                       width = 250,
                        command = refresh)
 
 #Restart Button
@@ -358,11 +519,43 @@ button_sweep =  Button(window,
                        width = 76,
                        command = clear)
 
+#Clear the board Button
+button_dollar =  Button(window, 
+                       image = photo_dollar,
+                       height = 76,
+                       width = 76,
+                       command = editPrices)
 
-button.place(x=1500, y=965)
-button_s.place(x=1350, y=965)
-button_restart.place(x=1718, y=0)
+#Twitter
+button_twitter =     Button(window, 
+                       command=link,
+                       image = photo_twitter,
+                       height = 130,
+                       width = 130)
+
+#Twitter
+button_amogus =     Button(window, 
+                       command=link2,
+                       image = photo_amogus,
+                       height = 130,
+                       width = 130)
+
+
+#Top Middle, Sweep, Restart, Edit Names, Edit Prices
 button_sweep.place(x=740, y=0)
-button_edit.place(x=840, y=0)
-button_refresh.place(x=940, y=0)
+button_restart.place(x=840, y=0)
+button_edit.place(x=940, y=0)
+button_dollar.place(x=1040, y=0)
+
+#Top Right, Update CSV
+button_refresh.place(x=1506, y=0)
+
+#Bottom Left, Twitter redirect and sus
+button_twitter.place(x=150, y=965)
+button_amogus.place(x=300, y=965)
+
+#Bottom Right, Google Sheet and Carrd
+button_sheets.place(x=1350, y=965)
+button_carrd.place(x=1500, y=965)
+
 window.mainloop()

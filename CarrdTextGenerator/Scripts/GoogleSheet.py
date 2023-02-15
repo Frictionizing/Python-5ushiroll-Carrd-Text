@@ -7,7 +7,11 @@ def maffs(i):
     ans = i.getPrice()
 
     if i.getPaymentType() == "SQUARE":
-        ans = math.floor(1.3 * float(ans))
+        try:
+            ans = math.floor(1.3 * float(ans))
+        except:
+            print("ERROR EDIT: " + i.getName() + " had price of " + ans + ", resetted to $0")
+            return "0.00"
     return str(ans) + ".00"
 
 def reorder(i):

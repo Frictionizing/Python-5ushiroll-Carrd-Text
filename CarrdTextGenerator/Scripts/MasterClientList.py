@@ -51,7 +51,11 @@ def readSave():
         cli.overrideShortName(i[6])
         cli.overrideState(i[7])
         cli.overrideColor(i[8])
-        cli.overridePrice(int(i[9]))
+        try:
+            cli.overridePrice(int(i[9]))
+        except:
+            print("ERROR EDIT: " + cli.getName() + " had price of " + i[9] + ", resetted to $0\n")
+            cli.overridePrice(0)
         if cli.getSub():
             ClientQueue.append(cli)
         else:
@@ -65,6 +69,9 @@ def readSave():
 def writeSave():
     test = ""
     for i in ClientObj:
+
+        print(i.getState())
+
         test += i.getName() + "\n"
         test += str(i.getSub()) + "\n"
         test += i.getType() + "\n"
@@ -81,6 +88,8 @@ def writeSave():
         test += str(i.getPrice()) + "\n"
         test += "\n"
 
+    print("\n")
+
     f = open(main.findPath("\Scripts","\\Texts\SaveFile.txt"), "w")
     f.write(test)
     f.close()
@@ -94,16 +103,15 @@ def appendNewComms():
         sub = subscriberLen(ClientOG) - subscriberLen(ClientObj)
         not_sub = commLen(ClientOG) - commLen(ClientObj) - sub
         counter = 0
-        print(sub)
-        print(not_sub)
         for i in range(subscriberLen(ClientObj), subscriberLen(ClientOG)):
             ClientObj.insert(subscriberLen(ClientObj), readSingle(i))
         for i in range(0, not_sub):
             ClientObj.append(readSingle(len(ClientOG)-not_sub+counter))
             counter += 1
     
-    if commLen(ClientOG) < commLen(ClientObj):
+    elif commLen(ClientOG) < commLen(ClientObj):
         ClientObj = ClientOG
+
     
     writeSave()
     return

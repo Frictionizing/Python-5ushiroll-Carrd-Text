@@ -5,22 +5,11 @@ True
 1
 SQUARE
 GACH-5
-COMPLETED
+IN PROGRESS
 BLUE
 350
 
 Dream
-True
-Banner
-True
-1
-SQUARE
-BAN-CB
-BLANK
-BLUE
-190
-
-Edsdffsa
 True
 Banner
 True
@@ -38,22 +27,11 @@ True
 1
 SQUARE
 BAN-CB
-COMPLETED
+IN PROGRESS
 BLUE
 190
 
 Edelgard
-True
-Banner
-True
-1
-SQUARE
-BAN-CB
-BLANK
-BLUE
-190
-
-Ed
 True
 Banner
 True
@@ -71,8 +49,8 @@ True
 2
 SQUARE
 MAW-w/charas
-COMPLETED
-RED
+BLANK
+BLACK
 140
 
 Soosh
@@ -82,7 +60,7 @@ True
 1
 SQUARE
 GACH-4
-IN PROGRESS
+BLANK
 BLACK
 275
 
@@ -93,18 +71,18 @@ True
 1
 SQUARE
 GACH-4
-IN PROGRESS
+BLANK
 BLACK
 275
 
-Nword
+NorthStar
 False
 Banner
 True
 1
 SQUARE
 BAN-CB
-IN PROGRESS
+BLANK
 BLACK
 190
 
@@ -126,7 +104,7 @@ True
 1
 SQUARE
 BAN-CB
-BLANK
+COMPLETED
 BLACK
 190
 
@@ -141,7 +119,7 @@ BLANK
 BLACK
 275
 
-Ni
+Nie
 False
 Banner
 True
@@ -151,4 +129,37 @@ BAN-CB
 BLANK
 BLACK
 190
+
+Bywq
+False
+Gacha Splash Art 4 Star
+True
+1
+SQUARE
+GACH-4
+BLANK
+BLACK
+275
+
+Onion
+False
+Gacha Splash Art 4 Star
+True
+1
+SQUARE
+GACH-4
+IN PROGRESS
+BLACK
+275
+
+Akechi
+False
+Gacha Splash Art 4 Star
+True
+1
+SQUARE
+GACH-4
+COMPLETED
+BLACK
+275
 
