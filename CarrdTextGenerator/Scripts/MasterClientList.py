@@ -70,8 +70,6 @@ def writeSave():
     test = ""
     for i in ClientObj:
 
-        print(i.getState())
-
         test += i.getName() + "\n"
         test += str(i.getSub()) + "\n"
         test += i.getType() + "\n"
@@ -87,8 +85,6 @@ def writeSave():
             test += i.getButton().currentColor() + "\n"
         test += str(i.getPrice()) + "\n"
         test += "\n"
-
-    print("\n")
 
     f = open(main.findPath("\Scripts","\\Texts\SaveFile.txt"), "w")
     f.write(test)

@@ -5,7 +5,7 @@ True
 1
 SQUARE
 GACH-5
-IN PROGRESS
+COMPLETED
 BLUE
 350
 
@@ -16,7 +16,7 @@ True
 1
 SQUARE
 BAN-CB
-BLANK
+COMPLETED
 BLUE
 190
 
@@ -27,7 +27,7 @@ True
 1
 SQUARE
 BAN-CB
-IN PROGRESS
+COMPLETED
 BLUE
 190
 
@@ -38,7 +38,7 @@ True
 1
 SQUARE
 BAN-CB
-BLANK
+IN PROGRESS
 BLUE
 190
 
@@ -49,7 +49,7 @@ True
 2
 SQUARE
 MAW-w/charas
-BLANK
+IN PROGRESS
 BLACK
 140
 
@@ -60,7 +60,7 @@ True
 1
 SQUARE
 GACH-4
-BLANK
+IN PROGRESS
 BLACK
 275
 
@@ -104,7 +104,7 @@ True
 1
 SQUARE
 BAN-CB
-COMPLETED
+BLANK
 BLACK
 190
 
@@ -148,7 +148,7 @@ True
 1
 SQUARE
 GACH-4
-IN PROGRESS
+BLANK
 BLACK
 275
 
@@ -159,7 +159,40 @@ True
 1
 SQUARE
 GACH-4
-COMPLETED
+BLANK
 BLACK
 275
+
+King of the Wigglers
+False
+Gacha Splash Art 4 Star
+True
+1
+SQUARE
+GACH-4
+BLANK
+BLACK
+275
+
+Ray ඞan
+False
+Gacha Splash Art 4 Star
+True
+1
+SQUARE
+GACH-4
+BLANK
+BLACK
+275
+
+Python
+False
+Gacha Splash Art 4 Star
+True
+1
+SQUARE
+GACH-4
+BLANK
+BLACK
+2
 

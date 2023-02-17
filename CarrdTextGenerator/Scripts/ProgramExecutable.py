@@ -13,6 +13,7 @@ complete   = " [==COMPLETED==]{lime}"
 inProgress = " [==IN PROGRESS==]{orange}"
 buttonDict = {}
 name_label = {}
+num_label = {}
 colorDict = {}
 resize = 7
 
@@ -45,8 +46,8 @@ def click2():
 
 #Generate all the buttons for In Progress and Complete; Handles the changing of modes in the button as well
 def createButtons():
-    yaxis = 150
-    xaxis = 0
+    yaxis = 180
+    xaxis = 10
     nextRowReady = True
 
     for i in range(0,(len(carrd.buttonList))):
@@ -74,20 +75,32 @@ def createButtons():
         if nextRowReady and i >= 10:
             nextRowReady = not nextRowReady
             xaxis = 900
-            yaxis = 150
+            yaxis = 180
 
         #List of names
         name_label[i] = Label(window,
-                           text = str(i+1) + ". " +  app.ClientObj[i].getName(),
+                           text = app.ClientObj[i].getName(),
                            font = ("Helvetica", 40),
+                           width = 16,
                            fg = progressDict[app.ClientObj[i].getSub()])
-        name_label[i].place(x=xaxis + 10, y=yaxis)
+        name_label[i].place(x=xaxis + 90, y=yaxis)
+
+        num_label[i] = Label(window,
+                           text = str(i+1),
+                           font = ("Helvetica", 40),
+                           bg = progressDict[app.ClientObj[i].getSub()],
+                           width = 2,
+                           fg = "white")
+        num_label[i].place(x=xaxis + 10, y=yaxis)
+
 
         #List of progress buttons
         buttonDict[i] = Button(window, 
                                command = convertMode,
+                               width = 180,
+                               height = 61,
                                image = progressDict[app.ClientObj[i].getState()])
-        buttonDict[i].place(x=680 + xaxis, y=yaxis)
+        buttonDict[i].place(x=682 + xaxis, y=yaxis)
 
         #Override SubscriberStar color to blue
         if carrd.buttonList[i].currentColor() == "BLACK" and app.ClientObj[i].getSub():
@@ -95,6 +108,8 @@ def createButtons():
         #List of color overlay buttons
         colorDict[i] = Button(window, 
                               command = convertColor,
+                              width = 61,
+                              height = 61,
                               image = progressDict[app.ClientObj[i].getColor()])
         colorDict[i].place(x=605 + xaxis, y=yaxis)
         
@@ -104,6 +119,7 @@ def createButtons():
 
 #Refreshes the whole page for new CSV information
 def refresh():
+    os.system('cls') 
     for i in range(0, len(name_label)):
         name_label[i].destroy()
         buttonDict[i].destroy()
@@ -113,6 +129,7 @@ def refresh():
     carrd.buttonList = carrd.createButtonObjects()
     consolidateObjects(app.ClientObj)
     createButtons()
+    names.printPrices(app.ClientObj)
 
 #Reset all buttons and modes to BLANK
 def clear():
@@ -186,19 +203,20 @@ class OverwritePrices:
         app.BG.insert(INSERT, price.bgDict[i] if price.bgDict[i] > 0 else "N/A")
 
     def getBase(app):
-        return app.base.get("1.0", "end-1c")
+        try:
+            return int(app.base.get("1.0", "end-1c"))
+        except:
+            return str(0)
     def getChar(app):
         try:
-            i = int(app.char.get("1.0", "end-1c"))
+            return int(app.char.get("1.0", "end-1c"))
         except:
             return str(0)
-        return app.char.get("1.0", "end-1c")
     def getBG(app):
         try:
-            i = int(app.BG.get("1.0", "end-1c"))
+            return int(app.BG.get("1.0", "end-1c"))
         except:
             return str(0)
-        return app.BG.get("1.0", "end-1c")
 
 #Overrides the Script with handmade edits
 def edit():
@@ -206,7 +224,7 @@ def edit():
     def save():
         for i in range(0,len(app.ClientObj)):
             app.ClientObj[i].OverrideComm(entry_Object[i].getName(),entry_Object[i].getComm(),entry_Object[i].getPrice())
-            name_label[i].config(text = str(i+1) + ". " + app.ClientObj[i].getName())
+            name_label[i].config(text = app.ClientObj[i].getName())
         app.writeSave()
         return
 
@@ -228,7 +246,7 @@ def edit():
     #X,Y Axis for editable items
     nextRowReady = True
     count = 0
-    yaxis = 150
+    yaxis = 180
     xaxis = 10
 
     entry_Name = []
@@ -263,12 +281,11 @@ def edit():
                           height = 130,
                           width = 130,
                           command = destroyEditFrame)
-    print(len(app.ClientObj))
     for i in app.ClientObj:
         if nextRowReady and count >= 10:
             nextRowReady = not nextRowReady
             xaxis = 900
-            yaxis = 150
+            yaxis = 180
 
         entry_Name.append(Text(window, 
                     width = 15, 
@@ -291,10 +308,10 @@ def edit():
         yaxis += 80
 
     bg_edit.place(x=0, y=0, relwidth=1, relheight=1)
-    title.place(x=0, y=0)
-    name_tag.place(x=160, y=90)
-    comm_tag.place(x=550, y=90)
-    price_tag.place(x=780, y=90)
+    title.place(x=0, y=24)
+    name_tag.place(x=160, y=120)
+    comm_tag.place(x=550, y=120)
+    price_tag.place(x=780, y=120)
     button_exit.place(x=900, y=0)
     return
 
@@ -311,6 +328,23 @@ def editPrices():
     entry_BG = []
     
     def save():
+        final = ""
+        for k in range(0,3):
+            for i in entry_Prices:
+                if k == 0:
+                    final += str(i.getBase()) + "\n"
+                if k == 1:
+                    final += str(i.getChar()) + "\n"
+                if k == 2:
+                    final += str(i.getBG()) + "\n"
+            final += "\n"
+        
+        f = open(price.findPath("\Scripts","\\Texts\MoneySheet.txt"), "w")
+        f.write(final)
+        f.close()
+        price.readSheet()
+        os.system('cls')
+        names.printPrices(app.ClientObj)
         return
 
     #Clears edit, goes back to main page
@@ -320,6 +354,8 @@ def editPrices():
         bg_edit.destroy()
         button_exit.destroy()
         title.destroy()
+        comm.destroy()
+        base.destroy()
         for i in range(0,len(entry_Name)):
             entry_Name[i].destroy()
             entry_Base[i].destroy()
@@ -339,14 +375,28 @@ def editPrices():
                           height = 130,
                           width = 130,
                           command = destroyEditFrame)
-                
+
+    comm =    (Label(window,
+                    text = "Commission", 
+                    width = 20, 
+                    height = 1,
+                    fg = "blue", 
+                    bg = "gray",
+                    font = ("Helvetica", 20),))
+
+    base =    (Label(window,
+                    text = "Base - Char - BG", 
+                    width = 14, 
+                    height = 1,
+                    fg = "blue",
+                    bg = "gray",
+                    font = ("Helvetica", 20),))
+
+    comm.place(x = 650, y = 144)
+    base.place(x = 975, y = 144)
+
     for i in price.comm:
-        """
-        if nextRowReady and count >= 10:
-            nextRowReady = not nextRowReady
-            xaxis = 900
-            yaxis = 150
-        """
+
         entry_Name.append(Label(window,
                     text = i, 
                     width = 20, 
@@ -375,7 +425,7 @@ def editPrices():
         yaxis += 45
 
     bg_edit.place(x=0, y=0, relwidth=1, relheight=1)
-    title.place(x=0, y=0)
+    title.place(x=0, y=24)
     button_exit.place(x=900, y=0)
     return
 
@@ -395,7 +445,8 @@ window.geometry("1800x1100")
 window.resizable(width=False, height=False)
 
 #Title of program
-window.title("SussyExecutable")
+window.title("5ushiroll Text Generator")
+
 
 #Create photos types
 #Background images
@@ -430,10 +481,10 @@ photo_sweep = PhotoImage(file = names.findPath("\Scripts","\\Sprites/sweep.png")
 photo_sweep = photo_sweep.subsample(7,7)
 #Image of Power
 photo_power = PhotoImage(file = names.findPath("\Scripts","\\Sprites/restart.png"))
-photo_power = photo_power.subsample(5,5)
+photo_power = photo_power.subsample(6,6)
 #Image of Pencil
 photo_pencil = PhotoImage(file = names.findPath("\Scripts","\\Sprites/pencil.png"))
-photo_pencil = photo_pencil.subsample(5,5)
+photo_pencil = photo_pencil.subsample(19,19)
 #Image of Green Checkmark
 photo_check = PhotoImage(file = names.findPath("\Scripts","\\Sprites/green_check.png"))
 photo_check = photo_check.subsample(20,20)
@@ -442,16 +493,16 @@ photo_csv = PhotoImage(file = names.findPath("\Scripts","\\Sprites/csv.png"))
 photo_csv = photo_csv.subsample(5,5)
 #Image of Dollar sign
 photo_dollar = PhotoImage(file = names.findPath("\Scripts","\\Sprites/dollar.png"))
-photo_dollar = photo_dollar.subsample(15,15)
+photo_dollar = photo_dollar.subsample(6,6)
 #Image of Twitter
 photo_twitter = PhotoImage(file = names.findPath("\Scripts","\\Sprites/twitter.png"))
-photo_twitter = photo_twitter.subsample(12,12)
+photo_twitter = photo_twitter.subsample(17,17)
 #Image of Sus
 photo_amogus = PhotoImage(file = names.findPath("\Scripts","\\Sprites/amogus.png"))
-photo_amogus = photo_amogus.subsample(8,8)
+photo_amogus = photo_amogus.subsample(12,12)
 
 progressDict = { 
-        True : "blue",
+        True : "#5094d1",
         False : "black",
         "BLANK": photo_blank,
         "IN PROGRESS": photo_inprogress,
@@ -466,96 +517,109 @@ progressDict = {
 #Background image (Made by 5ushiroll)
 bg_image = Label(window,
                  image = photo)
-bg_image.place(x=0, y=0, relwidth=1, relheight=1)
 
 #Title
 title = Label(window, 
               text = "5ushiroll Text Generator", 
               font = ("Helvetica", 50))
-title.place(x=0, y=0)
-
-#Generate the Names, Subscriber, and Progress buttons
-createButtons()
 
 #Clipboard Button
 button_carrd =    Button(window, 
                        command=click,
                        image = photo_carrd,
-                       height = 130,
-                       width = 130)
+                       bg = "#DF84F0",
+                       height = 120,
+                       width = 120)
 
 #Sheet Button
 button_sheets =   Button(window, 
                        command=click2,
                        image = photo_sheet,
-                       height = 130,
-                       width = 130)
-
-#Edit Button
-button_edit =  Button(window, 
-                       image = photo_pencil,
-                       height = 76,
-                       width = 76,
-                       command = edit)
-
+                       bg = "#DF84F0",
+                       height = 120,
+                       width = 120)
 #Refresh Button
 button_refresh =  Button(window, 
                        image = photo_csv,
                        height = 120,
                        width = 250,
+                       bg = "#5094d1",
                        command = refresh)
-
-#Restart Button
-button_restart= Button(window, 
-                       image = photo_power,
-                       height = 76,
-                       width = 76,
-                       command = restart)
 
 #Clear the board Button
 button_sweep =  Button(window, 
                        image = photo_sweep,
-                       height = 76,
+                       bg = "#c9d7e9",
+                       height = 120,
                        width = 76,
                        command = clear)
+
+#Restart Button
+button_restart= Button(window, 
+                       image = photo_power,
+                       bg = "#c9d7e9",
+                       height = 120,
+                       width = 76,
+                       command = restart)
+
+#Edit Button
+button_edit =  Button(window, 
+                       image = photo_pencil,
+                       bg = "#c9d7e9",
+                       height = 120,
+                       width = 76,
+                       command = edit)
 
 #Clear the board Button
 button_dollar =  Button(window, 
                        image = photo_dollar,
-                       height = 76,
+                       bg = "#c9d7e9",
+                       height = 120,
                        width = 76,
-                       command = editPrices)
+                       command = editPrices,
+                       )
 
 #Twitter
 button_twitter =     Button(window, 
                        command=link,
                        image = photo_twitter,
-                       height = 130,
-                       width = 130)
+                       bg = "#c9d7e9",
+                       height = 120,
+                       width = 76)
 
 #Twitter
 button_amogus =     Button(window, 
                        command=link2,
                        image = photo_amogus,
-                       height = 130,
-                       width = 130)
+                       height = 76,
+                       width = 76)
 
 
-#Top Middle, Sweep, Restart, Edit Names, Edit Prices
+#Background, BG Image
+bg_image.place(x=0, y=0, relwidth=1, relheight=1)
+
+#Top Left, Title
+title.place(x=0, y=24)
+
+#Top Middle, Sweep, Restart, Edit Names, Edit Prices, Twitter
 button_sweep.place(x=740, y=0)
-button_restart.place(x=840, y=0)
-button_edit.place(x=940, y=0)
-button_dollar.place(x=1040, y=0)
+button_restart.place(x=835, y=0)
+button_edit.place(x=930, y=0)
+button_dollar.place(x=1025, y=0)
+button_twitter.place(x=1120, y=0)
+
+#Middle, main
+#Generate the Names, Subscriber, and Progress buttons
+createButtons()
+
+#Top Middle Large, Google Sheet and Carrd
+button_sheets.place(x=1220, y=0)
+button_carrd.place(x=1365, y=0)
 
 #Top Right, Update CSV
 button_refresh.place(x=1506, y=0)
 
-#Bottom Left, Twitter redirect and sus
-button_twitter.place(x=150, y=965)
-button_amogus.place(x=300, y=965)
-
-#Bottom Right, Google Sheet and Carrd
-button_sheets.place(x=1350, y=965)
-button_carrd.place(x=1500, y=965)
+#Bottom Left, sus
+button_amogus.place(x=0, y=1020)
 
 window.mainloop()

@@ -453,7 +453,7 @@ def printPrices(x):
             print(i.getName() + ": See Remarks")
             continue
 
-        price = i.getPrice()
+        price = int(i.getPrice())
 
         if i.getPaymentType() == "SQUARE":
             price = math.floor(price * cashConvert[i.getPaymentType()])
