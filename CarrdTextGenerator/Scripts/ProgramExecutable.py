@@ -472,19 +472,19 @@ photo_clip  = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Clipboard.p
 photo_clip  = photo_clip.subsample(resize,resize)
 #Image of Sheets
 photo_sheet = PhotoImage(file = names.findPath("\Scripts","\\Sprites/GoogleSheets.png"))
-photo_sheet = photo_sheet.subsample(22,22)
+photo_sheet = photo_sheet.subsample(21,21)
 #Image of Carrd
 photo_carrd = PhotoImage(file = names.findPath("\Scripts","\\Sprites/CarrdLogo.png"))
 photo_carrd = photo_carrd.subsample(10,10)
-#Image of Reset
+#Image of Clear
 photo_sweep = PhotoImage(file = names.findPath("\Scripts","\\Sprites/sweep.png"))
 photo_sweep = photo_sweep.subsample(7,7)
-#Image of Power
+#Image of Reset
 photo_power = PhotoImage(file = names.findPath("\Scripts","\\Sprites/restart.png"))
-photo_power = photo_power.subsample(6,6)
+photo_power = photo_power.subsample(15,15)
 #Image of Pencil
 photo_pencil = PhotoImage(file = names.findPath("\Scripts","\\Sprites/pencil.png"))
-photo_pencil = photo_pencil.subsample(19,19)
+photo_pencil = photo_pencil.subsample(18,18)
 #Image of Green Checkmark
 photo_check = PhotoImage(file = names.findPath("\Scripts","\\Sprites/green_check.png"))
 photo_check = photo_check.subsample(20,20)
@@ -493,10 +493,10 @@ photo_csv = PhotoImage(file = names.findPath("\Scripts","\\Sprites/csv.png"))
 photo_csv = photo_csv.subsample(5,5)
 #Image of Dollar sign
 photo_dollar = PhotoImage(file = names.findPath("\Scripts","\\Sprites/dollar.png"))
-photo_dollar = photo_dollar.subsample(6,6)
+photo_dollar = photo_dollar.subsample(5,5)
 #Image of Twitter
 photo_twitter = PhotoImage(file = names.findPath("\Scripts","\\Sprites/twitter.png"))
-photo_twitter = photo_twitter.subsample(17,17)
+photo_twitter = photo_twitter.subsample(16,16)
 #Image of Sus
 photo_amogus = PhotoImage(file = names.findPath("\Scripts","\\Sprites/amogus.png"))
 photo_amogus = photo_amogus.subsample(12,12)
