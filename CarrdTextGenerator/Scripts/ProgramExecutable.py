@@ -162,17 +162,27 @@ class Overwrite:
         app.name  = content[0]
         app.comm  = content[1]
         app.price = content[2]
+
+        app.tip   = content[3]
+
         app.x     = xaxis
         app.y     = yaxis
 
         app.name.place(x=0 + xaxis, y = yaxis)
         app.name.insert(INSERT, i.getName())
 
-        app.comm.place(x=455 + xaxis, y = yaxis)
+        app.comm.place(x=450 + xaxis, y = yaxis)
         app.comm.insert(INSERT, i.getShortName())
 
-        app.price.place(x=770 + xaxis, y = yaxis)
+        app.price.place(x=750 + xaxis, y = yaxis)
         app.price.insert(INSERT, i.getPrice())
+
+        app.tip.place(x=750 + xaxis, y = yaxis+40)
+        app.tip.insert(INSERT, i.getTip())
+
+        content[4].place(x=820 + xaxis, y = yaxis)
+        content[5].place(x=820 + xaxis , y = yaxis + 40)
+
 
     def getName(app):
         return app.name.get("1.0", "end-1c")
@@ -180,6 +190,8 @@ class Overwrite:
         return app.comm.get("1.0", "end-1c")
     def getPrice(app):
         return app.price.get("1.0", "end-1c")
+    def getTip(app):
+        return app.tip.get("1.0", "end-1c")
 
 #Object Holding Prices
 class OverwritePrices:
@@ -223,7 +235,8 @@ def edit():
     
     def save():
         for i in range(0,len(app.ClientObj)):
-            app.ClientObj[i].OverrideComm(entry_Object[i].getName(),entry_Object[i].getComm(),entry_Object[i].getPrice())
+            app.ClientObj[i].OverrideComm(entry_Object[i].getName(),entry_Object[i].getComm(),
+                                          entry_Object[i].getPrice(),entry_Object[i].getTip())
             name_label[i].config(text = app.ClientObj[i].getName())
         app.writeSave()
         return
@@ -237,21 +250,28 @@ def edit():
         name_tag.destroy()
         comm_tag.destroy()
         price_tag.destroy()
+        tip_tag.destroy()
         title.destroy()
         for i in range(0,len(entry_Comm)):
             entry_Name[i].destroy()
             entry_Comm[i].destroy()
             entry_Price[i].destroy()
+            entry_Tip[i].destroy()
+            entry_Flag[i].destroy()
+            entry_FlagTip[i].destroy()
 
     #X,Y Axis for editable items
     nextRowReady = True
     count = 0
     yaxis = 180
-    xaxis = 10
+    xaxis = 5
 
     entry_Name = []
     entry_Comm = []
     entry_Price = []
+    entry_Tip = []
+    entry_Flag = []
+    entry_FlagTip = []
     entry_Object = [0] * len(app.ClientObj) 
 
     bg_edit = Label(window,
@@ -267,52 +287,84 @@ def edit():
                   font = ("Helvetica", 30))
     
     comm_tag = Label(window, 
-                  text = "COMM", 
+                  text = "COMM CODE", 
                   fg = "blue",
                   font = ("Helvetica", 30))
 
     price_tag = Label(window, 
-                  text = "USD", 
+                  text = "TOTAL USD", 
                   fg = "blue",
-                  font = ("Helvetica", 30))
+                  font = ("Helvetica", 15))
+
+    tip_tag = Label(window, 
+                  text = "TIP IN USD/CAD", 
+                  fg = "blue",
+                  font = ("Helvetica", 15))
+
 
     button_exit =  Button(window, 
                           image = photo_check,
                           height = 130,
                           width = 130,
                           command = destroyEditFrame)
+    
+    us = Label(window, 
+           image = photo_USA, 
+          )
+    
+    cad = Label(window, 
+           image = photo_CAD, 
+          )
+    
     for i in app.ClientObj:
         if nextRowReady and count >= 10:
             nextRowReady = not nextRowReady
-            xaxis = 900
+            xaxis = 905
             yaxis = 180
 
         entry_Name.append(Text(window, 
-                    width = 15, 
+                    width = 12, 
                     height = 1, 
-                    font = ("Helvetica", 40),))
+                    font = ("Helvetica", 47),))
 
         entry_Comm.append(Text(window, 
-                    width = 10, 
+                    width = 8, 
                     height = 1,
-                    font = ("Helvetica", 40),))
+                    font = ("Helvetica", 47),))
 
         entry_Price.append(Text(window, 
-                    width = 3, 
+                    width = 4, 
                     height = 1,
-                    font = ("Helvetica", 40),))
+                    font = ("Helvetica", 20),))
+        
+        entry_Tip.append(Text(window, 
+                    width = 4, 
+                    height = 1,
+                    font = ("Helvetica", 20),))
+        
+        entry_Flag.append(Label(window, 
+                    image = photo_USA, ))
+        
+        if i.getPaymentType() == "SQUARE":
+            entry_FlagTip.append(Label(window, 
+                    image = photo_CAD, ))
+        else:
+            entry_FlagTip.append(Label(window, 
+                    image = photo_USA, ))
 
-        entry_Object[count] = (Overwrite([entry_Name[count],entry_Comm[count],entry_Price[count]], i, xaxis, yaxis))
+        entry_Object[count] = (Overwrite([entry_Name[count],entry_Comm[count],entry_Price[count], entry_Tip[count], entry_Flag[count], entry_FlagTip[count]], i, xaxis, yaxis))
 
         count += 1
-        yaxis += 80
+        yaxis += 90
 
     bg_edit.place(x=0, y=0, relwidth=1, relheight=1)
     title.place(x=0, y=24)
     name_tag.place(x=160, y=120)
-    comm_tag.place(x=550, y=120)
-    price_tag.place(x=780, y=120)
+    comm_tag.place(x=470, y=120)
+    price_tag.place(x=760, y=110)
+    tip_tag.place(x=760, y=140)
     button_exit.place(x=900, y=0)
+
     return
 
 #Updates the Prices
@@ -501,6 +553,14 @@ photo_twitter = photo_twitter.subsample(16,16)
 photo_amogus = PhotoImage(file = names.findPath("\Scripts","\\Sprites/amogus.png"))
 photo_amogus = photo_amogus.subsample(12,12)
 
+#Image of USA
+photo_USA = PhotoImage(file = names.findPath("\Scripts","\\Sprites/USFlag.png"))
+photo_USA = photo_USA.subsample(8,8)
+
+#Image of USA
+photo_CAD = PhotoImage(file = names.findPath("\Scripts","\\Sprites/CanadaFlag.png"))
+photo_CAD = photo_CAD.subsample(8,8)
+
 progressDict = { 
         True : "#5094d1",
         False : "black",
@@ -527,7 +587,7 @@ title = Label(window,
 button_carrd =    Button(window, 
                        command=click,
                        image = photo_carrd,
-                       bg = "#DF84F0",
+                       bg = "#E3BEEA",
                        height = 120,
                        width = 120)
 
@@ -535,17 +595,18 @@ button_carrd =    Button(window,
 button_sheets =   Button(window, 
                        command=click2,
                        image = photo_sheet,
-                       bg = "#DF84F0",
+                       bg = "#E3BEEA",
                        height = 120,
                        width = 120)
 #Refresh Button
+
 button_refresh =  Button(window, 
                        image = photo_csv,
                        height = 120,
                        width = 250,
                        bg = "#5094d1",
                        command = refresh)
-
+ 
 #Clear the board Button
 button_sweep =  Button(window, 
                        image = photo_sweep,
@@ -587,7 +648,7 @@ button_twitter =     Button(window,
                        height = 120,
                        width = 76)
 
-#Twitter
+#Rickroll
 button_amogus =     Button(window, 
                        command=link2,
                        image = photo_amogus,
@@ -607,6 +668,8 @@ button_restart.place(x=835, y=0)
 button_edit.place(x=930, y=0)
 button_dollar.place(x=1025, y=0)
 button_twitter.place(x=1120, y=0)
+
+#us.place(x=0,y=0)
 
 #Middle, main
 #Generate the Names, Subscriber, and Progress buttons

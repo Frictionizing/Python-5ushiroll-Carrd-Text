@@ -1,198 +1,168 @@
-Bob
+King of the Wigglers
 True
-Gacha Splash Art 5 Star
-True
+Complex Reference Sheet
+False
 1
 SQUARE
-GACH-5
-COMPLETED
+CRS
+BLANK
 BLUE
-350
+270
+0
 
-Dream
+Zeebr
 True
-Banner
-True
+Complex Reference Sheet
+False
 1
 SQUARE
-BAN-CB
-COMPLETED
+CRS
+BLANK
 BLUE
-190
-
-Auto
-True
-Banner
-True
-1
-SQUARE
-BAN-CB
-COMPLETED
-BLUE
-190
-
-Edelgard
-True
-Banner
-True
-1
-SQUARE
-BAN-CB
-IN PROGRESS
-BLUE
-190
-
-Fric
-False
-Mawshot
-True
-2
-SQUARE
-MAW-w/charas
-IN PROGRESS
-BLACK
-140
-
-Soosh
-False
-Gacha Splash Art 4 Star
-True
-1
-SQUARE
-GACH-4
-IN PROGRESS
-BLACK
-275
-
-Das
-False
-Gacha Splash Art 4 Star
-True
-1
-SQUARE
-GACH-4
-BLANK
-BLACK
-275
-
-NorthStar
-False
-Banner
-True
-1
-SQUARE
-BAN-CB
-BLANK
-BLACK
-190
-
-Byleth
-False
-Gacha Splash Art 4 Star
-True
-1
-SQUARE
-GACH-4
-BLANK
-BLACK
-275
-
-Nice
-False
-Banner
-True
-1
-SQUARE
-BAN-CB
-BLANK
-BLACK
-190
-
-By
-False
-Gacha Splash Art 4 Star
-True
-1
-SQUARE
-GACH-4
-BLANK
-BLACK
-275
-
-Nie
-False
-Banner
-True
-1
-SQUARE
-BAN-CB
-BLANK
-BLACK
-190
-
-Bywq
-False
-Gacha Splash Art 4 Star
-True
-1
-SQUARE
-GACH-4
-BLANK
-BLACK
-275
-
-Onion
-False
-Gacha Splash Art 4 Star
-True
-1
-SQUARE
-GACH-4
-BLANK
-BLACK
-275
-
-Akechi
-False
-Gacha Splash Art 4 Star
-True
-1
-SQUARE
-GACH-4
-BLANK
-BLACK
-275
+270
+0
 
 King of the Wigglers
-False
-Gacha Splash Art 4 Star
 True
+Demonify Me
+False
 1
 SQUARE
-GACH-4
+DM
 BLANK
-BLACK
-275
+BLUE
+200
+0
 
-Ray ඞan
-False
-Gacha Splash Art 4 Star
+Zephyr
 True
+Complex Reference Sheet
+False
 1
 SQUARE
-GACH-4
+CRS
 BLANK
-BLACK
-275
+BLUE
+270
+0
 
-Python
-False
-Gacha Splash Art 4 Star
+EnsoDonut
 True
+Complex Reference Sheet
+False
 1
-SQUARE
-GACH-4
+PAYPAL
+CRS
 BLANK
-BLACK
+BLUE
+270
+30
+
+King Venom
+True
+Cell-Shaded Fullbody
+True
 2
+SQUARE
+CS-FBs-CB
+BLANK
+BLUE
+325
+0
+
+Deruka / Nova
+True
+Demonify Me
+False
+1
+SQUARE
+DM
+BLANK
+BLUE
+200
+0
+
+ZiggyStellari
+True
+Banner
+True
+1
+SQUARE
+BAN-CB
+BLANK
+BLUE
+190
+0
+
+Discord: DeathByUsagi
+True
+Complex Reference Sheet
+False
+1
+SQUARE
+CRS
+BLANK
+BLUE
+270
+0
+
+EnsoDonut
+True
+YCH
+True
+1
+PAYPAL
+YCH
+BLANK
+BLUE
+215
+0
+
+RadicalGamer56
+False
+Cell-Shaded Halfbody
+False
+2
+SQUARE
+CS-HBs
+BLANK
+BLACK
+215
+0
+
+Miska_Blue
+False
+Banner
+True
+2
+SQUARE
+BAN-w/charas-CB
+BLANK
+BLACK
+205
+69
+
+Dexxdragoter
+False
+Complex Reference Sheet
+False
+1
+SQUARE
+CRS
+BLANK
+BLACK
+270
+0
+
+Kaputus1
+False
+Cell-Shaded Fullbody
+False
+1
+SQUARE
+CS-FB
+BLANK
+BLACK
+225
+0
 

@@ -24,7 +24,7 @@ def subscriberLen(x):
 
 ##Read In Saved File With Edits
 def readSave():
-    le = 10
+    le = 11
     final = []
     every_client = []
     ClientQueue = []
@@ -56,6 +56,7 @@ def readSave():
         except:
             print("ERROR EDIT: " + cli.getName() + " had price of " + i[9] + ", resetted to $0\n")
             cli.overridePrice(0)
+        cli.overrideTip(int(i[10]))
         if cli.getSub():
             ClientQueue.append(cli)
         else:
@@ -84,6 +85,7 @@ def writeSave():
             test += i.getButton().currentMode() + "\n"
             test += i.getButton().currentColor() + "\n"
         test += str(i.getPrice()) + "\n"
+        test += str(i.getTip()) + "\n"
         test += "\n"
 
     f = open(main.findPath("\Scripts","\\Texts\SaveFile.txt"), "w")

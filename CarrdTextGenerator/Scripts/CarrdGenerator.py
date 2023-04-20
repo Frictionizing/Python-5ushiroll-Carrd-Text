@@ -35,6 +35,7 @@ class Client:
         app.fullType    = textChange(app.type, app.isComplex, app.numOfChar)
         app.shortName   = shortenedComm(app.type, app.numOfChar, app.isComplex)
         app.price       = singlePrice(app.type, app.numOfChar, app.isComplex)
+        app.tip         = 0
 
         app.button      = ""
         app.state       = "BLANK"
@@ -57,6 +58,8 @@ class Client:
         return app.paymentType
     def getPrice(app):
         return app.price
+    def getTip(app):
+        return app.tip
     def getShortName(app):
         return app.shortName
     def getButton(app):
@@ -77,10 +80,11 @@ class Client:
         app.shortName = i
 
     #Override Functions
-    def OverrideComm(app, i,j,k):
+    def OverrideComm(app, i,j,k,l):
         app.name = i
         app.shortName = j
         app.price = k
+        app.tip = l
 
     def overrideComplex(app, i):
         app.isComplex = i
@@ -90,6 +94,8 @@ class Client:
         app.shortName = i
     def overridePrice(app, i):
         app.price = i
+    def overrideTip(app, i):
+        app.tip = i
     def overrideState(app, i):
         app.state = i
     def overrideColor(app, i):
