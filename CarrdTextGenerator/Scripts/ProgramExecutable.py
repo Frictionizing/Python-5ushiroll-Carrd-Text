@@ -17,7 +17,6 @@ num_label = {}
 colorDict = {}
 resize = 7
 
-
 #Combine Application and ButtonList
 def consolidateObjects(a):
     x = 0
@@ -145,6 +144,9 @@ def clear():
     for i in range (0,len(app.ClientObj)):
         app.ClientObj[i].overrideState("BLANK")
         app.ClientObj[i].overrideColor(carrd.buttonList[i].currentColor())
+
+    app.resetToOG()
+    refresh()
     app.writeSave()
 
 #Restart Entire program
@@ -491,14 +493,12 @@ def link2():
     webbrowser.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", new=0, autoraise=True)
     return
 
-
 #Proportions of window, not allowed to resize
 window.geometry("1800x1100")
 window.resizable(width=False, height=False)
 
 #Title of program
 window.title("5ushiroll Text Generator")
-
 
 #Create photos types
 #Background images

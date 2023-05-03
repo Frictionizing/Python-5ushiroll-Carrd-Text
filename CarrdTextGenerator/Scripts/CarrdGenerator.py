@@ -259,6 +259,24 @@ def shortenedComm(i,j,k):
 def shortenPayment(x):
     return "SQUARE" if x == "I can pay with Square" else "PAYPAL"
 
+def shortenName(x):
+    #Discord Case
+    a = x.split("#")[0]
+
+    #Twitter Case
+    if len(a.split("@")) == 2:
+        a = a.split("@")[1]
+
+    #Space in name Front
+    if a[0] == " ":
+        a = a[1:len(a)]
+
+    #Space in name Back
+    if a[len(a)-1] == " ":
+        a = a[0:len(a)-1]
+
+    return a
+
 #Create Client objects and put them in Queue (MAIN FUCNTION)
 def CreateClientObjects():
     lines = readFile()

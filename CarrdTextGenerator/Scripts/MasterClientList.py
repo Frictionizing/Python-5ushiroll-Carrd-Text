@@ -2,8 +2,10 @@ import math
 import pyperclip
 import pathlib
 import CarrdGenerator as main
+import GoogleAPI as new
 
 def readCSV():
+    return new.main()
     return main.CreateClientObjects()
 
 #Returns a single commission
@@ -110,12 +112,15 @@ def appendNewComms():
     elif commLen(ClientOG) < commLen(ClientObj):
         ClientObj = ClientOG
 
+def resetToOG():
+    global ClientObj
+    ClientObj = readCSV()
+
     
     writeSave()
     return
 
 appendNewComms()
-
 
 
 #Print out suggested prices
