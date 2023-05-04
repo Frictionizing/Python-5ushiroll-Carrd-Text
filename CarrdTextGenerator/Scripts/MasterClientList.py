@@ -94,7 +94,9 @@ def writeSave():
     f.write(test)
     f.close()
 
-ClientObj = readSave()
+#ClientObj = readSave()
+ClientObj = readCSV()
+
 
 def appendNewComms():
     ClientOG = readCSV()
@@ -120,7 +122,7 @@ def resetToOG():
     writeSave()
     return
 
-appendNewComms()
+#appendNewComms()
 
 
 #Print out suggested prices

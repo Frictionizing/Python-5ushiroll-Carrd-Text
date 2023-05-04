@@ -2,6 +2,7 @@ import MasterClientList as app
 import CarrdInProgressCompleted as carrd
 import CarrdGenerator as names
 import GoogleSheet as goog
+import GoogleAPI as api
 import CommissionPrices as price
 import webbrowser
 from tkinter import *
@@ -241,6 +242,8 @@ def edit():
                                           entry_Object[i].getPrice(),entry_Object[i].getTip())
             name_label[i].config(text = app.ClientObj[i].getName())
         app.writeSave()
+
+        api.update(app.ClientObj)
         return
 
     #Clears edit, goes back to main page

@@ -26,6 +26,7 @@ class Client:
     button: button objects associated with client
     """
     def __init__(app, application):
+        app.customer_num= application[6]
         app.name        = application[0]
         app.isSub       = application[1]
         app.type        = application[2]
@@ -70,6 +71,8 @@ class Client:
         return app.state
     def getColor(app):
         return app.color
+    def getCustomer(app):
+        return app.customer_num+1
 
     #Set Functions
     def assignButton(app, button):
@@ -86,6 +89,8 @@ class Client:
         app.price = k
         app.tip = l
 
+    def overrideName(app, i):
+        app.name = i
     def overrideComplex(app, i):
         app.isComplex = i
     def overrideType(app, i):

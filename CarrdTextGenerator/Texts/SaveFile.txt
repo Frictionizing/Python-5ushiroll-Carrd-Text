@@ -1,4 +1,28 @@
-RandomNightFury
+Arkovae
+True
+Complex Reference Sheet
+False
+1
+SQUARE
+CRS
+BLANK
+BLUE
+270
+0
+
+Raumsk
+True
+Simple Reference Sheet
+False
+1
+SQUARE
+SRS
+BLANK
+BLUE
+110
+0
+
+Raumsk
 True
 Cell-Shaded Fullbody
 False
@@ -10,6 +34,54 @@ BLUE
 225
 0
 
+Zeeber
+True
+Cell-Shaded Fullbody
+False
+2
+SQUARE
+CS-FBs
+BLANK
+BLUE
+275
+0
+
+Zeeber
+True
+Cell-Shaded Fullbody
+False
+2
+SQUARE
+CS-FBs
+COMPLETED
+BLUE
+275
+0
+
+Arkovae
+True
+Complex Reference Sheet
+False
+1
+SQUARE
+CRS
+IN PROGRESS
+BLUE
+270
+0
+
+RandomNightFury
+True
+Cell-Shaded Fullbody
+False
+1
+SQUARE
+CS-FB
+COMPLETED
+BLUE
+225
+0
+
 DeathByUsagi
 True
 Complex Reference Sheet
@@ -17,7 +89,7 @@ False
 1
 SQUARE
 CRS
-BLANK
+IN PROGRESS
 BLUE
 270
 0
@@ -34,78 +106,30 @@ BLUE
 275
 0
 
-Balk
+Keizer Ghidorah
 False
-Simple Reference Sheet
-False
-1
-SQUARE
-SRS
-BLANK
-BLACK
-110
-0
-
-Ulysses
-False
-Cell-Shaded Halfbody
-False
-1
-SQUARE
-CS-HB
-BLANK
-BLACK
-175
-0
-
-Ulysses
-False
-Colored Sketch
-False
-1
-SQUARE
-COS
-BLANK
-BLACK
-85
-0
-
-RandomNightFury
-True
 Cell-Shaded Fullbody
 False
-1
+6
 SQUARE
-CS-FB
+CS-FBs
 BLANK
-BLUE
-225
+BLACK
+475
 0
 
-DeathByUsagi
-True
+MushroomRooms
+False
 Complex Reference Sheet
 False
 1
 SQUARE
 CRS
 BLANK
-BLUE
+BLACK
 270
 0
 
-Syn
-True
-Sketch Page
-False
-2
-SQUARE
-SP
-BLANK
-BLUE
-275
-0
-
 Balk
 False
 Simple Reference Sheet
@@ -128,45 +152,9 @@ CS-HB
 BLANK
 BLACK
 175
-0
+65
 
-Ulysses
-False
-Colored Sketch
-False
-1
-SQUARE
-COS
-BLANK
-BLACK
-85
-0
-
-Balk
-False
-Simple Reference Sheet
-False
-1
-SQUARE
-SRS
-BLANK
-BLACK
-110
-0
-
-Ulysses
-False
-Cell-Shaded Halfbody
-False
-1
-SQUARE
-CS-HB
-BLANK
-BLACK
-175
-0
-
-Ulysses
+Ulyssesy
 False
 Colored Sketch
 False
