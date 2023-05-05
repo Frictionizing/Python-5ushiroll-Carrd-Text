@@ -1,82 +1,10 @@
-Arkovae
-True
-Complex Reference Sheet
-False
-1
-SQUARE
-CRS
-BLANK
-BLUE
-270
-0
-
-Raumsk
-True
-Simple Reference Sheet
-False
-1
-SQUARE
-SRS
-BLANK
-BLUE
-110
-0
-
-Raumsk
-True
-Cell-Shaded Fullbody
-False
-1
-SQUARE
-CS-FB
-BLANK
-BLUE
-225
-0
-
-Zeeber
-True
-Cell-Shaded Fullbody
-False
-2
-SQUARE
-CS-FBs
-BLANK
-BLUE
-275
-0
-
-Zeeber
-True
-Cell-Shaded Fullbody
-False
-2
-SQUARE
-CS-FBs
-COMPLETED
-BLUE
-275
-0
-
-Arkovae
-True
-Complex Reference Sheet
-False
-1
-SQUARE
-CRS
-IN PROGRESS
-BLUE
-270
-0
-
 RandomNightFury
 True
 Cell-Shaded Fullbody
-False
+True
 1
 SQUARE
-CS-FB
+CS-FB-CB
 COMPLETED
 BLUE
 225
@@ -89,7 +17,7 @@ False
 1
 SQUARE
 CRS
-IN PROGRESS
+COMPLETED
 BLUE
 270
 0
@@ -106,28 +34,28 @@ BLUE
 275
 0
 
-Keizer Ghidorah
+Syn
+True
+Sketch Page
 False
-Cell-Shaded Fullbody
-False
-6
+2
 SQUARE
-CS-FBs
+SP
 BLANK
-BLACK
-475
+BLUE
+275
 0
 
-MushroomRooms
+Syn
+True
+Sketch Page
 False
-Complex Reference Sheet
-False
-1
+2
 SQUARE
-CRS
+SP
 BLANK
-BLACK
-270
+BLUE
+275
 0
 
 Balk
@@ -137,7 +65,7 @@ False
 1
 SQUARE
 SRS
-BLANK
+COMPLETED
 BLACK
 110
 0
@@ -149,7 +77,7 @@ False
 1
 SQUARE
 CS-HB
-BLANK
+COMPLETED
 BLACK
 175
 65
@@ -161,7 +89,7 @@ False
 1
 SQUARE
 COS
-BLANK
+COMPLETED
 BLACK
 85
 0

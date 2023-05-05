@@ -247,7 +247,6 @@ def errorText(x,y,z):
 def shortenedComm(i,j,k):
 
     j = int(j)
-
     exemptList = ["GACH-3","GACH-4","GACH-5","GACH-6", "Full-Ren", "MAW", "DD", "YCH", "SRS", "CRS", "HSP", "DM", "SP", "RH"]
     temp = prices.shortDict[i]
     name = prices.shortDict[i]

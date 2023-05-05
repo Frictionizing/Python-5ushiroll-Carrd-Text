@@ -8,6 +8,9 @@ def readCSV():
     return new.main()
     return main.CreateClientObjects()
 
+def readSlot():
+    return new.refreshSheet()
+
 #Returns a single commission
 def readSingle(i):
     return main.CreateClientObjectIndex(i)
@@ -117,9 +120,12 @@ def appendNewComms():
 def resetToOG():
     global ClientObj
     ClientObj = readCSV()
+    #writeSave()
+    return
 
-    
-    writeSave()
+def resetToUpdate():
+    global ClientObj
+    ClientObj = readSlot()
     return
 
 #appendNewComms()

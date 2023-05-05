@@ -86,7 +86,7 @@ def createButtons():
         name_label[i].place(x=xaxis + 90, y=yaxis)
 
         num_label[i] = Label(window,
-                           text = str(i+1),
+                           text = str(app.ClientObj[i].getCustomer()),
                            font = ("Helvetica", 40),
                            bg = progressDict[app.ClientObj[i].getSub()],
                            width = 2,
@@ -121,15 +121,21 @@ def createButtons():
 def refresh():
     os.system('cls') 
     for i in range(0, len(name_label)):
+        num_label[i].destroy()
         name_label[i].destroy()
         buttonDict[i].destroy()
         colorDict[i].destroy()
 
-    app.appendNewComms()
     carrd.buttonList = carrd.createButtonObjects()
     consolidateObjects(app.ClientObj)
     createButtons()
     names.printPrices(app.ClientObj)
+
+def CSVRefresh():
+    api.update(app.ClientObj)
+    app.resetToOG()
+    refresh()
+    return
 
 #Reset all buttons and modes to BLANK
 def clear():
@@ -496,6 +502,13 @@ def link2():
     webbrowser.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", new=0, autoraise=True)
     return
 
+def editPlace(x):
+     api.sheetPlace += x
+     counter.config(text = api.sheetPlace + 1)
+     app.resetToUpdate()
+     refresh()
+     return
+
 #Proportions of window, not allowed to resize
 window.geometry("1800x1100")
 window.resizable(width=False, height=False)
@@ -544,7 +557,7 @@ photo_pencil = photo_pencil.subsample(18,18)
 photo_check = PhotoImage(file = names.findPath("\Scripts","\\Sprites/green_check.png"))
 photo_check = photo_check.subsample(20,20)
 #Image of CSV File
-photo_csv = PhotoImage(file = names.findPath("\Scripts","\\Sprites/csv.png"))
+photo_csv = PhotoImage(file = names.findPath("\Scripts","\\Sprites/newCSV.png"))
 photo_csv = photo_csv.subsample(5,5)
 #Image of Dollar sign
 photo_dollar = PhotoImage(file = names.findPath("\Scripts","\\Sprites/dollar.png"))
@@ -560,9 +573,17 @@ photo_amogus = photo_amogus.subsample(12,12)
 photo_USA = PhotoImage(file = names.findPath("\Scripts","\\Sprites/USFlag.png"))
 photo_USA = photo_USA.subsample(8,8)
 
-#Image of USA
+#Image of CAD
 photo_CAD = PhotoImage(file = names.findPath("\Scripts","\\Sprites/CanadaFlag.png"))
 photo_CAD = photo_CAD.subsample(8,8)
+
+#Image of LeftArrow
+photo_LArrow = PhotoImage(file = names.findPath("\Scripts","\\Sprites/LeftArrow.png"))
+photo_LArrow = photo_LArrow.subsample(40,80)
+
+#Image of RightArrowe
+photo_RArrow = PhotoImage(file = names.findPath("\Scripts","\\Sprites/RightArrow.png"))
+photo_RArrow = photo_RArrow.subsample(40,80)
 
 progressDict = { 
         True : "#5094d1",
@@ -601,14 +622,14 @@ button_sheets =   Button(window,
                        bg = "#E3BEEA",
                        height = 120,
                        width = 120)
-#Refresh Button
 
+#Refresh Button
 button_refresh =  Button(window, 
                        image = photo_csv,
                        height = 120,
                        width = 250,
                        bg = "#5094d1",
-                       command = refresh)
+                       command = CSVRefresh)
  
 #Clear the board Button
 button_sweep =  Button(window, 
@@ -636,11 +657,37 @@ button_edit =  Button(window,
 
 #Clear the board Button
 button_dollar =  Button(window, 
+                        
                        image = photo_dollar,
                        bg = "#c9d7e9",
                        height = 120,
                        width = 76,
                        command = editPrices,
+                       )
+
+#Counter
+counter = Label(window, 
+              text = api.sheet()+1,
+              height = 1,
+              width = 4, 
+              font = ("Helvetica", 25))
+
+#Left Arrow
+button_left =  Button(window, 
+                       image = photo_LArrow,
+                       bg = "#3187F6",
+                       height = 40,
+                       width = 80,
+                       command = lambda: editPlace(-1),
+                       )
+
+#Left Arrow
+button_right =  Button(window, 
+                       image = photo_RArrow,
+                       bg = "#3187F6",
+                       height = 40,
+                       width = 80,
+                       command = lambda: editPlace(1),
                        )
 
 #Twitter
@@ -684,6 +731,9 @@ button_carrd.place(x=1365, y=0)
 
 #Top Right, Update CSV
 button_refresh.place(x=1506, y=0)
+button_left.place(x=1506, y=125)
+button_right.place(x=1676, y=125)
+counter.place(x=1593, y=125)
 
 #Bottom Left, sus
 button_amogus.place(x=0, y=1020)
