@@ -13,7 +13,7 @@ def maffs(i):
             print("ERROR EDIT: " + i.getName() + " had price of " + ans + ", resetted to $0")
             return "0.00"
         
-    ans += i.getTip()
+    ans += int(i.getTip())
     
     return str(ans) + ".00"
 

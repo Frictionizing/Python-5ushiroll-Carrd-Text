@@ -4,8 +4,8 @@ import pathlib
 import CarrdGenerator as main
 import GoogleAPI as new
 
-def readCSV():
-    return new.main()
+def readCSV(x):
+    return new.main(x)
     return main.CreateClientObjects()
 
 def readSlot():
@@ -98,7 +98,7 @@ def writeSave():
     f.close()
 
 #ClientObj = readSave()
-ClientObj = readCSV()
+ClientObj = readCSV(0)
 
 
 def appendNewComms():
@@ -117,9 +117,9 @@ def appendNewComms():
     elif commLen(ClientOG) < commLen(ClientObj):
         ClientObj = ClientOG
 
-def resetToOG():
+def resetToOG(x):
     global ClientObj
-    ClientObj = readCSV()
+    ClientObj = readCSV(x)
     #writeSave()
     return
 

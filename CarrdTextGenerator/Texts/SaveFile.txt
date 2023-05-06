@@ -1,27 +1,3 @@
-RandomNightFury
-True
-Cell-Shaded Fullbody
-True
-1
-SQUARE
-CS-FB-CB
-COMPLETED
-BLUE
-225
-0
-
-DeathByUsagi
-True
-Complex Reference Sheet
-False
-1
-SQUARE
-CRS
-COMPLETED
-BLUE
-270
-0
-
 Syn
 True
 Sketch Page
@@ -32,65 +8,5 @@ SP
 BLANK
 BLUE
 275
-0
-
-Syn
-True
-Sketch Page
-False
-2
-SQUARE
-SP
-BLANK
-BLUE
-275
-0
-
-Syn
-True
-Sketch Page
-False
-2
-SQUARE
-SP
-BLANK
-BLUE
-275
-0
-
-Balk
-False
-Simple Reference Sheet
-False
-1
-SQUARE
-SRS
-COMPLETED
-BLACK
-110
-0
-
-Ulysses
-False
-Cell-Shaded Halfbody
-False
-1
-SQUARE
-CS-HB
-COMPLETED
-BLACK
-175
-65
-
-Ulyssesy
-False
-Colored Sketch
-False
-1
-SQUARE
-COS
-COMPLETED
-BLACK
-85
 0
 

@@ -485,8 +485,10 @@ def printPrices(x):
 
         if i.getPaymentType() == "SQUARE":
             price = math.floor(price * cashConvert[i.getPaymentType()])
+            price += int(i.getTip())
             totalPriceCAD += price
         else:
+            price += int(i.getTip())
             totalPrice += price
 
         #Complex BG Price

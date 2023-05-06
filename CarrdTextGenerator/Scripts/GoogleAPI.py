@@ -16,7 +16,8 @@ sheetPlace = 0
 values = []
 save_file = []
 
-def main():
+#X is flag for whether to use the sheetnumber from Googlesheets or whether to use the local sheetNumber; x is 0 at initialization to grab from GS
+def main(x):
     ClientQueue = []
     ClientQueue_NoSub = []
     credentials = None
@@ -38,7 +39,8 @@ def main():
 
         global sheetPlace
 
-        sheetPlace = int(sheets.values().get(spreadsheetId=SPREADSHEET_ID, range="APIStuff!F1").execute().get("values")[0][0])
+        if x == 0:
+            sheetPlace = int(sheets.values().get(spreadsheetId=SPREADSHEET_ID, range="APIStuff!F1").execute().get("values")[0][0])
 
         global values
         global save_file
@@ -76,7 +78,7 @@ def main():
             #Turn application into Client object
             cli = cg.Client(pack)
 
-            if save_file[k]:
+            if save_file[k] != []:
                 info = save_file[k][0].split(",")
                 cli.overrideName(info[0])
                 cli.overridePrice(info[2])

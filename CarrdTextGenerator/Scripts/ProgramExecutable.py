@@ -89,7 +89,7 @@ def createButtons():
                            text = str(app.ClientObj[i].getCustomer()),
                            font = ("Helvetica", 40),
                            bg = progressDict[app.ClientObj[i].getSub()],
-                           width = 2,
+                           width = 3,
                            fg = "white")
         num_label[i].place(x=xaxis + 10, y=yaxis)
 
@@ -131,9 +131,13 @@ def refresh():
     createButtons()
     names.printPrices(app.ClientObj)
 
-def CSVRefresh():
+def save():
     api.update(app.ClientObj)
-    app.resetToOG()
+    return
+
+def CSVRefresh():
+    save()
+    app.resetToOG(1)
     refresh()
     return
 
@@ -250,6 +254,8 @@ def edit():
         app.writeSave()
 
         api.update(app.ClientObj)
+        os.system('cls') 
+        names.printPrices(app.ClientObj)
         return
 
     #Clears edit, goes back to main page
@@ -504,6 +510,8 @@ def link2():
 
 def editPlace(x):
      api.sheetPlace += x
+     if api.sheetPlace < 0:
+         api.sheetPlace = 0
      counter.config(text = api.sheetPlace + 1)
      app.resetToUpdate()
      refresh()
@@ -557,7 +565,7 @@ photo_pencil = photo_pencil.subsample(18,18)
 photo_check = PhotoImage(file = names.findPath("\Scripts","\\Sprites/green_check.png"))
 photo_check = photo_check.subsample(20,20)
 #Image of CSV File
-photo_csv = PhotoImage(file = names.findPath("\Scripts","\\Sprites/newCSV.png"))
+photo_csv = PhotoImage(file = names.findPath("\Scripts","\\Sprites/csv.png"))
 photo_csv = photo_csv.subsample(5,5)
 #Image of Dollar sign
 photo_dollar = PhotoImage(file = names.findPath("\Scripts","\\Sprites/dollar.png"))
@@ -579,11 +587,23 @@ photo_CAD = photo_CAD.subsample(8,8)
 
 #Image of LeftArrow
 photo_LArrow = PhotoImage(file = names.findPath("\Scripts","\\Sprites/LeftArrow.png"))
-photo_LArrow = photo_LArrow.subsample(40,80)
+photo_LArrow = photo_LArrow.subsample(60,80)
 
 #Image of RightArrowe
 photo_RArrow = PhotoImage(file = names.findPath("\Scripts","\\Sprites/RightArrow.png"))
-photo_RArrow = photo_RArrow.subsample(40,80)
+photo_RArrow = photo_RArrow.subsample(60,80)
+
+#Image of FastForward
+photo_FFArrow = PhotoImage(file = names.findPath("\Scripts","\\Sprites/FastForward.png"))
+photo_FFArrow = photo_FFArrow.subsample(3,3)
+
+#Image of FastRewind
+photo_BBArrow = PhotoImage(file = names.findPath("\Scripts","\\Sprites/FastRewind.png"))
+photo_BBArrow = photo_BBArrow.subsample(3,3)
+
+#Image of Save
+photo_saveIcon = PhotoImage(file = names.findPath("\Scripts","\\Sprites/Save.png"))
+photo_saveIcon = photo_saveIcon.subsample(6,6)
 
 progressDict = { 
         True : "#5094d1",
@@ -677,23 +697,42 @@ button_left =  Button(window,
                        image = photo_LArrow,
                        bg = "#3187F6",
                        height = 40,
-                       width = 80,
+                       width = 40,
                        command = lambda: editPlace(-1),
                        )
 
-#Left Arrow
+#Right Arrow
 button_right =  Button(window, 
                        image = photo_RArrow,
                        bg = "#3187F6",
                        height = 40,
-                       width = 80,
+                       width = 40,
                        command = lambda: editPlace(1),
                        )
 
+#Fast Forward Arrow
+button_ff =  Button(window, 
+                       image = photo_FFArrow,
+                       bg = "#3187F6",
+                       height = 40,
+                       width = 40,
+                       command = lambda: editPlace(5),
+                       )
+
+#Fast Rewind Arrow
+button_bb =  Button(window, 
+                       image = photo_BBArrow,
+                       bg = "#3187F6",
+                       height = 40,
+                       width = 40,
+                       command = lambda: editPlace(-5),
+                       )
+
+
 #Twitter
 button_twitter =     Button(window, 
-                       command=link,
-                       image = photo_twitter,
+                       command=save,
+                       image = photo_saveIcon,
                        bg = "#c9d7e9",
                        height = 120,
                        width = 76)
@@ -713,7 +752,7 @@ bg_image.place(x=0, y=0, relwidth=1, relheight=1)
 title.place(x=0, y=24)
 
 #Top Middle, Sweep, Restart, Edit Names, Edit Prices, Twitter
-button_sweep.place(x=740, y=0)
+#button_sweep.place(x=740, y=0)
 button_restart.place(x=835, y=0)
 button_edit.place(x=930, y=0)
 button_dollar.place(x=1025, y=0)
@@ -731,8 +770,10 @@ button_carrd.place(x=1365, y=0)
 
 #Top Right, Update CSV
 button_refresh.place(x=1506, y=0)
-button_left.place(x=1506, y=125)
-button_right.place(x=1676, y=125)
+button_left.place(x=1548, y=125)
+button_bb.place(x=1506, y=125)
+button_right.place(x=1674, y=125)
+button_ff.place(x=1716, y=125)
 counter.place(x=1593, y=125)
 
 #Bottom Left, sus
