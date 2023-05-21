@@ -21,9 +21,12 @@ def main(x):
     ClientQueue = []
     ClientQueue_NoSub = []
     credentials = None
+
+  
     if os.path.exists("token.json"):
         credentials = Credentials.from_authorized_user_file("token.json", SCOPES)
 
+    
     if not credentials or not credentials.valid:
         if credentials and credentials.expired and credentials.refresh_token:
             credentials.refresh(Request())
@@ -189,6 +192,31 @@ def update(entry):
         for i in entry:
             sheets.values().update(spreadsheetId=SPREADSHEET_ID, range = f"APIStuff!A{i.getCustomer()}", valueInputOption="USER_ENTERED", body = {"values":[[i.getName() + "," + i.getShortName() + "," + str(i.getPrice()) + "," + 
                                                                                                                                                              str(i.getTip()) + "," + i.getState() + "," + i.getColor()]]}).execute()
+
+    except HttpError as error:
+        print(error)
+        pass
+
+def updateSingle(entry):
+    credentials = None
+    if os.path.exists("token.json"):
+        credentials = Credentials.from_authorized_user_file("token.json", SCOPES)
+
+    if not credentials or not credentials.valid:
+        if credentials and credentials.expired and credentials.refresh_token:
+            credentials.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(cg.findPath("\Scripts","\\GoogleSheetAPI.json"), SCOPES)
+            credentials = flow.run_local_server(port = 0)
+        with open("token.json", "w") as token:
+            token.write(credentials.to_json())
+
+    try:
+        service = build("sheets", "v4", credentials=credentials)
+        sheets = service.spreadsheets()
+
+        sheets.values().update(spreadsheetId=SPREADSHEET_ID, range = f"APIStuff!A{entry.getCustomer()}", valueInputOption="USER_ENTERED", body = {"values":[[entry.getName() + "," + entry.getShortName() + "," + str(entry.getPrice()) + "," + 
+                                                                                                                                                             str(entry.getTip()) + "," + entry.getState() + "," + entry.getColor()]]}).execute()
 
     except HttpError as error:
         print(error)

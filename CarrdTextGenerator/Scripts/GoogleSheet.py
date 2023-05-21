@@ -4,11 +4,11 @@ import pyperclip
 
 #Price function
 def maffs(i):
-    ans = i.getPrice()
+    ans = int(i.getPrice())
 
     if i.getPaymentType() == "SQUARE":
         try:
-            ans = math.floor(1.3 * float(ans))
+            ans = int(math.floor(1.3 * float(ans)))
         except:
             print("ERROR EDIT: " + i.getName() + " had price of " + ans + ", resetted to $0")
             return "0.00"

@@ -62,6 +62,7 @@ def createButtons():
             #Update save file
             app.ClientObj[x].overrideState(carrd.buttonList[x].currentMode())
             app.writeSave()
+            api.updateSingle(app.ClientObj[x])
 
         def convertColor(x=i):
             carrd.buttonList[x].changeColor()
@@ -70,6 +71,7 @@ def createButtons():
             colorDict[x].configure(image = progressDict[carrd.buttonList[x].currentColor()])
             app.ClientObj[x].overrideColor(carrd.buttonList[x].currentColor())
             app.writeSave()
+            api.updateSingle(app.ClientObj[x])
 
         #If more than half commissions, continue on the right side
         if nextRowReady and i >= 10:
