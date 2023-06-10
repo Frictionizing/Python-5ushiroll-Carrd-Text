@@ -28,15 +28,11 @@ def main(x):
 
     
     if not credentials or not credentials.valid:
-        """
         if credentials and credentials.expired and credentials.refresh_token:
-            print("ev")
             credentials.refresh(Request())
         else:
-        """
-        
-        flow = InstalledAppFlow.from_client_secrets_file(cg.findPath("\Scripts","\\GoogleSheetAPI.json"), SCOPES)
-        credentials = flow.run_local_server(port = 0)
+            flow = InstalledAppFlow.from_client_secrets_file(cg.findPath("\Scripts","\\GoogleSheetAPI.json"), SCOPES)
+            credentials = flow.run_local_server(port = 0)
         
         with open("token.json", "w") as token:
             token.write(credentials.to_json())
@@ -73,6 +69,9 @@ def main(x):
             i.append("")
             i.append("")
             i.append("")
+
+            if i == ['','','','']:
+                continue
                 
             name = cg.shortenName(i[2])
             isSub = cg.convertBool(i[3])

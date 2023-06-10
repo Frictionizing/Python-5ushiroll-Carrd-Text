@@ -264,6 +264,8 @@ def shortenPayment(x):
     return "SQUARE" if x == "I can pay with Square" else "PAYPAL"
 
 def shortenName(x):
+
+
     #Discord Case
     a = x.split("#")[0]
 

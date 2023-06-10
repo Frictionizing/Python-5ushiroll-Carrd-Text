@@ -1,240 +1,108 @@
-Syn
-True
-Sketch Page
-False
-2
-SQUARE
-SP
-COMPLETED
-BLUE
-275
-15
-
-Zeebrr
+Zephyr
 True
 Cell-Shaded Fullbody
-False
-3
+True
+2
 SQUARE
-CS-FBs
-COMPLETED
+CS-FBs-CB
+BLANK
 BLUE
 325
 0
 
-King of the Wigglers
+Zephyr
 True
-Full Render
-True
-2
-SQUARE
-Full-Ren
-COMPLETED
-BLUE
-455
-130
-
-Zeebr
-True
-Complex Reference Sheet
+Demonify Me
 False
 1
 SQUARE
-CRS
-COMPLETED
+DM
+BLANK
 BLUE
-270
+200
 0
-
-OnyxtheDragon
-True
-Cell-Shaded Fullbody
-False
-3
-SQUARE
-CS-FBs
-COMPLETED
-BLUE
-325
-5
-
-Deruka
-True
-Gacha Splash Art 4 Star
-True
-1
-SQUARE
-GACH-4
-COMPLETED
-BLUE
-275
-0
-
-The Wanderer
-True
-Cell-Shaded Fullbody
-False
-2
-PAYPAL
-CS-FBs
-COMPLETED
-BLUE
-275
-25
 
 EnsoDonut
 True
 Cell-Shaded Fullbody
-True
-1
+False
+2
 PAYPAL
-CS-FB-CB
-COMPLETED
+CS-FBs
+BLANK
 BLUE
 275
-25
+0
+
+Ziggystellari
+True
+Cell-Shaded Halfbody
+True
+2
+SQUARE
+CS-HBs-CB
+BLANK
+BLUE
+255
+0
+
+Deruka
+True
+Gacha Splash Art 5 Star
+True
+1
+SQUARE
+GACH-5
+BLANK
+BLUE
+350
+0
+
+Arkovae
+True
+Cell-Shaded Fullbody
+False
+2
+SQUARE
+CS-FBs
+BLANK
+BLUE
+275
+0
 
 RandomNightFury
 True
-Full Render
-True
+Daily Dragon Feature
+False
 2
 SQUARE
-Full-Ren
+DD
 BLANK
 BLUE
-455
-0
-
-Zetakh
-False
-Cell-Shaded Fullbody
-True
-2
-SQUARE
-CS-FBs-CB
-COMPLETED
-BLACK
-325
-27
-
-IgnisBlazer
-False
-Demonify Me
-False
-1
-PAYPAL
-DM
-COMPLETED
-BLACK
-200
-0
-
-Radiance
-False
-Colored Sketch
-False
-2
-PAYPAL
-COS-w/charas
-COMPLETED
-BLACK
-115
-0
-
-Marrok
-False
-Demonify Me
-False
-1
-PAYPAL
-DM
-COMPLETED
-BLACK
-200
-0
-
-NightDaDrago
-False
-Cell-Shaded Halfbody
-True
-1
-SQUARE
-CS-HB-CB
-IN PROGRESS
-BLACK
-215
-0
-
-Zai_sarel
-False
-Colored Sketch
-False
-1
-SQUARE
-COS
-COMPLETED
-BLACK
 85
 0
 
-Talos The Hydra
-False
-Flat Colored Fullbody
+Raumsk
 True
-1
-SQUARE
-FC-FB-CB
-IN PROGRESS
-BLACK
-155
-0
-
-Lovliest Plant
-False
-Simple Reference Sheet
-False
-1
-SQUARE
-SRS
-BLANK
-BLACK
-110
-0
-
-Lkgs Space Program
-False
 Cell-Shaded Fullbody
 True
-2
+1
 SQUARE
-CS-FBs-CB
+CS-FB-CB
 BLANK
-BLACK
-325
+BLUE
+275
 0
 
-Peacemaker
+PythonFur
 False
-Cell-Shaded Headshot
+Cell-Shaded Halfbody
 False
 1
 SQUARE
-CS-H
+CS-HB
 BLANK
 BLACK
-135
-0
-
-KiwiCam
-False
-Flat Colored Fullbody
-False
-1
-SQUARE
-FC-FB
-BLANK
-BLACK
-125
+175
 0
 
