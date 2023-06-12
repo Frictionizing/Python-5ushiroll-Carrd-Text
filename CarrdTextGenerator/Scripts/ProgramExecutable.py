@@ -76,20 +76,20 @@ def createButtons():
         #If more than half commissions, continue on the right side
         if nextRowReady and i >= 10:
             nextRowReady = not nextRowReady
-            xaxis = 900
+            xaxis = 800
             yaxis = 180
 
         #List of names
         name_label[i] = Label(window,
                            text = app.ClientObj[i].getName(),
-                           font = ("Helvetica", 40),
+                           font = ("Helvetica", 35),
                            width = 16,
                            fg = progressDict[app.ClientObj[i].getSub()])
         name_label[i].place(x=xaxis + 90, y=yaxis)
 
         num_label[i] = Label(window,
                            text = str(app.ClientObj[i].getCustomer()),
-                           font = ("Helvetica", 40),
+                           font = ("Helvetica", 35),
                            bg = progressDict[app.ClientObj[i].getSub()],
                            width = 3,
                            fg = "white")
@@ -99,10 +99,10 @@ def createButtons():
         #List of progress buttons
         buttonDict[i] = Button(window, 
                                command = convertMode,
-                               width = 180,
-                               height = 61,
+                               width = 170,
+                               height = 54,
                                image = progressDict[app.ClientObj[i].getState()])
-        buttonDict[i].place(x=682 + xaxis, y=yaxis)
+        buttonDict[i].place(x=600 + xaxis, y=yaxis)
 
         #Override SubscriberStar color to blue
         if carrd.buttonList[i].currentColor() == "BLACK" and app.ClientObj[i].getSub():
@@ -110,14 +110,14 @@ def createButtons():
         #List of color overlay buttons
         colorDict[i] = Button(window, 
                               command = convertColor,
-                              width = 61,
-                              height = 61,
+                              width = 54,
+                              height = 54,
                               image = progressDict[app.ClientObj[i].getColor()])
-        colorDict[i].place(x=605 + xaxis, y=yaxis)
+        colorDict[i].place(x=535 + xaxis, y=yaxis)
         
 
         #Move the Y axis every iteration (resets at the halfway point)
-        yaxis += 80
+        yaxis += 70
 
 #Refreshes the whole page for new CSV information
 def refresh():
@@ -186,17 +186,17 @@ class Overwrite:
         app.name.place(x=0 + xaxis, y = yaxis)
         app.name.insert(INSERT, i.getName())
 
-        app.comm.place(x=450 + xaxis, y = yaxis)
+        app.comm.place(x=360 + xaxis, y = yaxis)
         app.comm.insert(INSERT, i.getShortName())
 
-        app.price.place(x=750 + xaxis, y = yaxis)
+        app.price.place(x=600 + xaxis, y = yaxis)
         app.price.insert(INSERT, i.getPrice())
 
-        app.tip.place(x=750 + xaxis, y = yaxis+40)
+        app.tip.place(x=600 + xaxis, y = yaxis+35)
         app.tip.insert(INSERT, i.getTip())
 
-        content[4].place(x=820 + xaxis, y = yaxis)
-        content[5].place(x=820 + xaxis , y = yaxis + 40)
+        content[4].place(x=660 + xaxis, y = yaxis)
+        content[5].place(x=660 + xaxis , y = yaxis + 35)
 
 
     def getName(app):
@@ -283,7 +283,7 @@ def edit():
     nextRowReady = True
     count = 0
     yaxis = 180
-    xaxis = 5
+    xaxis = 40
 
     entry_Name = []
     entry_Comm = []
@@ -303,12 +303,12 @@ def edit():
     name_tag = Label(window, 
                   text = "NAME", 
                   fg = "blue",
-                  font = ("Helvetica", 30))
+                  font = ("Helvetica", 25))
     
     comm_tag = Label(window, 
                   text = "COMM CODE", 
                   fg = "blue",
-                  font = ("Helvetica", 30))
+                  font = ("Helvetica", 25))
 
     price_tag = Label(window, 
                   text = "TOTAL USD", 
@@ -338,28 +338,28 @@ def edit():
     for i in app.ClientObj:
         if nextRowReady and count >= 10:
             nextRowReady = not nextRowReady
-            xaxis = 905
+            xaxis = 805
             yaxis = 180
 
         entry_Name.append(Text(window, 
                     width = 12, 
                     height = 1, 
-                    font = ("Helvetica", 47),))
+                    font = ("Helvetica", 40),))
 
         entry_Comm.append(Text(window, 
                     width = 8, 
                     height = 1,
-                    font = ("Helvetica", 47),))
+                    font = ("Helvetica", 40),))
 
         entry_Price.append(Text(window, 
                     width = 4, 
                     height = 1,
-                    font = ("Helvetica", 20),))
+                    font = ("Helvetica", 17),))
         
         entry_Tip.append(Text(window, 
                     width = 4, 
                     height = 1,
-                    font = ("Helvetica", 20),))
+                    font = ("Helvetica", 17),))
         
         entry_Flag.append(Label(window, 
                     image = photo_USA, ))
@@ -374,14 +374,14 @@ def edit():
         entry_Object[count] = (Overwrite([entry_Name[count],entry_Comm[count],entry_Price[count], entry_Tip[count], entry_Flag[count], entry_FlagTip[count]], i, xaxis, yaxis))
 
         count += 1
-        yaxis += 90
+        yaxis += 70
 
     bg_edit.place(x=0, y=0, relwidth=1, relheight=1)
     title.place(x=0, y=24)
-    name_tag.place(x=160, y=120)
-    comm_tag.place(x=470, y=120)
-    price_tag.place(x=760, y=110)
-    tip_tag.place(x=760, y=140)
+    name_tag.place(x=170, y=120)
+    comm_tag.place(x=410, y=120)
+    price_tag.place(x=640, y=110)
+    tip_tag.place(x=640, y=140)
     button_exit.place(x=900, y=0)
 
     return
@@ -391,7 +391,7 @@ def editPrices():
     #X,Y Axis for editable items
     count = 0
     yaxis = 190
-    xaxis = 650
+    xaxis = 250
 
     entry_Name = []
     entry_Base = []
@@ -427,6 +427,8 @@ def editPrices():
         title.destroy()
         comm.destroy()
         base.destroy()
+        comm2.destroy()
+        base2.destroy()
         for i in range(0,len(entry_Name)):
             entry_Name[i].destroy()
             entry_Base[i].destroy()
@@ -462,11 +464,38 @@ def editPrices():
                     fg = "blue",
                     bg = "gray",
                     font = ("Helvetica", 20),))
+    
+    comm2 =    (Label(window,
+                    text = "Commission", 
+                    width = 20, 
+                    height = 1,
+                    fg = "blue", 
+                    bg = "gray",
+                    font = ("Helvetica", 20),))
 
-    comm.place(x = 650, y = 144)
-    base.place(x = 975, y = 144)
+    base2 =    (Label(window,
+                    text = "Base - Char - BG", 
+                    width = 14, 
+                    height = 1,
+                    fg = "blue",
+                    bg = "gray",
+                    font = ("Helvetica", 20),))
+
+    comm.place(x = 250, y = 144)
+    base.place(x = 575, y = 144)
+
+    comm2.place(x = 850, y = 144)
+    base2.place(x = 1175, y = 144)
+
+    count = 0
+    isNewLine = True
 
     for i in price.comm:
+
+        if isNewLine and count == 15:
+            isNewLine = False
+            yaxis = 190
+            xaxis = 850
 
         entry_Name.append(Label(window,
                     text = i, 
@@ -497,7 +526,7 @@ def editPrices():
 
     bg_edit.place(x=0, y=0, relwidth=1, relheight=1)
     title.place(x=0, y=24)
-    button_exit.place(x=900, y=0)
+    button_exit.place(x=400, y=0)
     return
 
 #Sends you to twitter
@@ -520,11 +549,12 @@ def editPlace(x):
      return
 
 #Proportions of window, not allowed to resize
-window.geometry("1800x1100")
+#window.geometry("1800x1100")
+window.geometry("1590x900")
 window.resizable(width=False, height=False)
 
 #Title of program
-window.title("5ushiroll Text Generator")
+window.title("5ushiroll Commission Program June 11 2023 Build")
 
 #Create photos types
 #Background images
@@ -626,8 +656,8 @@ bg_image = Label(window,
 
 #Title
 title = Label(window, 
-              text = "5ushiroll Text Generator", 
-              font = ("Helvetica", 50))
+              text = "Sushi's Commissions", 
+              font = ("Helvetica", 48))
 
 #Clipboard Button
 button_carrd =    Button(window, 
@@ -753,12 +783,14 @@ bg_image.place(x=0, y=0, relwidth=1, relheight=1)
 #Top Left, Title
 title.place(x=0, y=24)
 
+adjust = 187
+
 #Top Middle, Sweep, Restart, Edit Names, Edit Prices, Twitter
 #button_sweep.place(x=740, y=0)
-button_restart.place(x=835, y=0)
-button_edit.place(x=930, y=0)
-button_dollar.place(x=1025, y=0)
-button_twitter.place(x=1120, y=0)
+button_restart.place(x=835-adjust, y=0)
+button_edit.place(x=930-adjust, y=0)
+button_dollar.place(x=1025-adjust, y=0)
+button_twitter.place(x=1120-adjust, y=0)
 
 #us.place(x=0,y=0)
 
@@ -767,16 +799,16 @@ button_twitter.place(x=1120, y=0)
 createButtons()
 
 #Top Middle Large, Google Sheet and Carrd
-button_sheets.place(x=1220, y=0)
-button_carrd.place(x=1365, y=0)
+button_sheets.place(x=1220-adjust, y=0)
+button_carrd.place(x=1365-adjust, y=0)
 
 #Top Right, Update CSV
-button_refresh.place(x=1506, y=0)
-button_left.place(x=1548, y=125)
-button_bb.place(x=1506, y=125)
-button_right.place(x=1674, y=125)
-button_ff.place(x=1716, y=125)
-counter.place(x=1593, y=125)
+button_refresh.place(x=1506-adjust, y=0)
+button_left.place(x=1548-adjust, y=125)
+button_bb.place(x=1506-adjust, y=125)
+button_right.place(x=1674-adjust, y=125)
+button_ff.place(x=1716-adjust, y=125)
+counter.place(x=1593-adjust, y=125)
 
 #Bottom Left, sus
 button_amogus.place(x=0, y=1020)

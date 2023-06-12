@@ -54,6 +54,7 @@ def createButtonObjects():
 #Returns Carrd Copy Paste Text
 def appendProgress(mode):
     Carrd = []
+    pp    = []
 
     for i in range(0,app.commLen(app.ClientObj)):
 
@@ -70,7 +71,13 @@ def appendProgress(mode):
             "PAYMENT PLAN" : "!" + name + ": "
         }
 
-        Carrd.append(ColorCode[app.ClientObj[i].getColor()] + app.ClientObj[i].getNewType() + ColorCode[app.ClientObj[i].getState()] + "\n")
+        if app.ClientObj[i].getColor() == "PAYMENT PLAN":
+            pp.append(ColorCode[app.ClientObj[i].getColor()] + app.ClientObj[i].getNewType() + ColorCode[app.ClientObj[i].getState()] + "\n")
+        else:
+            Carrd.append(ColorCode[app.ClientObj[i].getColor()] + app.ClientObj[i].getNewType() + ColorCode[app.ClientObj[i].getState()] + "\n")
+
+    for i in pp:
+        Carrd.append(i)
 
     return Carrd
 

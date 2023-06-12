@@ -5,10 +5,10 @@ True
 2
 SQUARE
 CS-FBs-CB
-BLANK
+IN PROGRESS
 BLUE
 325
-0
+30
 
 Zephyr
 True
@@ -56,7 +56,7 @@ GACH-5
 BLANK
 BLUE
 350
-0
+11
 
 Arkovae
 True
@@ -68,7 +68,7 @@ CS-FBs
 BLANK
 BLUE
 275
-0
+30
 
 RandomNightFury
 True
@@ -90,9 +90,45 @@ True
 SQUARE
 CS-FB-CB
 BLANK
-BLUE
+PAYMENT PLAN
 275
 0
+
+King of the Wigglers
+True
+Cell-Shaded Halfbody
+True
+1
+SQUARE
+CS-HB-CB
+BLANK
+BLUE
+215
+70
+
+Syn
+True
+Flat Colored Fullbody
+False
+1
+SQUARE
+FC-FB
+BLANK
+BLUE
+125
+15
+
+King of the Wigglers
+True
+Mawshot
+False
+2
+SQUARE
+MAW-w/charas
+BLANK
+BLUE
+220
+60
 
 PythonFur
 False
@@ -105,4 +141,40 @@ BLANK
 BLACK
 175
 0
+
+Talos The Hydra
+False
+Simple Reference Sheet
+False
+1
+SQUARE
+SRS
+BLANK
+BLACK
+110
+0
+
+KyZekk
+False
+Flat Colored Fullbody
+False
+1
+SQUARE
+FC-FB
+BLANK
+BLACK
+125
+0
+
+DragonWaffle
+False
+Complex Reference Sheet
+False
+1
+SQUARE
+CRS
+BLANK
+BLACK
+270
+50
 
