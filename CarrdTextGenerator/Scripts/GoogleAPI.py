@@ -28,8 +28,11 @@ def main(x):
 
     
     if not credentials or not credentials.valid:
+        print("Gg")
         if credentials and credentials.expired and credentials.refresh_token:
-            credentials.refresh(Request())
+            flow = InstalledAppFlow.from_client_secrets_file(cg.findPath("\Scripts","\\GoogleSheetAPI.json"), SCOPES)
+            credentials = flow.run_local_server(port = 0)
+            #credentials.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(cg.findPath("\Scripts","\\GoogleSheetAPI.json"), SCOPES)
             credentials = flow.run_local_server(port = 0)

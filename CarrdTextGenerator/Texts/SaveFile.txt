@@ -5,7 +5,7 @@ True
 2
 SQUARE
 CS-FBs-CB
-IN PROGRESS
+COMPLETED
 BLUE
 325
 30
@@ -17,7 +17,7 @@ False
 1
 SQUARE
 DM
-BLANK
+COMPLETED
 BLUE
 200
 0
@@ -29,7 +29,7 @@ False
 2
 PAYPAL
 CS-FBs
-BLANK
+IN PROGRESS
 BLUE
 275
 0
@@ -130,6 +130,42 @@ BLUE
 220
 60
 
+SpiritOfFen
+True
+YCH
+False
+1
+SQUARE
+YCH
+BLANK
+BLUE
+275
+0
+
+DragonAutie
+True
+Complex Reference Sheet
+False
+1
+SQUARE
+CRS
+BLANK
+BLUE
+270
+0
+
+EnsoDonut
+True
+YCH
+True
+1
+SQUARE
+YCH
+BLANK
+BLUE
+275
+0
+
 PythonFur
 False
 Cell-Shaded Halfbody
@@ -177,4 +213,28 @@ BLANK
 BLACK
 270
 50
+
+Redmonarch900
+False
+Colored Sketch
+False
+1
+SQUARE
+COS
+BLANK
+BLACK
+85
+0
+
+CloudOfBats
+False
+Colored Sketch
+False
+1
+SQUARE
+COS
+BLANK
+BLACK
+85
+0
 
