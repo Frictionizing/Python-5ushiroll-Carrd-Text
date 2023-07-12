@@ -22,17 +22,17 @@ def main(x):
     ClientQueue_NoSub = []
     credentials = None
 
-  
     if os.path.exists("token.json"):
-        credentials = Credentials.from_authorized_user_file("token.json", SCOPES)
-
+        try:
+            credentials = Credentials.from_authorized_user_file("token.json", SCOPES)
+        except:
+            print("Expired Token. Requires New Login")
     
     if not credentials or not credentials.valid:
-        print("Gg")
         if credentials and credentials.expired and credentials.refresh_token:
             flow = InstalledAppFlow.from_client_secrets_file(cg.findPath("\Scripts","\\GoogleSheetAPI.json"), SCOPES)
             credentials = flow.run_local_server(port = 0)
-            #credentials.refresh(Request())
+            credentials.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(cg.findPath("\Scripts","\\GoogleSheetAPI.json"), SCOPES)
             credentials = flow.run_local_server(port = 0)
@@ -118,6 +118,7 @@ def main(x):
     except HttpError as error:
         print(error)
         pass
+
 
 def refreshSheet():
     global sheetPlace

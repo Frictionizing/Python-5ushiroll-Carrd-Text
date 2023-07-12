@@ -1,148 +1,40 @@
-Zephyr
+Zeebrr
 True
-Cell-Shaded Fullbody
-True
-2
-SQUARE
-CS-FBs-CB
-COMPLETED
-BLUE
-325
-30
-
-Zephyr
-True
-Demonify Me
+Complex Reference Sheet
 False
 1
 SQUARE
-DM
+CRS
 COMPLETED
 BLUE
-200
+270
 0
 
-EnsoDonut
+Zeebr
 True
-Cell-Shaded Fullbody
-False
-2
-PAYPAL
-CS-FBs
-IN PROGRESS
-BLUE
-275
-0
-
-Ziggystellari
-True
-Cell-Shaded Halfbody
-True
-2
-SQUARE
-CS-HBs-CB
-BLANK
-BLUE
-255
-0
-
-Deruka
-True
-Gacha Splash Art 5 Star
+Rendered Headshot
 True
 1
 SQUARE
-GACH-5
-BLANK
+RH
+COMPLETED
 BLUE
-350
-11
+260
+0
 
-Arkovae
+Randomnightfury
 True
-Cell-Shaded Fullbody
+Colored Sketch
 False
-2
+1
 SQUARE
-CS-FBs
-BLANK
-BLUE
-275
-30
-
-RandomNightFury
-True
-Daily Dragon Feature
-False
-2
-SQUARE
-DD
+COS
 BLANK
 BLUE
 85
 0
 
-Raumsk
-True
-Cell-Shaded Fullbody
-True
-1
-SQUARE
-CS-FB-CB
-BLANK
-PAYMENT PLAN
-275
-0
-
-King of the Wigglers
-True
-Cell-Shaded Halfbody
-True
-1
-SQUARE
-CS-HB-CB
-BLANK
-BLUE
-215
-70
-
-Syn
-True
-Flat Colored Fullbody
-False
-1
-SQUARE
-FC-FB
-BLANK
-BLUE
-125
-15
-
-King of the Wigglers
-True
-Mawshot
-False
-2
-SQUARE
-MAW-w/charas
-BLANK
-BLUE
-220
-60
-
-SpiritOfFen
-True
-YCH
-False
-1
-SQUARE
-YCH
-BLANK
-BLUE
-275
-0
-
-DragonAutie
+Snowythefloof
 True
 Complex Reference Sheet
 False
@@ -150,23 +42,23 @@ False
 SQUARE
 CRS
 BLANK
-BLUE
+PAYMENT PLAN
 270
 0
 
-EnsoDonut
-True
-YCH
-True
+OnyxClawe
+False
+Complex Reference Sheet
+False
 1
 SQUARE
-YCH
+CRS
 BLANK
-BLUE
-275
+BLACK
+270
 0
 
-PythonFur
+Umbralant
 False
 Cell-Shaded Halfbody
 False
@@ -178,7 +70,55 @@ BLACK
 175
 0
 
-Talos The Hydra
+PythonFur
+False
+Cell-Shaded Fullbody
+True
+1
+SQUARE
+CS-FB-CB
+BLANK
+BLACK
+275
+0
+
+Kal_hona
+False
+Banner
+False
+1
+SQUARE
+BAN
+BLANK
+BLACK
+160
+0
+
+KingCobra007
+False
+Demonify Me
+False
+1
+SQUARE
+DM
+BLANK
+BLACK
+200
+0
+
+Akuren_Kobold
+False
+Complex Reference Sheet
+False
+1
+SQUARE
+CRS
+BLANK
+BLACK
+270
+0
+
+Torrent Dragon
 False
 Simple Reference Sheet
 False
@@ -190,51 +130,63 @@ BLACK
 110
 0
 
-KyZekk
+Deefdragon
 False
-Flat Colored Fullbody
+Simple Reference Sheet
 False
 1
 SQUARE
-FC-FB
+SRS
 BLANK
 BLACK
-125
+110
 0
 
-DragonWaffle
+TyphosDerg
 False
-Complex Reference Sheet
-False
+Cell-Shaded Fullbody
+True
 1
 SQUARE
-CRS
+CS-FB-CB
 BLANK
 BLACK
-270
-50
+275
+0
 
-Redmonarch900
+IgnisBlazer
 False
 Colored Sketch
 False
 1
-SQUARE
+PAYPAL
 COS
 BLANK
 BLACK
 85
 0
 
-CloudOfBats
+TiredCyrus
 False
-Colored Sketch
-False
-1
+Cell-Shaded Fullbody
+True
+2
 SQUARE
-COS
+CS-FBs-CB
+BLANK
+PAYMENT PLAN
+325
+0
+
+Kaputus1
+False
+Cell-Shaded Fullbody
+True
+2
+SQUARE
+CS-FBs-CB
 BLANK
 BLACK
-85
+325
 0
 
