@@ -29,7 +29,7 @@ False
 1
 SQUARE
 COS
-BLANK
+COMPLETED
 BLUE
 85
 0
@@ -46,6 +46,30 @@ PAYMENT PLAN
 270
 0
 
+Spiritoffen
+True
+Flat Colored Fullbody
+True
+2
+SQUARE
+FC-FB-CB
+IN PROGRESS
+BLUE
+185
+0
+
+Synariel90
+True
+Cell-Shaded Fullbody
+False
+1
+SQUARE
+CS-FB
+BLANK
+BLUE
+225
+0
+
 OnyxClawe
 False
 Complex Reference Sheet
@@ -53,7 +77,7 @@ False
 1
 SQUARE
 CRS
-BLANK
+COMPLETED
 BLACK
 270
 0
@@ -188,5 +212,29 @@ CS-FBs-CB
 BLANK
 BLACK
 325
+0
+
+KyZekk
+False
+Mawshot
+False
+1
+SQUARE
+MAW
+BLANK
+BLACK
+175
+0
+
+OwlRocky
+False
+Flat Colored Fullbody
+True
+2
+PAYPAL
+FC-FB-CB
+BLANK
+BLACK
+185
 0
 
