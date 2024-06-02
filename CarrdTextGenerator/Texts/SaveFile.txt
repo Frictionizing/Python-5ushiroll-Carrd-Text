@@ -8,7 +8,7 @@ CS-FBs
 BLANK
 BLUE
 308
-75
+28
 
 raku_rimeclaw
 True
@@ -32,7 +32,7 @@ SP
 BLANK
 BLUE
 316
-10
+3
 
 kingofthewigglers
 True
@@ -44,7 +44,7 @@ MAW-w/charas
 BLANK
 BLUE
 246
-55
+21
 
 leoleosuper
 True
@@ -104,7 +104,7 @@ FC-FB-CB
 BLANK
 BLUE
 203
-50
+18
 
 DragonAutie
 False
@@ -224,7 +224,7 @@ SRS
 BLANK
 BLACK
 126
-19
+6
 
 deefdragon
 False
@@ -236,5 +236,5 @@ COS-w/charas
 BLANK
 BLACK
 247
-75
+28
 

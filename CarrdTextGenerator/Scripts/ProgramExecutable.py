@@ -5,6 +5,8 @@ import GoogleSheet as goog
 import GoogleAPI as api
 import CommissionPrices as price
 import webbrowser
+import math
+import keyboard
 from tkinter import *
 import os
 import pyperclip
@@ -180,8 +182,14 @@ class Overwrite:
 
         app.tip   = content[3]
 
+        app.priceCA = content[4]
+
+        app.tipCA   = content[5]
+
         app.x     = xaxis
         app.y     = yaxis
+
+        app.i = i
 
         app.name.place(x=0 + xaxis, y = yaxis)
         app.name.insert(INSERT, i.getName())
@@ -189,15 +197,36 @@ class Overwrite:
         app.comm.place(x=360 + xaxis, y = yaxis)
         app.comm.insert(INSERT, i.getShortName())
 
-        app.price.place(x=600 + xaxis, y = yaxis)
+        app.price.place(x=605 + xaxis, y = yaxis)
+
+        app.tip.place(x=605 + xaxis, y = yaxis+35)
+
+        app.priceCA.place(x=670 + xaxis, y = yaxis)
+
+        app.tipCA.place(x=670 + xaxis, y = yaxis+35)
+
+        conv = price.cashConvert["SQUARE"]
+
         app.price.insert(INSERT, i.getPrice())
+        app.priceCA.insert(INSERT, math.floor(int(float(i.getPrice()) * conv)))
 
-        app.tip.place(x=600 + xaxis, y = yaxis+35)
-        app.tip.insert(INSERT, i.getTip())
 
-        content[4].place(x=660 + xaxis, y = yaxis)
-        content[5].place(x=660 + xaxis , y = yaxis + 35)
+        if i.getPaymentType() == "SQUARE":
+            app.tipCA.config(bg = "#63c76e")
+            app.priceCA.config(bg = "#63c76e")
+            app.tipCA.insert(INSERT, i.getTip())
+            app.tip.insert(INSERT, math.floor(int(float(i.getTip()) * 0.73)))
 
+        else:
+            app.tip.config(bg = "#63c76e")
+            app.price.config(bg = "#63c76e")
+            app.tip.insert(INSERT, i.getTip())
+            app.tipCA.insert(INSERT, math.floor(int(float(i.getTip()) * conv)))
+
+        app.tip.edit_modified(False) 
+        app.tipCA.edit_modified(False) 
+        app.priceCA.edit_modified(False) 
+        app.price.edit_modified(False) 
 
     def getName(app):
         return app.name.get("1.0", "end-1c")
@@ -207,6 +236,10 @@ class Overwrite:
         return app.price.get("1.0", "end-1c")
     def getTip(app):
         return app.tip.get("1.0", "end-1c")
+    def getPriceCA(app):
+        return app.priceCA.get("1.0", "end-1c")
+    def getTipCA(app):
+        return app.tipCA.get("1.0", "end-1c")
 
 #Object Holding Prices
 class OverwritePrices:
@@ -251,13 +284,44 @@ def edit():
     def save():
         for i in range(0,len(app.ClientObj)):
             app.ClientObj[i].OverrideComm(entry_Object[i].getName(),entry_Object[i].getComm(),
-                                          entry_Object[i].getPrice(),entry_Object[i].getTip())
+                                          entry_Object[i].getPrice(),entry_Object[i].getTipCA() if app.ClientObj[i].getPaymentType == "SQUARE" 
+                                                                        else entry_Object[i].getTip())
             name_label[i].config(text = app.ClientObj[i].getName())
         app.writeSave()
 
         api.update(app.ClientObj)
         os.system('cls') 
         names.printPrices(app.ClientObj)
+        return
+    
+    def update():
+        conv = price.cashConvert["SQUARE"]
+
+        for i in range(0,len(app.ClientObj)):
+            if entry_Tip[i].edit_modified():
+                entry_TipCA[i].delete(1.0, END)
+                entry_TipCA[i].insert(INSERT, math.floor(int(float(entry_Object[i].getTip()) * conv)))
+                entry_Tip[i].edit_modified(False)
+                entry_TipCA[i].edit_modified(False)
+
+            if entry_TipCA[i].edit_modified():
+                entry_Tip[i].delete(1.0, END)
+                entry_Tip[i].insert(INSERT, math.floor(int(float(entry_Object[i].getTipCA()) * 0.73)))
+                entry_Tip[i].edit_modified(False)
+                entry_TipCA[i].edit_modified(False)
+
+            if entry_PriceCA[i].edit_modified():
+                entry_Price[i].delete(1.0, END)
+                entry_Price[i].insert(INSERT, math.floor(int(float(entry_Object[i].getPriceCA()) * 0.73)))
+                entry_Price[i].edit_modified(False)
+                entry_PriceCA[i].edit_modified(False)
+            
+            if entry_Price[i].edit_modified():
+                entry_PriceCA[i].delete(1.0, END)
+                entry_PriceCA[i].insert(INSERT, math.floor(int(float(entry_Object[i].getPrice()) * conv)))
+                entry_PriceCA[i].edit_modified(False)
+                entry_Price[i].edit_modified(False)
+
         return
 
     #Clears edit, goes back to main page
@@ -266,11 +330,14 @@ def edit():
         save()
         bg_edit.destroy()
         button_exit.destroy()
+        button_update.destroy()
         name_tag.destroy()
         comm_tag.destroy()
         price_tag.destroy()
         tip_tag.destroy()
         title.destroy()
+        us2.destroy()
+        cad2.destroy()
         for i in range(0,len(entry_Comm)):
             entry_Name[i].destroy()
             entry_Comm[i].destroy()
@@ -278,17 +345,21 @@ def edit():
             entry_Tip[i].destroy()
             entry_Flag[i].destroy()
             entry_FlagTip[i].destroy()
+            entry_PriceCA[i].destroy()
+            entry_TipCA[i].destroy()
 
     #X,Y Axis for editable items
     nextRowReady = True
     count = 0
-    yaxis = 180
+    yaxis = 130
     xaxis = 40
 
     entry_Name = []
     entry_Comm = []
     entry_Price = []
     entry_Tip = []
+    entry_PriceCA = []
+    entry_TipCA = []
     entry_Flag = []
     entry_FlagTip = []
     entry_Object = [0] * len(app.ClientObj) 
@@ -298,7 +369,7 @@ def edit():
 
     title = Label(window, 
                   text = "Edit Comm Information", 
-                  font = ("Helvetica", 50))
+                  font = ("Helvetica", 40))
 
     name_tag = Label(window, 
                   text = "NAME", 
@@ -310,6 +381,7 @@ def edit():
                   fg = "blue",
                   font = ("Helvetica", 25))
 
+
     price_tag = Label(window, 
                   text = "TOTAL USD", 
                   fg = "blue",
@@ -320,26 +392,47 @@ def edit():
                   fg = "blue",
                   font = ("Helvetica", 15))
 
-
     button_exit =  Button(window, 
                           image = photo_check,
-                          height = 130,
-                          width = 130,
+                          height = 70,
+                          width = 70,
                           command = destroyEditFrame)
+    
+    button_update =  Button(window, 
+                            image = photo_saveIcon,
+                            height = 70,
+                            width = 70,
+                            command =update)
     
     us = Label(window, 
            image = photo_USA, 
+           width = 52,
+           height = 25
           )
     
     cad = Label(window, 
            image = photo_CAD, 
+           width = 52,
+           height = 25
+          )
+    
+    us2 = Label(window, 
+           image = photo_USA, 
+           width = 52,
+           height = 25
+          )
+    
+    cad2 = Label(window, 
+           image = photo_CAD, 
+           width = 52,
+           height = 25
           )
     
     for i in app.ClientObj:
         if nextRowReady and count >= 10:
             nextRowReady = not nextRowReady
             xaxis = 805
-            yaxis = 180
+            yaxis = 130
 
         entry_Name.append(Text(window, 
                     width = 12, 
@@ -361,6 +454,16 @@ def edit():
                     height = 1,
                     font = ("Helvetica", 17),))
         
+        entry_PriceCA.append(Text(window, 
+                    width = 4, 
+                    height = 1,
+                    font = ("Helvetica", 17),))
+        
+        entry_TipCA.append(Text(window, 
+                    width = 4, 
+                    height = 1,
+                    font = ("Helvetica", 17),))
+        
         entry_Flag.append(us)
         
         if i.getPaymentType() == "SQUARE":
@@ -368,18 +471,23 @@ def edit():
         else:
             entry_FlagTip.append(us)
 
-        entry_Object[count] = (Overwrite([entry_Name[count],entry_Comm[count],entry_Price[count], entry_Tip[count], entry_Flag[count], entry_FlagTip[count]], i, xaxis, yaxis))
+        entry_Object[count] = (Overwrite([entry_Name[count],entry_Comm[count],entry_Price[count], entry_Tip[count], entry_PriceCA[count], entry_TipCA[count]], i, xaxis, yaxis))
 
         count += 1
-        yaxis += 70
+        yaxis += 76
 
     bg_edit.place(x=0, y=0, relwidth=1, relheight=1)
     title.place(x=0, y=24)
-    name_tag.place(x=170, y=120)
-    comm_tag.place(x=410, y=120)
-    price_tag.place(x=640, y=110)
-    tip_tag.place(x=640, y=140)
-    button_exit.place(x=900, y=0)
+    name_tag.place(x=-170, y=120)
+    comm_tag.place(x=-410, y=120)
+    price_tag.place(x=-640, y=110)
+    tip_tag.place(x=-640, y=140)
+    button_exit.place(x=560, y=20)
+    button_update.place(x=806, y=20)
+    us.place(x=645, y = 90)
+    cad.place(x=710, y = 90)
+    us2.place(x=1410, y = 90)
+    cad2.place(x=1475, y = 90)
 
     return
 
