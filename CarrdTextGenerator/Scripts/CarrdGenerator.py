@@ -487,11 +487,16 @@ def printPrices(x):
 
         if i.getPaymentType() == "SQUARE":
             price = math.floor(price * cashConvert[i.getPaymentType()])
+            gst = price*0.05
             price += int(i.getTip())
             totalPriceCAD += price
         else:
             price += int(i.getTip())
+            gst = price*0.05
             totalPrice += price
+
+        gst = int(gst*100)
+        gst /= 100
 
         #Complex BG Price
         if bgDict[i.getType()] == 0 or not i.getComplex():
@@ -500,7 +505,7 @@ def printPrices(x):
             s = str(math.floor(bgDict[i.getType()]* cashConvert[i.getPaymentType()]))
         
         if i.getCharNum() > 5:
-            nameAndPrice = i.getName() + ": $" + str(price) + "+ " + cashConvert2[i.getPaymentType()]
+            nameAndPrice = i.getName() + ": $" + str(price) + "+ " + cashConvert2[i.getPaymentType()] 
         else:
             nameAndPrice = i.getName() + ": $" + str(price) + " " + cashConvert2[i.getPaymentType()]
 
@@ -511,10 +516,10 @@ def printPrices(x):
         pad = " " * pad
 
         if i.getCharNum() > 5:
-            print(nameAndPrice + pad + "(" + i.getType() + ": " + str(math.floor(priceDict[i.getType()]* cashConvert[i.getPaymentType()])) + 
+            print(nameAndPrice + pad + " GST(" + str(gst) + ") " + "(" + i.getType() + ": " + str(math.floor(priceDict[i.getType()]* cashConvert[i.getPaymentType()])) + 
                   ", 5+ Chars: " + str(math.floor(charDict[i.getType()]*(i.getCharNum()-1)* cashConvert[i.getPaymentType()])) + "+, Background: " + s + ")")
         else:
-            print(nameAndPrice + pad + "(" + i.getType() + ": " + str(math.floor(priceDict[i.getType()]* cashConvert[i.getPaymentType()])) + ", " + str(i.getCharNum()) + 
+            print(nameAndPrice + pad + " GST(" + str(gst) + ") " + "(" + i.getType() + ": " + str(math.floor(priceDict[i.getType()]* cashConvert[i.getPaymentType()])) + ", " + str(i.getCharNum()) + 
                   " Char(s): " + str(math.floor(charDict[i.getType()]*(i.getCharNum()-1)* cashConvert[i.getPaymentType()])) + ", Background: " + s + ")")
 
     print("\nTOTAL: $" + str(totalPriceCAD) + " CAD + $" + str(totalPrice) + " USD" + " ($" + str(math.floor(totalPrice*1.34)) + "CAD) = $" + str(totalPriceCAD + math.floor(totalPrice*1.34)) + " CAD") 

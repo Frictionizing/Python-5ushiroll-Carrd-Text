@@ -361,15 +361,12 @@ def edit():
                     height = 1,
                     font = ("Helvetica", 17),))
         
-        entry_Flag.append(Label(window, 
-                    image = photo_USA, ))
+        entry_Flag.append(us)
         
         if i.getPaymentType() == "SQUARE":
-            entry_FlagTip.append(Label(window, 
-                    image = photo_CAD, ))
+            entry_FlagTip.append(cad)
         else:
-            entry_FlagTip.append(Label(window, 
-                    image = photo_USA, ))
+            entry_FlagTip.append(us)
 
         entry_Object[count] = (Overwrite([entry_Name[count],entry_Comm[count],entry_Price[count], entry_Tip[count], entry_Flag[count], entry_FlagTip[count]], i, xaxis, yaxis))
 

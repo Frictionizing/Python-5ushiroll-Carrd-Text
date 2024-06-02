@@ -1,9 +1,9 @@
 import pathlib
 #Find the path to file, x is path to split, y is replacement text
 
-base = [0] * 20
-char = [0] * 20
-bg   = [0] * 20
+base = [0] * 15
+char = [0] * 15
+bg   = [0] * 15
 
 #Money related Dictionaries
 comm = ["Daily Dragon Feature",             #0
@@ -13,19 +13,14 @@ comm = ["Daily Dragon Feature",             #0
         "Cell-Shaded Headshot",             #4  
         "Simple Reference Sheet",           #5
         "Flat Colored Fullbody",            #6
-        "Headshot Page",                    #7
-        "Cell-Shaded Halfbody",             #8
-        "Banner",                           #9
-        "Cell-Shaded Fullbody",             #10
-        "Demonify Me",                      #11
-        "Rendered Headshot",                #12
-        "Sketch Page",                      #13
-        "Complex Reference Sheet",          #14
-        "Full Render",                      #15
-        "Gacha Splash Art 3 Star",          #16
-        "Gacha Splash Art 4 Star",          #17
-        "Gacha Splash Art 5 Star",          #18
-        "Gacha Splash Art 6 Star"           #19
+        "Cell-Shaded Halfbody",             #7
+        "Banner",                           #8
+        "Cell-Shaded Fullbody",             #9
+        "Demonify Me",                      #10
+        "Rendered Headshot",                #11
+        "Sketch Page",                      #12
+        "Complex Reference Sheet",          #13
+        "Full Render"                       #14
         ]                      
 
 #Prices of base commission
@@ -44,12 +39,7 @@ priceDict = {
     comm[11] : base[11],
     comm[12] : base[12],
     comm[13] : base[13],
-    comm[14] : base[14],
-    comm[15] : base[15],
-    comm[16] : base[16],
-    comm[17] : base[17],
-    comm[18] : base[18],
-    comm[19] : base[19]
+    comm[14] : base[14]
 }
 
 #Extra Character count prices
@@ -68,12 +58,7 @@ charDict = {
     comm[11] : char[11],
     comm[12] : char[12],
     comm[13] : char[13],
-    comm[14] : char[14],
-    comm[15] : char[15],
-    comm[16] : char[16],
-    comm[17] : char[17],
-    comm[18] : char[18],
-    comm[19] : char[19]
+    comm[14] : char[14]
 }
 
 #Complex Background upgrade prices
@@ -92,12 +77,7 @@ bgDict = {
     comm[11] : bg[11],
     comm[12] : bg[12],
     comm[13] : bg[13],
-    comm[14] : bg[14],
-    comm[15] : bg[15],
-    comm[16] : bg[16],
-    comm[17] : bg[17],
-    comm[18] : bg[18],
-    comm[19] : bg[19]
+    comm[14] : bg[14]
 }
 
 ###MAIN
@@ -115,7 +95,7 @@ def readSheet():
     char.clear()
     bg.clear()
 
-    le = 20
+    le = 15
     c = 0
     prices = []
 
@@ -133,7 +113,7 @@ def readSheet():
         prices.clear()
         c += 1
 
-    for i in range(0,20):
+    for i in range(0,15):
         priceDict.update({comm[i] : base[i]})
         charDict.update({comm[i] : char[i]})
         bgDict.update({comm[i] : bg[i]})
@@ -145,7 +125,7 @@ readSheet()
 #Conversion rate to CAD if payment type is Square (set to 1.3 means 1.00 USD = 1.30 CAD)
 cashConvert = {
     "PAYPAL" : 1,
-    "SQUARE" : 1.3
+    "SQUARE" : 1.37
 }
 
 #Type of currency
@@ -166,19 +146,14 @@ shortDict = {
     comm[4]  : "CS-H",
     comm[5]  : "SRS",
     comm[6]  : "FC-FB",
-    comm[7]  : "HSP",
-    comm[8]  : "CS-HB",
-    comm[9]  : "BAN",
-    comm[10] : "CS-FB",
-    comm[11] : "DM",
-    comm[12] : "RH",
-    comm[13] : "SP",
-    comm[14] : "CRS",
-    comm[15] : "Full-Ren",
-    comm[16] : "GACH-3",
-    comm[17] : "GACH-4",
-    comm[18] : "GACH-5",
-    comm[19] : "GACH-6"
+    comm[7]  : "CS-HB",
+    comm[8]  : "BAN",
+    comm[9] : "CS-FB",
+    comm[10] : "DM",
+    comm[11] : "RH",
+    comm[12] : "SP",
+    comm[13] : "CRS",
+    comm[14] : "Full-Ren"
 }
 
 #Gramatically correct plural form for commissions with 2 or more characters
@@ -190,17 +165,12 @@ pluralDict = {
     comm[4]  : "Cell-Shaded Headshots",
     comm[5]  : "Simple Reference Sheet",
     comm[6]  : "Flat Colored Fullbodies",
-    comm[7]  : "Headshot Page",
-    comm[8]  : "Cell-Shaded Halfbodies",
-    comm[9]  : "Banner w/ Extra Character",
-    comm[10] : "Cell-Shaded Fullbodies",
-    comm[11] : "Demonify Me",
-    comm[12] : "Rendered Headshots",
-    comm[13] : "Sketch Page",
-    comm[14] : "Complex Reference Sheet",
-    comm[15] : "Full Render w/ Extra Character",
-    comm[16] : "Gacha Splash Art 3 Star",
-    comm[17] : "Gacha Splash Art 4 Star",
-    comm[18] : "Gacha Splash Art 5 Star",
-    comm[19] : "Gacha Splash Art 6 Star"
+    comm[7]  : "Cell-Shaded Halfbodies",
+    comm[8]  : "Banner w/ Extra Character",
+    comm[9] : "Cell-Shaded Fullbodies",
+    comm[10] : "Demonify Me",
+    comm[11] : "Rendered Headshots",
+    comm[12] : "Sketch Page",
+    comm[13] : "Complex Reference Sheet",
+    comm[14] : "Full Render w/ Extra Character"
 }
