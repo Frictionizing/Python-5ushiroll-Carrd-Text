@@ -1,4 +1,4 @@
-kingofthewigglers
+Kingofthewigglers
 True
 Cell-Shaded Fullbody
 False
@@ -8,9 +8,9 @@ CS-FBs
 BLANK
 BLUE
 308
-28
+75
 
-raku_rimeclaw
+Raku_rimeclaw
 True
 Complex Reference Sheet
 False
@@ -22,7 +22,7 @@ BLUE
 310
 0
 
-deruka
+Deruka
 True
 Sketch Page
 True
@@ -32,9 +32,9 @@ SP
 BLANK
 BLUE
 316
-3
+10
 
-kingofthewigglers
+Kingofthewigglers
 True
 Mawshot
 False
@@ -44,9 +44,9 @@ MAW-w/charas
 BLANK
 BLUE
 246
-21
+55
 
-leoleosuper
+Leoleosuper
 True
 Cell-Shaded Headshot
 False
@@ -58,7 +58,7 @@ BLUE
 155
 0
 
-raku_rimeclaw
+Raku_rimeclaw
 True
 Rendered Headshot
 False
@@ -94,7 +94,7 @@ BLUE
 294
 0
 
-ensodonut
+Ensodonut
 True
 Flat Colored Fullbody
 True
@@ -104,7 +104,7 @@ FC-FB-CB
 BLANK
 BLUE
 203
-18
+50
 
 DragonAutie
 False
@@ -154,7 +154,7 @@ BLACK
 258
 0
 
-xm1
+Xm1
 False
 Flat Colored Fullbody
 True
@@ -166,7 +166,7 @@ BLACK
 173
 0
 
-dragonkiller119
+Dragonkiller119
 False
 Simple Reference Sheet
 True
@@ -178,7 +178,7 @@ BLACK
 126
 0
 
-synariel90
+Synariel90
 False
 Flat Colored Fullbody
 False
@@ -190,7 +190,7 @@ BLACK
 173
 40
 
-balefirephoenix
+Balefirephoenix
 False
 Cell-Shaded Fullbody
 True
@@ -202,7 +202,7 @@ BLACK
 358
 0
 
-valkyrie115
+Valkyrie115
 False
 Cell-Shaded Fullbody
 True
@@ -214,7 +214,7 @@ BLACK
 308
 0
 
-zetakh
+Zetakh
 False
 Simple Reference Sheet
 False
@@ -224,9 +224,9 @@ SRS
 BLANK
 BLACK
 126
-6
+19
 
-deefdragon
+Deefdragon
 False
 Colored Sketch
 False
@@ -236,5 +236,5 @@ COS-w/charas
 BLANK
 BLACK
 247
-28
+75
 

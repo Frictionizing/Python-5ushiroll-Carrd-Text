@@ -6,7 +6,6 @@ import GoogleAPI as api
 import CommissionPrices as price
 import webbrowser
 import math
-import keyboard
 from tkinter import *
 import os
 import pyperclip
@@ -280,11 +279,11 @@ class OverwritePrices:
 
 #Overrides the Script with handmade edits
 def edit():
-    
     def save():
         for i in range(0,len(app.ClientObj)):
             app.ClientObj[i].OverrideComm(entry_Object[i].getName(),entry_Object[i].getComm(),
-                                          entry_Object[i].getPrice(),entry_Object[i].getTipCA() if app.ClientObj[i].getPaymentType == "SQUARE" 
+                                          entry_Object[i].getPrice(),
+                                          entry_Object[i].getTipCA() if app.ClientObj[i].getPaymentType() == "SQUARE" 
                                                                         else entry_Object[i].getTip())
             name_label[i].config(text = app.ClientObj[i].getName())
         app.writeSave()

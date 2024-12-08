@@ -500,7 +500,7 @@ def printPrices(x):
 
         #Complex BG Price
         if bgDict[i.getType()] == 0 or not i.getComplex():
-            s = "NO"
+            s = "0"
         else:
             s = str(math.floor(bgDict[i.getType()]* cashConvert[i.getPaymentType()]))
         
@@ -520,11 +520,11 @@ def printPrices(x):
                   ", 5+ Chars: " + str(math.floor(charDict[i.getType()]*(i.getCharNum()-1)* cashConvert[i.getPaymentType()])) + "+, Background: " + s + ")")
         else:
             print(nameAndPrice + pad + " GST(" + str(gst) + ") " + "(" + i.getType() + ": " + str(math.floor(priceDict[i.getType()]* cashConvert[i.getPaymentType()])) + ", " + str(i.getCharNum()) + 
-                  " Char(s): " + str(math.floor(charDict[i.getType()]*(i.getCharNum()-1)* cashConvert[i.getPaymentType()])) + ", Background: " + s + ")")
+                  " Char(s): " + str(math.floor(charDict[i.getType()]*(i.getCharNum()-1)* cashConvert[i.getPaymentType()])) + ", Background: " + s + ", Tip: " + i.getTip() + ")")
 
     print("\nTOTAL: $" + str(totalPriceCAD) + " CAD + $" + str(totalPrice) + " USD" + " ($" + str(math.floor(totalPrice*1.34)) + "CAD) = $" + str(totalPriceCAD + math.floor(totalPrice*1.34)) + " CAD") 
     #print("Note: Total does not include YCH prices and any extra characters that go beyond 5 per comm")
-    print("USD to CAD official conversion rate 2023-1-11: 1.00 USD = 1.34 CAD")
+    print("USD to CAD official conversion rate 2024-2-6: 1.00 USD = 1.36 CAD")
     print("USD to CAD commission conversion rate set to 1.00 USD = " + str(cashConvert["SQUARE"]) + "0 CAD\n")
 
     print("REMARKS:")
